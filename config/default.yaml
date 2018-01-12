@@ -1,0 +1,54 @@
+appName: 'document-management-node-demo'
+
+log:
+  ERROR: 1
+  INFO: 1
+  LOG: 1
+  WARN: 1
+  DEBUG: 1
+
+useCSRFProtection: true
+
+security:
+  referrerPolicy: 'origin'
+  hpkp:
+    maxAge: 2592000
+    sha256s:
+      - 'TODO'
+      - 'Set proper SHA256s'
+
+idamExpressMiddlewareArgs:
+  continueUrl: 'http://localhost:8000'
+  idamApiUrl: 'http://localhost:8081'
+  idamLoginUrl: 'https://localhost:9000/login'
+  indexUrl: '/index'
+
+
+services:
+  dmApiGwUrl: 'http://localhost:8080'
+  dmUploadUrl: 'http://localhost:8080/documents'
+  dmFindDocumentsByCreator: 'http://localhost:8080/documents/owned'
+  dmFindDocumentsByMetadata: 'http://localhost:8080/documents/filter'
+  dmViewerUrl: 'http://localhost:8084'
+
+userGroup:
+  userGroupAName: 'Group A'
+  userGroupBName: 'Group B'
+  userGroupCName: 'Group C'
+  userGroupAUsers:
+  - 'user1a@test.com'
+  - 'user2a@test.com'
+  - 'user3a@test.com'
+  userGroupBUsers:
+  - 'user1b@test.com'
+  - 'user2b@test.com'
+  - 'user3b@test.com'
+  userGroupCUsers:
+  - 'user1c@test.com'
+  - 'user2c@test.com'
+  - 'user3c@test.com'
+
+logging:
+  microservice: document-management-node-demo
+  team: evidence
+  environment: local

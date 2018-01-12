@@ -1,0 +1,25 @@
+
+
+idamExpressMiddlewareArgs:
+  continueUrl: IDAM_CONTINUE_URL
+  idamApiUrl: IDAM_API_URL
+  idamLoginUrl: IDAM_LOGIN_URL
+
+services:
+  dmUploadUrl: DM_UPLOAD_URL
+  dmFindDocumentsByCreator: DM_OWNED_URL
+  dmFindDocumentsByMetadata: DM_SEARCH_URL
+  dmViewerUrl: DM_VIEWER_URL
+
+logging:
+  microservice: REFORM_SERVICE_NAME
+  team: REFORM_TEAM
+  environment: REFORM_ENVIRONMENT
+
+userGroup:
+  userGroupAName: USER_GROUP_A
+  userGroupBName: USER_GROUP_B
+  userGroupCName: USER_GROUP_C
+  userGroupAUsers: USER_GROUP_A_USERS
+  userGroupBUsers: USER_GROUP_B_USERS
+  userGroupCUsers: USER_GROUP_C_USERS

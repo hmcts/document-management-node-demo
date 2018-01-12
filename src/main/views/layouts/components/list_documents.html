@@ -1,0 +1,44 @@
+<br>
+<form id="searchForm" data-jwt="{{ jwt }}" method="post" action="{{ dmFindDocumentsByMetadata }}">
+    <label for="someref">Ref:</label>
+    <input type="text" id="someref" name="someref" value="{{ someref | safe }}"/>
+    <input class="button" type="submit" value="Search"/>
+</form>
+<br>
+<div id="tabs" class="js-tabs nav-tabs">
+    <ul class="tabs-nav" role="tablist">
+        <li class="">
+            <a href="#my-doc" id="tab-my-doc">My Docs</a>
+        </li>
+        {% if isUserGroupAorB  != null %}
+        <li class="">
+            <a href="#my-group-doc">My Group Docs</a>
+        </li>
+        {% endif %}
+        <li class="">
+            <a href="#search-doc">Search Docs</a>
+        </li>
+    </ul>
+    <br>
+    <div id="my-doc" class="js-tab-pane tab-pane tabs-panel">
+        <h1 class="heading-large">My Docs</h1>
+        <table id="documentTable" class="pageable" data-jwt="{{ jwt }}" data-dmFindDocumentsByCreator="{{ dmFindDocumentsByCreator }}"  data-dmviewerurl="{{ dmViewerUrl }}" ></table>
+        <div id="documentsPagination"></div>
+    </div>
+
+    {% if isUserGroupAorB  != null %}
+    <div id="my-group-doc" class="js-tab-pane tab-pane tabs-panel">
+        <h1 class="heading-large">My Group Docs ( {{ isUserGroupAorB }} )</h1>
+        <table id="groupDocumentTable" class="pageable" data-jwt="{{ jwt }}" data-dmFindDocumentsByGroup="{{ dmFindDocumentsByMetadata }}" data-dmviewerurl="{{dmViewerUrl}}" data-groupName="{{ isUserGroupAorB }}" ></table>
+        <div id="groupDocumentsPagination"></div>
+    </div>
+    {% endif %}
+
+    <div id="search-doc" class="js-tab-pane tab-pane tabs-panel">
+        <h1 class="heading-large">Search</h1>
+        <table id="searchDocumentTable" class="pageable" data-jwt="{{ jwt }}" data-dmFindDocumentsByGroup="{{ dmFindDocumentsByMetadata }}"  data-dmviewerurl="{{dmViewerUrl}}"></table>
+        <div id="searchDocumentsPagination"></div>
+    </div>
+</div>
+
+<a class="button" href="/upload" role="button">Upload Document</a>
