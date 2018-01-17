@@ -12,6 +12,7 @@ $(function () {
         $(`#${e.resultContainer}`).html('');
         $(`#${e.resultContainer}`)
             .append(getTableHead([
+                "",
                 "Title",
                 "Ref",
                 "User Group",
@@ -39,7 +40,10 @@ $(function () {
 
         console.log(docs)
         $.each(docs, function (i, doc) {
-            let row = $("<tr/>")
+            let row = $("<tr/>");
+            let thumbnail = $("<img/>").attr("src", doc._links.thumbnail.href ).attr("width",32);
+            row.append($("<td/>").append(thumbnail));
+
             row.append($("<td/>").text(`${metaClean(doc.metadata.title)}`));
 
             let somerefLink = $("<a/>").text(`${metaClean(doc.metadata.someref)}`).attr("href", "/list/"+ doc.metadata.someref + '#search-doc');
