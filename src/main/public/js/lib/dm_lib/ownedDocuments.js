@@ -156,6 +156,21 @@ $(function () {
         });
     }
 
+    function handleDeleteRequest(src, deleteData, jwt, success, error){
+        console.log(src,deleteData,jwt)
+        $.ajax({
+            url: src,
+            data: '',
+            headers: { 'Authorization': jwt},
+            cache: false,
+            contentType: 'application/json',
+            processData: false,
+            method: 'DELETE',
+            success: success,
+            error: error
+        });
+    }
+
     runSearch();
     updateOwnedDocuments();
     updateGroupDocuments();

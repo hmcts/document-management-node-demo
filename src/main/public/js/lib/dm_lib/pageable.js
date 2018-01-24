@@ -20,6 +20,9 @@ $(function () {
                 "Created By",
                 "Created On",
                 "",
+                "",
+                "",
+                "",
                 ""
             ]))
             .append(getTableBody((e.data._embedded) ? e.data._embedded.documents : [], e.jwt, e.dmviewerurl))
@@ -55,8 +58,23 @@ $(function () {
             row.append($("<td/>").text(`${dateClean(metaClean(doc.createdOn))}`));
             let fileViewLink = $("<a/>").text("View").attr("href", dmviewerurl + '?jwt='+ jwt + '&url=' + doc._links.self.href ).attr("target", "_blank");
             row.append($("<td/>").append(fileViewLink));
-            let fileBinLink = $("<a/>").text("Download").attr("href", doc._links.binary.href + '?jwt='+jwt).attr("target", "_blank");
+            let fileBinLink = $("<a/>").text("Download").attr("href", doc._links.binary.href + '?jwt='+jwt).attr("download",""+doc.originalDocumentName);
             row.append($("<td/>").append(fileBinLink));
+
+
+            let deleteSoftButton = $("<input/>")
+                .attr("type","button")
+                .attr("class","button")
+                .attr("value","Soft Delete")
+                .attr("onclick","delete("+doc._links.self.href + "?jwt="+jwt+"&permanent=false)");
+            row.append($("<td/>").append(deleteSoftButton));
+
+            let deleteHardButton = $("<input/>")
+                .attr("type","button")
+                .attr("class","button")
+                .attr("value","Hard Delete")
+                .attr("onclick","delete("+doc._links.self.href + "?jwt="+jwt+"&permanent=True)");
+            row.append($("<td/>").append(deleteHardButton));
 
             table_body.append(row);
         });
