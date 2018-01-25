@@ -44,7 +44,7 @@ $(function () {
         console.log(docs)
         $.each(docs, function (i, doc) {
             let row = $("<tr/>");
-            let thumbnail = $("<img/>").attr("src", doc._links.thumbnail.href ).attr("width",32);
+            let thumbnail = $("<img/>").attr("src", doc._links.thumbnail.href +"?jwt=" + jwt ).attr("width",32);
             row.append($("<td/>").append(thumbnail));
 
             row.append($("<td/>").text(`${metaClean(doc.metadata.title)}`));
@@ -56,25 +56,35 @@ $(function () {
             row.append($("<td/>").text(`${metaClean(doc.originalDocumentName)}`));
             row.append($("<td/>").text(`${metaClean(doc.createdBy)}`));
             row.append($("<td/>").text(`${dateClean(metaClean(doc.createdOn))}`));
-            let fileViewLink = $("<a/>").text("View").attr("href", dmviewerurl + '?jwt='+ jwt + '&url=' + doc._links.self.href ).attr("target", "_blank");
-            row.append($("<td/>").append(fileViewLink));
             let fileBinLink = $("<a/>").text("Download").attr("href", doc._links.binary.href + '?jwt='+jwt).attr("download",""+doc.originalDocumentName);
             row.append($("<td/>").append(fileBinLink));
+            let fileViewLink = $("<a/>").text("View").attr("href", dmviewerurl + '?jwt='+ jwt + '&url=' + doc._links.self.href ).attr("target", "_blank");
+            row.append($("<td/>").append(fileViewLink));
+            let fileAnnoLink = $("<a/>").text("Annotate").attr("href", dmviewerurl + '?jwt='+ jwt + '&url=' + doc._links.self.href + '&annotate=true' ).attr("target", "_blank");
+            row.append($("<td/>").append(fileAnnoLink));
 
 
-            let deleteSoftButton = $("<input/>")
+            // let deleteSoftButton = $("<input/>")
+            //     .attr("type","button")
+            //     .attr("class","button")
+            //     .attr("value","Soft Delete")
+            //     .attr("onclick","deleteMe('"+doc._links.self.href + "?permanent=false','"+jwt+"')");
+            // row.append($("<td/>").append(deleteSoftButton));
+            //
+            // let deleteHardButton = $("<input/>")
+            //     .attr("type","button")
+            //     .attr("class","button")
+            //     .attr("value","Hard Delete")
+            //     .attr("onclick","deleteMe('"+doc._links.self.href + "?permanent=true','"+jwt+"')");
+            // row.append($("<td/>").append(deleteHardButton));
+
+            let deleteButton = $("<input/>")
                 .attr("type","button")
                 .attr("class","button")
-                .attr("value","Soft Delete")
-                .attr("onclick","delete("+doc._links.self.href + "?jwt="+jwt+"&permanent=false)");
-            row.append($("<td/>").append(deleteSoftButton));
-
-            let deleteHardButton = $("<input/>")
-                .attr("type","button")
-                .attr("class","button")
-                .attr("value","Hard Delete")
-                .attr("onclick","delete("+doc._links.self.href + "?jwt="+jwt+"&permanent=True)");
-            row.append($("<td/>").append(deleteHardButton));
+                .attr("style","colour=red")
+                .attr("value","Delete")
+                .attr("onclick","deleteMe('"+doc._links.self.href + "?permanent=true','"+jwt+"')");
+            row.append($("<td/>").append(deleteButton));
 
             table_body.append(row);
         });
@@ -142,3 +152,4 @@ $(function () {
     }
 
 });
+

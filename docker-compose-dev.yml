@@ -7,7 +7,7 @@ services:
     ports:
       - 8000:8080
 
-  document-management-viewer:
+  em-viewer-web:
     ports:
      - 8084:8080
 

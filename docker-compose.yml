@@ -4,10 +4,10 @@ services:
   document-management-node-demo:
     build:
       context: .
-      args:
-        - http_proxy
-        - https_proxy
-        - no_proxy
+#      args:
+#        - http_proxy
+#        - https_proxy
+#        - no_proxy
     image: docker.artifactory.reform.hmcts.net/evidence/document-management-node-demo:latest
     environment:
     - NODE_ENV=development
@@ -30,8 +30,8 @@ services:
     - PACKAGES_NAME=document-management-node-demo
     - PACKAGES_VERSION=unkown
 
-  document-management-viewer:
-    image: docker.artifactory.reform.hmcts.net/evidence/document-management-viewer:latest
+  em-viewer-web:
+    image: docker.artifactory.reform.hmcts.net/evidence/em-viewer-web:latest
     environment:
     - NODE_ENV=development
     - PORT=8080

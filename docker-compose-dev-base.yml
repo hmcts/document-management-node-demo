@@ -3,7 +3,7 @@ version: '2.1'
 
 services:
 
-  document-management-viewer:
+  em-viewer-web:
    ports:
    - 8084:8080
 
