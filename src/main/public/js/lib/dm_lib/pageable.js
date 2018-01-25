@@ -44,8 +44,10 @@ $(function () {
         console.log(docs)
         $.each(docs, function (i, doc) {
             let row = $("<tr/>");
-            let thumbnail = $("<img/>").attr("src", doc._links.thumbnail.href +"?jwt=" + jwt ).attr("width",32);
-            row.append($("<td/>").append(thumbnail));
+            let thumbnailLink = $("<a/>").attr("href", doc._links.thumbnail.href +"?jwt=" + jwt );
+            let thumbnail = $("<img/>").attr("src", doc._links.thumbnail.href +"?jwt=" + jwt ).attr("width",48);
+            thumbnailLink.append(thumbnail);
+            row.append($("<td/>").append(thumbnailLink));
 
             row.append($("<td/>").text(`${metaClean(doc.metadata.title)}`));
 
