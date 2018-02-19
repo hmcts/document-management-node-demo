@@ -1,0 +1,28 @@
+#!groovy
+
+properties([
+  [
+    $class       : 'GithubProjectProperty',
+    displayName  : 'Document Management Webshow',
+    projectUrlStr: 'https://github.com/hmcts/document-management-node-demo/'
+  ],
+  pipelineTriggers([
+    [$class: 'GitHubPushTrigger']
+  ])
+])
+
+@Library("Infrastructure") _
+
+def type = "nodejs"
+def product = "dm"
+def component = "webshow-web"
+
+def channel = '#dm-pipeline'
+
+withPipeline(type , product, component) {
+
+    after('checkout') {
+        echo '${component} out'
+    }
+    enableSlackNotifications(channel)
+}
