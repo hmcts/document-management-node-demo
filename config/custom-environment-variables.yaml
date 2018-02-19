@@ -6,6 +6,7 @@ idamExpressMiddlewareArgs:
   idamLoginUrl: IDAM_LOGIN_URL
 
 services:
+  dmApiGwUrl: DM_GW_BASE_URL
   dmUploadUrl: DM_UPLOAD_URL
   dmFindDocumentsByCreator: DM_OWNED_URL
   dmFindDocumentsByMetadata: DM_SEARCH_URL
