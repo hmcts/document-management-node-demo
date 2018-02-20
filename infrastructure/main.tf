@@ -52,6 +52,7 @@ module "key-vault" {
     tenant_id           = "${var.tenant_id}"
     object_id           = "${var.jenkins_AAD_objectId}"
     resource_group_name = "${module.web.resource_group_name}"
+    product_group_object_id = "5d9cd025-a293-4b97-a0e5-6f43efce02c0"
 }
 
 # module "redis-cache" {
