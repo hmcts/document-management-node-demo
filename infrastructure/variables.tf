@@ -54,24 +54,24 @@ variable "jenkins_AAD_objectId" {
 ////////////////////////////////////////////////
 // Endpoints
 ////////////////////////////////////////////////
-variable "idam-api-url" {
+variable "idam_api_url" {
     default = "http://betaDevBccidamAppLB.reform.hmcts.net:80"
 }
 
-variable "s2s-url" {
+variable "s2s_url" {
     default = "http://betaDevBccidamS2SLB.reform.hmcts.net:80"
 }
-variable "idam-login-url" {
+variable "idam_login_url" {
     default = "https://idam-test.dev.ccidam.reform.hmcts.net/login"
 }
 
-variable "em-viewer-web-url" {
+variable "em_viewer_web_url" {
     default = "em-viewer-web"
 }
-variable "dm-gw-web-url" {
-    default = "dm-store-api-gateway-web"
+variable "dm_gw_web_url" {
+    default = "dm-api-gateway-web"
 }
-variable "dm-store-app-url" {
+variable "dm_store_app_url" {
     default = "dm-store-app"
 }
 
@@ -101,21 +101,21 @@ variable "log_output" {
 ////////////////////////////////////////////////
 // Addtional
 ////////////////////////////////////////////////
-variable "userGroupAName" {
+variable "user_group_a_name" {
     default = "Group A"
 }
-variable "userGroupBUsers" {
+variable "user_group_b_name" {
     default = "Group B"
 }
-variable "userGroupCUsers" {
+variable "user_group_c_name" {
     default = "Group C"
 }
-variable "userGroupAUsers" {
+variable "user_group_a_users" {
     default = "user1a@test.com"
 }
-variable "userGroupBName" {
+variable "user_group_b_users" {
     default = "user1b@test.com"
 }
-variable "userGroupCName" {
+variable "user_group_c_users" {
     default = "user1c@test.com"
 }

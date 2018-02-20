@@ -1,6 +1,13 @@
+locals {
+  app_full_name = "${var.product}-${var.app_name}-${var.app_type}"
+  ase_name = "${data.terraform_remote_state.core_apps_compute.ase_name[0]}"
+}
+# "${local.ase_name}"
+# "${local.app_full_name}"
+
 module "app" {
   source = "git@github.com:contino/moj-module-webapp?ref=master"
-  product = "${var.product}-${var.app_name}-${var.app_type}"
+  product = "${local.app_full_name}"
   location = "${var.location}"
   env = "${var.env}"
   ilbIp = "${var.ilbIp}"
@@ -16,12 +23,12 @@ module "app" {
     # PORT = "8080"
 
     # logging vars & healthcheck
-    REFORM_SERVICE_NAME = "${var.product}-${var.app_name}-${var.app_type}"
+    REFORM_SERVICE_NAME = "${local.app_full_name}"
     REFORM_TEAM = "${var.team_name}"
     REFORM_SERVICE_TYPE = "${var.app_language}"
     REFORM_ENVIRONMENT = "${var.env}"
 
-    PACKAGES_NAME = "${var.product}-${var.app_name}-${var.app_type}"
+    PACKAGES_NAME = "${local.app_full_name}"
     PACKAGES_PROJECT = "${var.team_name}"
     PACKAGES_ENVIRONMENT = "${var.env}"
 
@@ -29,26 +36,25 @@ module "app" {
     JSON_CONSOLE_PRETTY_PRINT = "${var.json_console_pretty_print}"
     LOG_OUTPUT = "${var.log_output}"
 
-    IDAM_API_URL = "${var.idam-api-url}"
-    IDAM_LOGIN_URL = "${var.idam-login-url}"
-    # IDAM_CONTINUE_URL = "http://${var.product}-${var.app_name}-${var.app_type}-${var.env}.service.${data.terraform_remote_state.core_apps_compute.ase_name[0]}.internal"
-    # DM_UPLOAD_URL = "http://${var.dm-gw-web-url}-${var.env}.service.${data.terraform_remote_state.core_apps_compute.ase_name[0]}.internal/documents"
-    # DM_OWNED_URL = "http://${var.dm-gw-web-url}-${var.env}.service.${data.terraform_remote_state.core_apps_compute.ase_name[0]}.internal/documents/owned"
-    # DM_SEARCH_URL = "http://${var.dm-gw-web-url}-${var.env}.service.${data.terraform_remote_state.core_apps_compute.ase_name[0]}.internal/documents/filter"
-    # DM_VIEWER_URL = "http://${var.em-viewer-web-url}-${var.env}.service.${data.terraform_remote_state.core_apps_compute.ase_name[0]}.internal"
-    USER_GROUP_A = "${var.userGroupAName}"
-    USER_GROUP_B = "${var.userGroupBName}"
-    USER_GROUP_C = "${var.userGroupCName}"
-    USER_GROUP_A_USERS = "${var.userGroupAUsers}"
-    USER_GROUP_B_USERS = "${var.userGroupBUsers}"
-    USER_GROUP_C_USERS = "${var.userGroupCUsers}"
-    
+    IDAM_API_URL = "${var.idam_api_url}"
+    IDAM_LOGIN_URL = "${var.idam_login_url}"
+    IDAM_CONTINUE_URL = "http://${local.app_full_name}-${var.env}.service.${local.ase_name}.internal"
+    DM_UPLOAD_URL = "http://${var.dm_gw_web_url}-${var.env}.service.${local.ase_name}.internal/documents"
+    DM_OWNED_URL = "http://${var.dm_gw_web_url}-${var.env}.service.${local.ase_name}.internal/documents/owned"
+    DM_SEARCH_URL = "http://${var.dm_gw_web_url}-${var.env}.service.${local.ase_name}.internal/documents/filter"
+    DM_VIEWER_URL = "http://${var.em_viewer_web_url}-${var.env}.service.${local.ase_name}.internal"
+    USER_GROUP_A = "${var.user_group_a_name}"
+    USER_GROUP_B = "${var.user_group_b_name}"
+    USER_GROUP_C = "${var.user_group_c_name}"
+    USER_GROUP_A_USERS = "${var.user_group_a_users}"
+    USER_GROUP_B_USERS = "${var.user_group_b_users}"
+    USER_GROUP_C_USERS = "${var.user_group_c_users}"
   }
 }
 
-module "key-vault" {
+module "key_vault" {
   source = "git@github.com:contino/moj-module-key-vault?ref=master"
-  product = "${var.product}-${var.app_name}-${var.app_type}"
+  product = "${local.app_full_name}"
   env = "${var.env}"
   tenant_id = "${var.tenant_id}"
   object_id = "${var.jenkins_AAD_objectId}"

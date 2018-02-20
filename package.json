@@ -20,6 +20,7 @@
         "test:nsp-warn": "nsp check --output summary --warn-only",
         "test:snyk": "snyk test",
         "test:smoke": "echo 'smoke test not implemented'",
+        "test:functional": "echo 'functional test not implemented'",
         "test:codacy-upload": "cat ./coverage/lcov.info | codacy-coverage",
         "test:codecov-upload": "codecov -f ./coverage/lcov.info",
         "sonar-scan": "node_modules/sonar-scanner/bin/sonar-scanner",
