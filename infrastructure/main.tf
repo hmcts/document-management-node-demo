@@ -42,6 +42,7 @@ module "app" {
     USER_GROUP_A_USERS = "${var.userGroupAUsers}"
     USER_GROUP_B_USERS = "${var.userGroupBUsers}"
     USER_GROUP_C_USERS = "${var.userGroupCUsers}"
+    
   }
 }
 
