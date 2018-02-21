@@ -18,18 +18,18 @@ security:
       - 'Set proper SHA256s'
 
 idamExpressMiddlewareArgs:
-  continueUrl: 'http://localhost:8000'
-  idamApiUrl: 'http://localhost:8081'
-  idamLoginUrl: 'https://localhost:9000/login'
+  continueUrl: 'http://localhost:3608'
+  idamApiUrl: 'http://localhost:4501'
+  idamLoginUrl: 'https://localhost:3501/login'
   indexUrl: '/index'
 
 
 services:
-  dmApiGwUrl: 'http://localhost:8080'
-  dmUploadUrl: 'http://localhost:8080/documents'
-  dmFindDocumentsByCreator: 'http://localhost:8080/documents/owned'
-  dmFindDocumentsByMetadata: 'http://localhost:8080/documents/filter'
-  dmViewerUrl: 'http://localhost:8084'
+  dmApiGwUrl: 'http://localhost:3603'
+  dmUploadUrl: 'http://localhost:3603/documents'
+  dmFindDocumentsByCreator: 'http://localhost:3603/documents/owned'
+  dmFindDocumentsByMetadata: 'http://localhost:3603/documents/filter'
+  dmViewerUrl: 'http://localhost:3621'
 
 userGroup:
   userGroupAName: 'Group A'
@@ -49,6 +49,6 @@ userGroup:
   - 'user3c@test.com'
 
 logging:
-  microservice: document-management-node-demo
+  microservice: dm-webshow-web
   team: evidence
   environment: local

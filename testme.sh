@@ -4,6 +4,6 @@ yarn clean
 yarn install
 yarn setup
 yarn lint
-./bin/test_dependency.sh
-./bin/test_coverage.sh
-./bin/test_integration.sh
+./bin/test/test_dependency.sh
+./bin/test/test_coverage.sh
+./bin/test/test_integration.sh
