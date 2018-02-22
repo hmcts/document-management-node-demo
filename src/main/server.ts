@@ -19,8 +19,7 @@ import { app } from "./app";
 
 const logger = logging.getLogger("server");
 
-// TODO: set the right port for your application
-const port: number = parseInt(process.env.PORT, 10) || 3608;
+const port = process.env.PORT || 3608;
 
 logger.info("ENV is " + app.locals.ENV);
 

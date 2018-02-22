@@ -3,15 +3,11 @@ FROM node:8.1.4
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-COPY package.json yarn.lock /usr/src/app/
+COPY package.json .
+COPY yarn.lock .
 RUN yarn install
 
-COPY src/main /usr/src/app/src/main
-COPY config /usr/src/app/config
+COPY . .
+RUN yarn setup
 
-COPY gulpfile.js tsconfig.json /usr/src/app/
-RUN yarn sass
-
-# TODO: expose the right port for your application
-EXPOSE 8080
 CMD [ "yarn", "start" ]
