@@ -1,6 +1,6 @@
 // TODO - Maybe needs to moved
 import * as config from "config";
-import * as checkDefaultEnv from "modules/util";
+import * as checkDefaultEnv from "../modules/util";
 checkDefaultEnv("PACKAGES_ENVIRONMENT", "local");
 checkDefaultEnv("PACKAGES_PROJECT", "evidence");
 checkDefaultEnv("PACKAGES_NAME", "document-management-node-demo");

@@ -1,5 +1,5 @@
 *
 !src
 !package.json
-!server.ts
+!server.js
 !yarn.lock

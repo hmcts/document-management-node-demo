@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // TODO move these setting to a better place
-import * as checkDefaultEnv from "./src/main/modules/util/index";
+import * as checkDefaultEnv from "./modules/util/index";
 
 checkDefaultEnv("ROOT_APPENDER", "JSON_CONSOLE");
 checkDefaultEnv("JSON_CONSOLE_PRETTY_PRINT", "false");
@@ -15,7 +15,7 @@ import * as logging from "@hmcts/nodejs-logging";
 // import * as fs from "fs";
 // import * as https from "https";
 // import * as path from "path";
-import { app } from "./src/main/app";
+import { app } from "./app";
 
 const logger = logging.getLogger("server");
 
