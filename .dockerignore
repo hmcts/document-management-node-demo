@@ -3,6 +3,6 @@
 !src/main
 !package.json
 !gulpfile.js
-!server.js
+!app.js
 !tsconfig.json
 !yarn.lock
