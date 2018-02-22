@@ -7,8 +7,8 @@ import * as express from "express";
 import * as expressNunjucks from "express-nunjucks";
 // import { Helmet, IConfig as HelmetConfig } from "modules/helmet";
 import * as path from "path";
-import { RouterFinder } from "./router/routerFinder";
 import * as favicon from "serve-favicon";
+import { RouterFinder } from "./router/routerFinder";
 import * as idamExpressMiddleware from "./services/idam";
 // import * as cors from "cors";
 
