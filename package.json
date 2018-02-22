@@ -23,7 +23,7 @@
         "test:functional": "echo 'functional test not implemented'",
         "test:codacy-upload": "cat ./coverage/lcov.info | codacy-coverage",
         "test:codecov-upload": "codecov -f ./coverage/lcov.info",
-        "sonar-scan": "node_modules/sonar-scanner/bin/sonar-scanner",
+        "sonar-scan": "echo 'sonar-scan not implemented this is it though => node_modules/sonar-scanner/bin/sonar-scanner'",
         "health-check": "echo 'healthcheck not implemented'",
         "clean": "rm -r node_modules && rm -r mochawesome-report && rm -r coverage && rm -r  .nyc_output",
         "test:routes": "NODE_ENV=mocha LOG_LEVEL=OFF mocha --compilers ts:ts-node/register -r tsconfig-paths/register $(find src/test \\( -name '*.ts' -or -name '*.js' \\) -path '*/routes/*') --reporter mochawesome --reporter-options reportFilename=routes,inlineAssets=true,reportTitle=expressjs-template-routes"
