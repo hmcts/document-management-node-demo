@@ -69,7 +69,7 @@ variable "em_viewer_web_url" {
     default = "em-viewer-web"
 }
 variable "dm_gw_web_url" {
-    default = "dm-api-gateway-web"
+    default = "dm-api-gw-web"
 }
 variable "dm_store_app_url" {
     default = "dm-store-app"
