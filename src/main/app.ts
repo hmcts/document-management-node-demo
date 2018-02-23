@@ -5,12 +5,10 @@ import * as cookieParser from "cookie-parser";
 import * as csrf from "csurf";
 import * as express from "express";
 import * as expressNunjucks from "express-nunjucks";
-// import { Helmet, IConfig as HelmetConfig } from "modules/helmet";
 import * as path from "path";
 import * as favicon from "serve-favicon";
 import { RouterFinder } from "./router/routerFinder";
 import * as idamExpressMiddleware from "./services/idam";
-// import * as cors from "cors";
 
 const env = process.env.NODE_ENV || "development";
 export const app: express.Express = express();
@@ -21,23 +19,7 @@ logging.config(config.get("logging"));
 
 // setup logging of HTTP requests
 app.use(logging.express.accessLogger());
-
-// let corsOptions = {
-//   methods: ['GET', 'POST']
-// };
-
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-//   res.header("Access-Control-Allow-Methods", "GET, POST");
-//   next();
-// });
-
 const logger = logging.getLogger("app");
-
-// secure the application by adding various HTTP headers to its responses
-// disabled for now
-// new Helmet(config.get<HelmetConfig>("security")).enableFor(app);
 
 // view engine setup
 app.set("views", [
@@ -51,7 +33,7 @@ app.use("/", (req, res, next) => {
   res.locals.homepage_url = "/";
   res.locals.logo_link_title = "Go to the homepage";
   res.locals.global_header_text = "HMCTS";
-  res.locals.serviceName = "Document Management Node Demo App";
+  res.locals.serviceName = "Document Management Show Web";
   next();
 });
 

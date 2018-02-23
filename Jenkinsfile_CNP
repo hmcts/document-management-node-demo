@@ -15,7 +15,7 @@ properties([
 
 def type = "nodejs"
 def product = "dm"
-def component = "webshow-web"
+def component = "show-web"
 
 def channel = '#dm-pipeline'
 

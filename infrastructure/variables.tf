@@ -5,7 +5,7 @@ variable "product" {
 }
 
 variable "app_name" {
-    default = "webshow"
+    default = "show"
 }
 
 variable "app_type" {
