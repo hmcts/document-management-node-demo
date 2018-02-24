@@ -1,0 +1,72 @@
+<div class="grid-row">
+  <div [ngClass]="{'column-full': true}">
+    <h1 class="heading-large">List View</h1>
+    <table id="documentTable">
+      <thead>
+      <tr>
+        <th></th>
+        <th>File Name</th>
+        <th>Created By</th>
+        <th>Created On</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr *ngFor="let docs of documents">
+        <td>
+          <a href="{{docs._links.thumbnail.href}}?jwt={{jwt}}">
+            <img src="{{docs._links.thumbnail.href}}?jwt={{jwt}}" width="48">
+          </a>
+        </td>
+        <td>{{docs.originalDocumentName}}</td>
+        <td>{{docs.createdBy}}</td>
+        <td>{{docs._modifiedOn}}</td>
+        <td>
+          <a href="{{docs._links.binary.href}}?jwt={{jwt}}" download="{{docs.originalDocumentName}}">Download</a>
+        </td>
+        <td>
+          <a href="{{config.config.em_viewer_url}}?url={{docs._links.self.href}}&jwt={{jwt}}" target="_blank">View</a>
+        </td>
+        <td>
+          <a href="{{config.config.em_viewer_url}}?url={{docs._links.self.href}}&jwt={{jwt}}&annotate=true" target="_blank">Annotate</a>
+        </td>
+        <td>
+          <input type="button" class="button" style="" value="Delete"
+                 (click)="deleteDocument(docs._links.self.href + '?permanent=true')"/>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div id="documentsPagination" class="pager">
+      <div class="pager-controls">
+        <ul class="pager-items">
+          <li>first</li>
+          <li>prev</li>
+          <li>next</li>
+          <li>last</li>
+        </ul>
+      </div>
+
+      <div class="summary">
+          Showing page {{page.number}} of {{page.totalPages}} of {{page.totalElements}} documents
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="error" class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+  <h2 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">There was an error while
+    loading your document.</h2>
+  <p>Response status was {{error.status}}.</p>
+  <ul class="error-summary-list">
+    <li><a href="javascript:history.back()">Go Back</a></li>
+  </ul>
+</div>

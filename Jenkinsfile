@@ -88,11 +88,11 @@ node {
             }
         }
 
-//        if ("master" == "${env.BRANCH_NAME}") {
-//            stage('Sonar') {
-//                sh "yarn sonar-scan -Dsonar.host.url=$SONARQUBE_URL"
-//            }
-//        }
+        if ("master" == "${env.BRANCH_NAME}") {
+            stage('Sonar') {
+                sh "yarn sonar-scan -Dsonar.host.url=$SONARQUBE_URL"
+            }
+        }
 
         if ("master" == "${env.BRANCH_NAME}") {
 

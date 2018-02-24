@@ -1,0 +1,2 @@
+ignore:
+  - "**/window.service.ts"         # glob accepted

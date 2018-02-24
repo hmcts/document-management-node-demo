@@ -2,6 +2,8 @@ version: '2.1'
 
 services:
   document-management-node-demo:
+    build:
+      context: ../../.
     image: docker.artifactory.reform.hmcts.net/evidence/document-management-node-demo:latest
     environment:
     - NODE_ENV=development

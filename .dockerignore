@@ -1,8 +1,7 @@
 *
-!config
-!src/main
-!package.json
-!gulpfile.js
+!src
+!.angular-cli.json
 !app.js
+!package.json
 !tsconfig.json
 !yarn.lock
