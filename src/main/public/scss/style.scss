@@ -1,155 +1,121 @@
-/* You can add global styles to this file, and also import other style files */
+//You can add global styles to this file, and also import other style files
+
 
 @import 'govuk-elements';
 @import '../../../node_modules/govuk_template_jinja/assets/stylesheets/govuk-template.css';
 @import '../../../node_modules/govuk_template_jinja/assets/stylesheets/fonts.css';
 
 
-/*
-==================================================================================
-PAGINATION CSS
-==================================================================================
-*/
-
+//==================================================================================
+//PAGINATION CSS
+//==================================================================================
 
 .pager {
-    margin-top: .3125em;
-    margin-bottom: 1.25em
-}
-
-@media (min-width: 641px) {
-    .pager {
-        margin-top: .26316em;
-        margin-bottom: 1.05263em
-    }
+  margin-bottom: 1.25em;
+  margin-top: .3125em;
 }
 
 .pager-items {
-    display: none
-}
-
-@media (min-width: 641px) {
-    .pager-items {
-        display: inline
-    }
-    .pager-items li {
-        display: inline;
-        margin: 0 5px
-    }
-    .pager-items li:first-child {
-        margin-left: 0
-    }
-    .pager-items li:last-child {
-        margin-right: 0
-    }
+  display: none;
 }
 
 .pager-prev,
 .pager-next {
-    margin-right: 10px
+  margin-right: 10px;
 }
 
 @media (min-width: 641px) {
-    .pager-prev,
-    .pager-next {
-        margin-right: 0
+  .pager {
+    margin-bottom: 1.05263em;
+    margin-top: .26316em;
+  }
+
+  .pager-items {
+    display: inline;
+
+    li {
+      display: inline;
+      margin: 0 5px;
+
+      :first-child {
+        margin-left: 0;
+      }
+
+      :last-child {
+        margin-right: 0;
+      }
     }
+  }
+
+  .pager-prev,
+  .pager-next {
+    margin-right: 0;
+  }
+
+  .pager-prev {
+    margin-right: 10px;
+  }
+
+  .pager-next {
+    margin-left: 10px;
+  }
+
+  .pager-controls {
+    float: right;
+  }
 }
 
-@media (min-width: 641px) {
-    .pager-prev {
-        margin-right: 10px
-    }
-}
+//==================================================================================
+//TAB CSS
+//==================================================================================
 
-@media (min-width: 641px) {
-    .pager-next {
-        margin-left: 10px
-    }
-}
+$border-colour: #bfc1c3;
+$page-colour: #fff;
+$panel-colour: #dee0e2;
+$black: #0b0c0c;
+$unknown-grey: #c9d0d0;
 
-@media (min-width: 641px) {
-    .pager-controls {
-        float: right
-    }
-}
-
-
-
-
-
-
-/*
-==================================================================================
-TAB CSS
-==================================================================================
-*/
 .nav-tabs {
-    zoom: 1;
-    background: #fff;
-    padding: 0;
-    position: relative
-}
+  background: $page-colour;
+  padding: 0;
+  position: relative;
+  zoom: 1;
 
-.nav-tabs:after {
-    content: ".";
+  ::after {
+    clear: both;
+    content: '.';
     display: block;
     height: 0;
-    clear: both;
-    visibility: hidden
-}
+    visibility: hidden;
+  }
 
-.nav-tabs ol,
-.nav-tabs ul,
-.nav-tabs .tabs-nav {
+  ol,
+  ul,
+  .tabs-nav {
     float: left;
     list-style: none;
     margin: 0;
     padding: 0;
     position: relative;
-    z-index: 5
-}
+    z-index: 5;
+  }
 
-@media (max-width: 640px) {
-    .nav-tabs ol,
-    .nav-tabs ul,
-    .nav-tabs .tabs-nav {
-        float: none;
-        margin: 0 -16px
-    }
-}
-
-.nav-tabs li,
-.nav-tabs .tabs-nav li {
-    font-family: "nta", Arial, sans-serif;
-    font-weight: 400;
-    text-transform: none;
+  li,
+  .tabs-nav li {
+    float: left;
+    font-family: 'nta', Arial, sans-serif;
     font-size: 14px;
+    font-weight: 400;
     line-height: 1.1428571429;
-    padding: 0;
     margin: 0;
-    float: left
-}
+    padding: 0;
+    text-transform: none;
+  }
 
-@media (min-width: 641px) {
-    .nav-tabs li,
-    .nav-tabs .tabs-nav li {
-        font-size: 16px;
-        line-height: 2.25
-    }
-}
-
-@media (max-width: 640px) {
-    .nav-tabs li,
-    .nav-tabs .tabs-nav li {
-        float: none
-    }
-}
-
-.nav-tabs li a,
-.nav-tabs .tabs-nav li a {
-    border: solid 1px #fff;
-    border-bottom: none;
+  li a,
+  .tabs-nav li a {
+    border: solid 1px $page-colour;
+    border-bottom: 0;
     float: left;
     height: 2.25em;
     line-height: 2.25em;
@@ -157,235 +123,240 @@ TAB CSS
     padding: 0 1em 0 1em;
     position: relative;
     text-align: center;
-    top: 0
-}
+    top: 0;
+  }
 
-@media (max-width: 640px) {
-    .nav-tabs li a,
-    .nav-tabs .tabs-nav li a {
-        display: block;
-        position: static;
-        float: none;
-        height: auto;
-        line-height: 3.5em;
-        padding: 0 16px;
-        text-align: left;
-        margin-bottom: 0;
-        border-bottom: 1px solid #bfc1c3
-    }
-}
+  li a:hover,
+  .tabs-nav li a:hover {
+    background-color: $border-colour;
+  }
 
-.nav-tabs li a:hover,
-.nav-tabs .tabs-nav li a:hover {
-    background-color: #bfc1c3
-}
-
-.nav-tabs li.ui-tabs-active a,
-.nav-tabs .tabs-nav li.ui-tabs-active a {
-    background-color: #fff;
-    border: solid 1px #bfc1c3;
-    border-bottom: solid 1px #fff;
-    color: #0b0c0c;
+  li.ui-tabs-active a,
+  .tabs-nav li.ui-tabs-active a {
+    background-color: $page-colour;
+    border: solid 1px $border-colour;
+    border-bottom: solid 1px $page-colour;
+    color: $black;
     position: relative;
     text-decoration: none;
-    z-index: 5
+    z-index: 5;
+  }
+
+  li.active a:hover,
+  .tabs-nav li.active a:hover {
+    color: inherit;
+  }
+
+  li:first-child a,
+  .tabs-nav li:first-child a {
+    margin-left: 0;
+  }
 }
 
-@media (max-width: 640px) {
-    .nav-tabs li.ui-tabs-active a,
-    .nav-tabs .tabs-nav li.ui-tabs-active a {
-        border: none;
-        border-bottom: 1px solid #bfc1c3
-    }
+@media (min-width: 641px) {
+  .nav-tabs li,
+  .nav-tabs .tabs-nav li {
+    font-size: 16px;
+    line-height: 2.25;
+  }
 }
 
-.nav-tabs li.active a:hover,
-.nav-tabs .tabs-nav li.active a:hover {
-    color: inherit
-}
+.tab-content {
+  margin: 0 -1em;
 
-.nav-tabs li:first-child a,
-.nav-tabs .tabs-nav li:first-child a {
-    margin-left: 0
-}
-
-@media (max-width: 640px) {
-    .nav-tabs li:first-child a,
-    .nav-tabs .tabs-nav li:first-child a {
-        border-left: none;
-        border-top: 1px solid #bfc1c3
-    }
-}
-
-@media (max-width: 640px) {
-    .tab-content {
-        margin: 0 -1em
-    }
-}
-
-.tab-content .tab-pane {
-    padding: 1em 1em 0 1em;
-    border-top: solid 1px #bfc1c3;
+  .tab-pane {
     clear: both;
-    width: auto
-}
+    border-top: solid 1px $border-colour;
+    width: auto;
+    border-top: 0;
+    padding: 0;
+  }
 
-@media (max-width: 640px) {
-    .tab-content .tab-pane {
-        border-top: none;
-        padding: 0
-    }
-}
+  .inner {
+    border-bottom: solid 1px $unknown-grey;
+    padding: 0 1em 1em;
+  }
 
-.tab-content .inner {
-    padding: 0em 2.5em 1em
-}
+  h1.visuallyhidden+h2 {
+    margin-top: 2em;
+  }
 
-@media (max-width: 640px) {
-    .tab-content .inner {
-        padding: 0 1em 1em;
-        border-bottom: solid 1px #C9D0D0
-    }
-}
-
-.tab-content h1.visuallyhidden+h2 {
-    margin-top: 2em
-}
-
-.tab-content p {
+  p {
     padding: 0;
     margin-left: 0;
-    margin-right: 0
-}
+    margin-right: 0;
+  }
 
-.tab-content em {
+  em {
     font-style: normal;
-    font-weight: bold
+    font-weight: bold;
+  }
+
+  nav {
+    margin: 1em -1.375em 0;
+  }
+
 }
 
-.tab-content nav {
-    margin: 1em -1.375em 0
-}
+.js-tab-content {
 
-.js-tab-content .js-heading-tab {
-    border-bottom: solid 1px #bfc1c3;
-    list-style: none
-}
+  .js-heading-tab {
+    border-bottom: solid 1px $border-colour;
+    list-style: none;
+  }
 
-.js-tab-content .js-heading-tab a,
-.js-tab-content .js-heading-tab h1 {
-    font-family: "nta", Arial, sans-serif;
-    font-weight: 400;
-    text-transform: none;
-    font-size: 18px;
-    line-height: 2.6470588235;
-    background: #FFF url(https://assets.publishing.service.gov.uk/static/accordion-arrow-b34c86338a4bcba6cdbd242842a42a8770fa8ce1fe5e4751fbab640e11f2cb85.png) no-repeat 100% -2px;
+  .js-heading-tab a,
+  .js-heading-tab h1 {
+    background: $page-colour url('https://assets.publishing.service.gov.uk/static/accordion-arrow-b34c86338a4bcba6cdbd242842a42a8770fa8ce1fe5e4751fbab640e11f2cb85.png') no-repeat 100% -2px;
     display: block;
+    font-family: 'nta', Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 2.6470588235;
     padding: 0 16px;
     position: relative;
     text-align: left;
     text-decoration: underline;
-    top: 0
-}
-
-@media (min-width: 641px) {
-    .js-tab-content .js-heading-tab a,
-    .js-tab-content .js-heading-tab h1 {
-        font-size: 24px;
-        line-height: 1.875
-    }
-}
-
-@media only screen and (-webkit-min-device-pixel-ratio: 2),
-only screen and (min--moz-device-pixel-ratio: 2),
-only screen and (-o-min-device-pixel-ratio: 20 / 10),
-only screen and (min-device-pixel-ratio: 2),
-only screen and (min-resolution: 192dpi),
-only screen and (min-resolution: 2dppx) {
-    .js-tab-content .js-heading-tab a,
-    .js-tab-content .js-heading-tab h1 {
-        background-image: url(https://assets.publishing.service.gov.uk/static/accordion-arrow-2x-571fbd74783219a72efc102f0113190d4393e506cf3bf759bf5ab5e463033f76.png);
-        background-size: 45px 90px
-    }
-}
-
-.js-tab-content .js-heading-tab a:hover,
-.js-tab-content .js-heading-tab h1:hover {
-    background-color: #dee0e2
-}
-
-.js-tab-content .js-heading-tab.ui-tabs-active {
-    text-decoration: none
-}
-
-.js-tab-content .js-heading-tab.ui-tabs-active a,
-.js-tab-content .js-heading-tab.ui-tabs-active h1 {
-    background: #dee0e2 100% -48px;
-    color: #0b0c0c;
-    text-decoration: none
-}
-
-.js-tab-content .js-heading-tab {
-    margin: 0;
-    clear: both
-}
-
-.js-tab-content .js-heading-tab h1 {
-    padding: 0
-}
-
-.js-tab-content .tab-shiftlink {
-    font-family: "nta", Arial, sans-serif;
-    font-weight: 400;
     text-transform: none;
+    top: 0;
+  }
+
+  .js-heading-tab a:hover,
+  .js-heading-tab h1:hover {
+    background-color: $panel-colour;
+  }
+
+  .js-heading-tab.ui-tabs-active {
+    text-decoration: none;
+  }
+
+  .js-heading-tab.ui-tabs-active a,
+  .js-heading-tab.ui-tabs-active h1 {
+    background: $panel-colour 100% -48px;
+    color: $black;
+    text-decoration: none;
+  }
+
+  .js-heading-tab {
+    clear: both;
+    margin: 0;
+  }
+
+  .js-heading-tab h1 {
+    padding: 0;
+  }
+
+  .tab-shiftlink {
+    font-family: 'nta', Arial, sans-serif;
     font-size: 16px;
+    font-weight: 400;
+    left: -9999em;
     line-height: 1.25;
     position: absolute;
-    left: -9999em
+    text-transform: none;
+  }
+
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 20 / 10), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+  .js-tab-content {
+    .js-heading-tab {
+      a, h1 {
+        background-image: url('https://assets.publishing.service.gov.uk/static/accordion-arrow-2x-571fbd74783219a72efc102f0113190d4393e506cf3bf759bf5ab5e463033f76.png');
+        background-size: 45px 90px;
+      }
+    }
+
+  }
 }
 
 @media (min-width: 641px) {
-    .js-tab-content .tab-shiftlink {
-        font-size: 19px;
-        line-height: 1.3157894737
+  .js-tab-content {
+    .tab-shiftlink {
+      font-size: 19px;
+      line-height: 1.3157894737;
     }
+
+    .js-heading-tab a,
+    .js-heading-tab h1 {
+      font-size: 24px;
+      line-height: 1.875;
+    }
+  }
 }
 
 @media (max-width: 640px) {
-    .js-tab-content .tab-shiftlink {
-        position: static;
-        left: auto
+  .js-tab-content {
+    .js-tab-container {
+      min-height: 0;
     }
-}
 
-@media (max-width: 640px) {
-    .js-tab-content .js-tab-container {
-        min-height: 0
+    .js-tab-pane {
+      border-bottom: solid 1px $border-colour;
     }
-    .js-tab-content .js-tab-pane {
-        border-bottom: solid 1px #bfc1c3
+
+    .js-tab-container:first-child {
+      border-top: solid 1px $border-colour;
     }
-    .js-tab-content .js-tab-container:first-child {
-        border-top: solid 1px #bfc1c3
+
+    .report-a-problem-toggle {
+      margin-top: 2em;
     }
+
+    .tab-shiftlink {
+      left: auto;
+      position: static;
+    }
+  }
+
+  .nav-tabs{
+    ol,
+    ul,
+    .tabs-nav {
+      float: none;
+      margin: 0 -16px;
+    }
+
+    li,
+    .tabs-nav li {
+      float: none;
+    }
+
+    li:first-child a,
+    .tabs-nav li:first-child a {
+      border-left: 0;
+      border-top: 1px solid $border-colour;
+    }
+
+    li.ui-tabs-active a,
+    .tabs-nav li.ui-tabs-active a {
+      border: 0;
+      border-bottom: 1px solid $border-colour;
+    }
+
+    li a,
+    .tabs-nav li a {
+      border-bottom: 1px solid $border-colour;
+      display: block;
+      float: none;
+      height: auto;
+      line-height: 3.5em;
+      margin-bottom: 0;
+      padding: 0 16px;
+      position: static;
+      text-align: left;
+    }
+  }
 }
 
 .transaction .js-tab-content {
-    overflow: hidden
+  overflow: hidden;
 }
-
-@media (max-width: 640px) {
-    .js-tab-content .report-a-problem-toggle {
-        margin-top: 2em
-    }
-}
-
 
 .tabs-panel {
-    display: none
+  display: none;
 }
 
-
 .ui-tabs-active {
-    display: block
+  display: block;
 }

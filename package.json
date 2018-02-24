@@ -9,8 +9,8 @@
         "start": "cross-env NODE_PATH=. ./app.js",
         "setup": "cross-env NODE_PATH=. npm run sass",
         "sass": "gulp sass copy-files",
-        "lint": "tslint --project tsconfig.json --type-check && sass-lint -v -q",
-        "lint:fix": "tslint --project tsconfig.json --fix && sass-lint --fix",
+        "lint": "tslint --project tsconfig.json --type-check && sass-lint -v -q --max-warnings 1000",
+        "lint:fix": "tslint --project tsconfig.json --fix",
         "test": "nyc --all --reporter=lcov --reporter=text-lcov mocha LOG_LEVEL=OFF mocha --compilers ts:ts-node/register -r tsconfig-paths/register $(find src/test \\( -name '*.ts' -or -name '*.js' \\) ! -path '*a11y*' ! -path '*/routes/*') --reporter mochawesome --reporter-options reportFilename=unit,inlineAssets=true,reportTitle=expressjs-template-unit",
         "e2e": "echo 'e2e not implemented'",
         "test-all": "echo 'test all not implemented'",
@@ -76,7 +76,7 @@
         "nsp": "^2.8.0",
         "nyc": "^11.3.0",
         "pa11y": "^4.13.0",
-        "sass-lint": "^1.11.1",
+        "sass-lint": "^1.12.1",
         "sinon": "^3.3.0",
         "sinon-chai": "^2.13.0",
         "sonar-scanner": "^1.0.1",
@@ -86,6 +86,7 @@
     },
     "nyc": {
         "exclude": [
+
             "gulpfile.js",
             "src",
             "mochawesome-report",
