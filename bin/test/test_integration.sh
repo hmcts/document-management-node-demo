@@ -1,5 +1,6 @@
 #!/bin/sh
-./gradlew installDist bootRepackage
+#if java gradle
+#./gradlew installDist bootRepackage
 
 docker-compose down
 

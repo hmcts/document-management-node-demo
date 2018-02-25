@@ -9,7 +9,7 @@
     "setup": "ng build --prod",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "test": "ng test --single-run=true",
+    "test": "ng test --single-run=true --code-coverage --reporters=kjhtml,mocha",
     "test-all": "echo 'test all not implemented'",
     "test:a11y": "echo 'ally test not implemented'",
     "test:coverage": "ng test --single-run=true --code-coverage",
@@ -62,9 +62,10 @@
     "karma": "~1.7.0",
     "karma-chrome-launcher": "~2.1.1",
     "karma-cli": "~1.0.1",
-    "karma-coverage-istanbul-reporter": "^1.2.1",
+    "karma-coverage-istanbul-reporter": "^1.4.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-mocha-reporter": "^2.2.5",
     "karma-phantomjs-launcher": "^1.0.4",
     "nsp": "^2.6.3",
     "protractor": "~5.1.2",
@@ -72,9 +73,6 @@
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
     "typescript": "~2.4.2"
-  },
-  "resolutions": {
-    "ng2-pdf-viewer/pdfjs-dist": "1.9.661"
   },
   "snyk": true
 }

@@ -1,5 +1,8 @@
 #!/bin/sh
-./gradlew dependencyCheckAnalyze -DdependencyCheck.failBuild=false
+yarn nsp
 
-xdg-open build/reports/dependency-check-report.html
-open build/reports/dependency-check-report.html
+# if Java Gradle
+#./gradlew dependencyCheckAnalyze -DdependencyCheck.failBuild=false
+
+#xdg-open build/reports/dependency-check-report.html
+#open build/reports/dependency-check-report.html
