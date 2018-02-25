@@ -4,6 +4,9 @@
 yarn test
 yarn lint
 
+xdg-open report/units.html
+open report/units.html
+
 #./gradlew check
 #
 #xdg-open build/reports/checkstyle/main.html

@@ -3549,6 +3549,12 @@ karma-coverage-istanbul-reporter@^1.4.1:
     istanbul-api "^1.1.14"
     minimatch "^3.0.4"
 
+karma-htmlfile-reporter@^0.3.5:
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/karma-htmlfile-reporter/-/karma-htmlfile-reporter-0.3.5.tgz#09abca9910a3eb1dbba27a9a766026948c96ca04"
+  dependencies:
+    xmlbuilder "3.1.0"
+
 karma-jasmine-html-reporter@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/karma-jasmine-html-reporter/-/karma-jasmine-html-reporter-0.2.2.tgz#48a8e5ef18807617ee2b5e33c1194c35b439524c"
@@ -3788,7 +3794,7 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-lodash@^3.10.0, lodash@^3.8.0:
+lodash@^3.10.0, lodash@^3.5.0, lodash@^3.8.0:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
@@ -7105,6 +7111,12 @@ xml2js@^0.4.17:
   dependencies:
     sax ">=0.6.0"
     xmlbuilder "~9.0.1"
+
+xmlbuilder@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-3.1.0.tgz#2c86888f2d4eade850fa38ca7f7223f7209516e1"
+  dependencies:
+    lodash "^3.5.0"
 
 xmlbuilder@>=1.0.0, xmlbuilder@~9.0.1:
   version "9.0.4"

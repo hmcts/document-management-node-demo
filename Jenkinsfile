@@ -70,18 +70,18 @@ node {
                 sh "yarn test:coverage"
             } finally {
                 publishHTML([
-                    allowMissing         : false,
-                    alwaysLinkToLastBuild: false,
-                    keepAll              : false,
-                    reportDir            : "mochawesome-report/",
-                    reportFiles          : 'mochawesome.html',
+                    allowMissing         : true,
+                    alwaysLinkToLastBuild: true,
+                    keepAll              : true,
+                    reportDir            : "report/",
+                    reportFiles          : 'units.html',
                     reportName           : 'Unit Test Report'
                 ])
                 publishHTML([
-                    allowMissing         : false,
-                    alwaysLinkToLastBuild: false,
-                    keepAll              : false,
-                    reportDir            : "coverage/lcov-report/",
+                    allowMissing         : true,
+                    alwaysLinkToLastBuild: true,
+                    keepAll              : true,
+                    reportDir            : "coverage/",
                     reportFiles          : 'index.html',
                     reportName           : 'Coverage Report'
                 ])
