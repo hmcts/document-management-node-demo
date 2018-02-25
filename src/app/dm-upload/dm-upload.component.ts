@@ -46,7 +46,6 @@ export class DmUploadComponent implements OnInit {
   uploadDocument() {
     if (this.fileToUpload) {
       this.postFile();
-      this.gotoListView();
     } else {
       this.error = new Error('Please upload a file').message;
     }
@@ -66,7 +65,7 @@ export class DmUploadComponent implements OnInit {
 
     this.http
       .post<any>(this.config.getDmUploadUrl(), formData, this.getHttpOptions())
-      .subscribe();
+      .subscribe( () => this.gotoListView());
   }
 
   cancelUpload() {
