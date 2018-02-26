@@ -1,6 +1,6 @@
 {
-  "name": "dm-show-web",
-  "version": "0.0.1",
+  "name": "document-management-node-demo",
+  "version": "2.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",

@@ -28,12 +28,12 @@ module.exports = function (config) {
     angularCli: {
       environment: "dev"
     },
-    reporters: ["html" , "kjhtml", "mocha"],
+    reporters: ["html" , "progress", "kjhtml", "mocha"],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ["Chrome", "PhantomJS"],
+    browsers: ["PhantomJS"],
     singleRun: false
   });
 };
