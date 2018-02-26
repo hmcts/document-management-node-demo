@@ -11,6 +11,8 @@ module "app" {
   location = "${var.location}"
   env = "${var.env}"
   ilbIp = "${var.ilbIp}"
+  subscription = "${var.subscription}"
+  is_frontend = true
 
   app_settings = {
     # REDIS_HOST = "${module.redis-cache.host_name}"
