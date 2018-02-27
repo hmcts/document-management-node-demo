@@ -20,9 +20,13 @@ def component = "show-web"
 def channel = '#dm-pipeline'
 
 withPipeline(type , product, component) {
-
     after('checkout') {
         echo '${component} out'
     }
+
+    after('build') {
+      sh 'yarn setup'
+    }
+
     enableSlackNotifications(channel)
 }
