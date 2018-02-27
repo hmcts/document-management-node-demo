@@ -18,7 +18,7 @@ describe('AppConfig tests', () => {
     httpMock = TestBed.get(HttpTestingController);
     appConfig = TestBed.get(AppConfig);
     appConfig.load();
-    const request = httpMock.expectOne(AppConfig.CONFIG_PATH);
+    const request = httpMock.expectOne('assert/config.json');
     request.flush({});
   }));
 });
