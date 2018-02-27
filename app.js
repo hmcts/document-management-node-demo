@@ -11,8 +11,6 @@ app.get("/health", (req, res) => {
     status: "UP"
   });
 });
-
-
 app.get("/config", (req, res) => {
   res.send(config);
 });
