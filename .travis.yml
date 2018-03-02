@@ -3,6 +3,11 @@ language: node_js
 node_js:
   - "node"
 
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
 addons:
 apt:
   sources:
@@ -16,18 +21,16 @@ before_install:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 
-cache:
-  yarn: true
-  directories:
-    - node_modules
-
 script:
   - yarn --version
+  - yarn check --integrity
   - yarn install
   - yarn setup
   - yarn lint
   - yarn test:nsp-warn
   - yarn test:coverage
+  #  - yarn test:routes
+  #  - yarn test:a11y
 after_success:
   - yarn test:codacy-upload
   - yarn test:codecov-upload
