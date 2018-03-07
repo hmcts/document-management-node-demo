@@ -18,6 +18,7 @@ import {AppConfig} from './app.config';
 import {WindowService} from './utils/window.service';
 import {SessionService} from './auth/session.service';
 import {DocumentService} from './utils/document.service';
+import {DocumentStoreService} from './dm/document-store.service';
 
 const appRoutes: Routes = [
   { path: '', canActivate: [IdamGuard], component: DmListViewRouteComponent },
@@ -50,6 +51,7 @@ const appRoutes: Routes = [
     IdamGuard,
     WindowService,
     DocumentService,
+    DocumentStoreService,
     SessionService,
     AppConfig,
     { provide: APP_INITIALIZER, useFactory: (config: AppConfig) => () => config.load(), deps: [AppConfig], multi: true }
