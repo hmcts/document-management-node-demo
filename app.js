@@ -1,12 +1,17 @@
 const express = require("express");
 const config = require('config');
+
+// const { Logger } = require('@hmcts/nodejs-logging');
+const healthcheck = require('@hmcts/nodejs-healthcheck');
+const { InfoContributor, infoRequestHandler  } = require('@hmcts/info-provider');
+
 const authCheckerUserOnlyFilter = require('./node/user/auth-checker-user-only-filter');
 const serviceFilter = require('./node/service/service-filter');
 const cookieParser = require('cookie-parser');
 
-let proxy = require('http-proxy-middleware');
-let http = require("http");
 let app = express();
+let http = require("http");
+let proxy = require('http-proxy-middleware');
 
 app.use('/viewer', authCheckerUserOnlyFilter);
 app.use('/viewer', serviceFilter);
@@ -34,11 +39,28 @@ app.use('/viewer', proxy({
 app.use('',express.static('dist'));
 app.use('/list',express.static('dist'));
 app.use('/upload',express.static('dist'));
-app.get("/health", (req, res) => {
-  res.send({
-    status: "UP"
-  });
-});
+
+app.get("/health", healthcheck.configure({
+  checks: {
+    'dm-api-gw-web' : healthcheck.web(config.get('dm_gw_url') + "/health"),
+    // 'em-api-gw-web' : healthcheck.web(config.get('em_gw_url') + "/health"),
+    'em-viewer-web' : healthcheck.web(config.get('em_viewer_url') + "/health")
+  },
+  buildInfo: {}
+}));
+
+app.get('/info', infoRequestHandler({
+    info: {
+      // 'dm-api-gw-web': new InfoContributor(config.get('dm_gw_url') + '/info'),
+      // 'em-api-gw-web': new InfoContributor(config.get('em_gw_url')  + '/info'),
+      // 'em-viewer-web': new InfoContributor(config.get('em_viewer_url') + '/info')
+    },
+    extraBuildInfo: {
+      // featureToggles: config.get('featureToggles'),
+      // hostname: hostname()
+    }
+  }));
+
 app.get("/config", (req, res) => {
   res.send(config);
 });
