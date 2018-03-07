@@ -13,7 +13,6 @@ export class DmUploadComponent implements OnInit {
 
   @ViewChild('dmUploadForm') dmUploadForm;
   jwt: string;
-  documents: string;
   error: string;
   page: any;
   fileToUpload: File = null;
@@ -47,7 +46,7 @@ export class DmUploadComponent implements OnInit {
     if (this.fileToUpload) {
       this.postFile();
     } else {
-      this.error = new Error('Please upload a file').message;
+      this.error = new Error('You have not selected a file for upload.').message;
     }
   }
 
@@ -65,7 +64,15 @@ export class DmUploadComponent implements OnInit {
 
     this.http
       .post<any>(this.config.getDmUploadUrl(), formData, this.getHttpOptions())
-      .subscribe( () => this.gotoListView());
+      .subscribe( () => this.gotoListView(),
+        err => {
+          if (err.status === 401) {
+            this.sessionService.clearSession();
+            return;
+          }
+          this.error = err;
+        }
+      );
   }
 
   cancelUpload() {

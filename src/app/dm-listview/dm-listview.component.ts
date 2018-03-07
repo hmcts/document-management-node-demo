@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {SessionService} from '../auth/session.service';
 import {AppConfig} from '../app.config';
@@ -18,10 +18,14 @@ export class DmPage {
 })
 export class DmListViewComponent implements OnInit {
 
+  @Input() page: number;
+  @Input() sortby: string;
+  @Input() order: string;
+  @Input() size: number;
   jwt: string;
   documents: string;
   error: string;
-  page: DmPage;
+  dmPage: DmPage;
 
   constructor(private http: HttpClient,
               private sessionService: SessionService,
@@ -50,12 +54,15 @@ export class DmListViewComponent implements OnInit {
   }
 
   refresh() {
-    this.http.post<any>(this.config.getDmFindByCreatorUrl(), null, this.getHttpOptions())
+    this.http.post<any>(this.getDmFindByCreatorUrlWithParams(), null, this.getHttpOptions())
       .subscribe(
         resp => {
-          if (resp && resp._links) {
+          if (resp.page) { this.dmPage = resp.page; }
+          if (resp && resp._embedded && resp._embedded.documents) {
             this.documents = resp._embedded.documents;
-            this.page = resp.page;
+          } else {
+            this.documents = null;
+            this.error = 'No Documents Found, Try Uploading a File.';
           }
         },
         err => {
@@ -67,4 +74,58 @@ export class DmListViewComponent implements OnInit {
         });
   }
 
+  get getEmViewerUrl(): string {
+    return this.config.getEmViewerUrl();
+  }
+
+  private getDmFindByCreatorUrlWithParams() {
+    return this.config.getDmFindByCreatorUrl()
+      + '?page=' + this.page
+      + '&sort=' + this.sortby + ',' + this.order
+      + '&size=' + this.size;
+  }
+
+  get getCurrentPage(): number {
+    return this.dmPage.number + 1;
+  }
+
+  get getTotalPage(): number {
+    return (this.dmPage.totalPages < 1) ? 1 : this.dmPage.totalPages;
+  }
+
+  firstPage() {
+    this.page = 0;
+    this.refresh();
+  }
+
+  lastPage() {
+    this.page = this.dmPage.totalPages - 1;
+    this.refresh();
+  }
+
+  prevPage() {
+    if (this.canPrevPage()) {
+      this.page--;
+      this.refresh();
+    }
+  }
+
+  nextPage() {
+    if (this.canNextPage()) {
+      this.page++;
+      this.refresh();
+    }
+  }
+
+
+  canPrevPage() {
+    return this.page > 0;
+  }
+
+  canNextPage() {
+    return this.page < this.dmPage.totalPages - 1;
+  }
+
 }
+
+

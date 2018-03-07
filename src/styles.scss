@@ -8,10 +8,9 @@ a {
   cursor: pointer;
 }
 
-.button-warning{
+.button-disable{
   @include button($grey-2);
 }
-
 
 
 

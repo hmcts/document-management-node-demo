@@ -1,10 +1,4 @@
-// import {Injectable} from '@angular/core';
-// import {HttpClient, HttpHeaders} from '@angular/common/http';
-// import {AppConfig} from '../app.config';
-// import {SessionService} from '../auth/session.service';
-// import {Observable} from 'rxjs/Observable';
-//
-// const pageNoteType = 'PAGENOTE';
+// import {Injectable} from "@angular/core";
 //
 // export class Note {
 //   url: string;
@@ -29,7 +23,7 @@
 // }
 //
 // @Injectable()
-// export class AnnotationService {
+// export class DocumentService {
 //
 //   private documetns: any;
 //
