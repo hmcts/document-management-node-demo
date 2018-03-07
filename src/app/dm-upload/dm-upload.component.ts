@@ -44,7 +44,12 @@ export class DmUploadComponent implements OnInit {
   }
 
   postFile() {
-    this.documentService.postFile('PRIVATE', null, this.fileToUpload)
+    const metadataObj: Map<string, string> = new Map<string, string>();
+    // metadataObj.set('title', 'some random Title');
+    // metadataObj.set('author', 'Joe');
+    // metadataObj.set('cake', 'yesplease');
+
+    this.documentService.postFile('PRIVATE', metadataObj, this.fileToUpload)
       .subscribe( () => this.gotoListView(),
         err => {
           if (err.status === 401) {

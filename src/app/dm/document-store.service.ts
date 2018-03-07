@@ -27,15 +27,18 @@ export class DocumentStoreService {
   //   };
   // }
 
-
-  postFile(classification: string, metaDate: Object, file: File) {
+  // TODO: add addtional thing for the postfile thing
+  postFile(classification: string, metaDate: Map<string, string>, file: File) {
     const formData: FormData = new FormData();
     formData.append('classification', classification);
     formData.append('files', file, file.name);
-    // formData.append('metadata[userGroup]', 'Group A');
-    // formData.append('metadata[someref]', 'asfsafhgdsah');
-    // formData.append('metadata[title]', 'this is a title');
 
+    if (metaDate) {
+      metaDate.forEach( (v, k) => {
+        formData.append('metadata[' + k + ']', v);
+        console.log('metadata[' + k + '] = ' + v);
+      });
+    }
     return this.http.post<any>(this.config.getDmUploadUrl(), formData, this.getHttpOptions());
   }
 
