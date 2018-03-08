@@ -14,18 +14,23 @@ import { DmListViewRouteComponent } from './dm-listview/dm-listview-route.compon
 import { DmUploadComponent } from './dm-upload/dm-upload.component';
 import { DmUploadRouteComponent } from './dm-upload/dm-upload-route.component';
 
-import {AppConfig} from './app.config';
+import {AppConfig} from './config/app.config';
 import {WindowService} from './utils/window.service';
 import {SessionService} from './auth/session.service';
 import {DocumentService} from './utils/document.service';
 import {DocumentStoreService} from './dm/document-store.service';
+import {EmAnnotationSummaryComponent, EmAnnotationSummaryModule, EmViewerComponent, EmViewerModule} from 'em-viewer-web';
+import {EmViewerRouteComponent} from './em/em-viewer-route.component';
+import {EmAnnotationSummaryRouteComponent} from './em/em-annotation-summary.component';
 
 const appRoutes: Routes = [
   { path: '', canActivate: [IdamGuard], component: DmListViewRouteComponent },
-  { path: '', canActivate: [IdamGuard], component: DmListViewRouteComponent },
   { path: 'list', canActivate: [IdamGuard], component: DmListViewRouteComponent },
-  { path: 'upload', canActivate: [IdamGuard], component: DmUploadRouteComponent }
+  { path: 'upload', canActivate: [IdamGuard], component: DmUploadRouteComponent },
+  { path: 'viewer', canActivate: [IdamGuard], component: EmViewerRouteComponent },
+  { path: 'summary', canActivate: [IdamGuard], component: EmAnnotationSummaryRouteComponent }
 ];
+
 
 @NgModule({
   declarations: [
@@ -33,7 +38,9 @@ const appRoutes: Routes = [
     DmListViewComponent,
     DmListViewRouteComponent,
     DmUploadComponent,
-    DmUploadRouteComponent
+    DmUploadRouteComponent,
+    EmViewerRouteComponent,
+    EmAnnotationSummaryRouteComponent
   ],
   entryComponents: [],
   imports: [
@@ -44,6 +51,8 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    EmViewerModule,
+    EmAnnotationSummaryModule,
     HttpModule,
     CookieModule.forRoot()
   ],

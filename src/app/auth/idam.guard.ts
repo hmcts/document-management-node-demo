@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { SessionService } from './session.service';
 import { WindowService } from '../utils/window.service';
 import { DocumentService } from '../utils/document.service';
-import { AppConfig } from '../app.config';
+import { AppConfig } from '../config/app.config';
 import { Router } from '@angular/router';
 import { JwtService } from './jwt.service';
 

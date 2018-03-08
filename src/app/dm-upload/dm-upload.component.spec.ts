@@ -1,11 +1,12 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {CookieModule} from 'ngx-cookie';
-import {AppConfig} from '../app.config';
+import {AppConfig} from '../config/app.config';
 import {SessionService} from '../auth/session.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {DmUploadComponent} from './dm-upload.component';
 import {WindowService} from '../utils/window.service';
 import {DebugElement} from '@angular/core';
+import {DocumentStoreService} from '../dm/document-store.service';
 
 let httpMock: HttpTestingController;
 let sessionService: SessionService;
@@ -27,7 +28,7 @@ describe('DmUploadComponent tests', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, CookieModule.forRoot()],
       declarations: [ DmUploadComponent ],
-      providers: [SessionService, AppConfig, WindowService]
+      providers: [SessionService, AppConfig, WindowService, DocumentStoreService]
     })
       .compileComponents();
   }));

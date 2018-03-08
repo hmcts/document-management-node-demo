@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot } from '@angular/router';
 import { SessionService } from './session.service';
 import { WindowService } from '../utils/window.service';
 import { DocumentService } from '../utils/document.service';
-import { AppConfig } from '../app.config';
+import { AppConfig } from '../config/app.config';
 
 describe('IdamGuard', () => {
 

@@ -44,7 +44,7 @@
             <img src="{{docs._links.thumbnail.href}}?jwt={{jwt}}" width="48">
           </a>
         </td>
-        <td>
+        <td class="overflow-ellipsis">
           {{docs.originalDocumentName}}
         </td>
         <td>
@@ -57,10 +57,10 @@
           <a href="{{docs._links.binary.href}}?jwt={{jwt}}" download="{{docs.originalDocumentName}}">Download</a>
         </td>
         <td>
-          <a href="{{getEmViewerUrl}}?url={{docs._links.self.href}}&jwt={{jwt}}" target="_blank">View</a>
+          <a href="/viewer?url={{docs._links.self.href}}">View</a>
         </td>
         <td>
-          <a href="{{getEmViewerUrl}}?url={{docs._links.self.href}}&jwt={{jwt}}&annotate=true" target="_blank">Annotate</a>
+          <a href="/viewer?url={{docs._links.self.href}}&annotate=true">Annotate</a>
         </td>
         <td>
           <input type="button" class="button" value="Delete" (click)="deleteDocument(docs._links.self.href + '?permanent=true')"/>

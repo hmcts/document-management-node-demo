@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {SessionService} from '../auth/session.service';
-import {AppConfig} from '../app.config';
+import {AppConfig} from '../config/app.config';
 import {DocumentStoreService} from '../dm/document-store.service';
 
 
@@ -65,7 +65,7 @@ export class DmListViewComponent implements OnInit {
   }
 
   get getEmViewerUrl(): string {
-    return this.config.getEmViewerUrl();
+    return '/viewer';
   }
 
   get getCurrentPage(): number {

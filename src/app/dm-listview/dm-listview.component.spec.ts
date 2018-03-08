@@ -3,9 +3,10 @@ import { DmListViewComponent } from './dm-listview.component';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import {SessionService} from '../auth/session.service';
 import {CookieModule} from 'ngx-cookie';
-import {AppConfig} from '../app.config';
+import {AppConfig} from '../config/app.config';
 import {WindowService} from '../utils/window.service';
 import {DebugElement} from '@angular/core';
+import {DocumentStoreService} from '../dm/document-store.service';
 
 const dmGwUrl = 'http://api-gateway.dm.com';
 const ownedDocumentUrl = dmGwUrl + '/documents/owned';
@@ -98,7 +99,7 @@ describe('DmListViewComponent tests', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, CookieModule.forRoot()],
       declarations: [ DmListViewComponent ],
-      providers: [SessionService, AppConfig, WindowService]
+      providers: [SessionService, AppConfig, WindowService, DocumentStoreService]
     })
       .compileComponents();
   }));

@@ -40,6 +40,7 @@
     "config": "^1.30.0",
     "core-js": "^2.4.1",
     "cross-env": "^5.0.5",
+    "em-viewer-web": "0.0.4",
     "express": "^4.16.2",
     "form-data": "^2.3.1",
     "otp": "^0.1.3",
