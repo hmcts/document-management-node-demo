@@ -10,7 +10,6 @@ import {DocumentStoreService} from '../dm/document-store.service';
 })
 export class DmUploadComponent implements OnInit {
 
-  @ViewChild('dmUploadForm') dmUploadForm;
   jwt: string;
   error: string;
   fileToUpload: File = null;

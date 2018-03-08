@@ -19,10 +19,10 @@ export class DmPage {
 })
 export class DmListViewComponent implements OnInit {
 
-  @Input() page: number;
-  @Input() sortby: string;
-  @Input() order: string;
-  @Input() size: number;
+  @Input() page = 0;
+  @Input() sortby = 'desc';
+  @Input() order = 'createdOn';
+  @Input() size = 5;
   jwt: string;
   documents: string;
   error: string;
@@ -35,7 +35,7 @@ export class DmListViewComponent implements OnInit {
   ngOnInit() {
     this.jwt = this.sessionService.getSession().token;
     if (!this.jwt) {
-      throw new Error('jwt token are required arguments');
+      this.error = 'jwt token are required arguments';
     }
     this.refresh();
   }
@@ -62,10 +62,6 @@ export class DmListViewComponent implements OnInit {
 
   deleteDocument(url: string) {
     this.documentStoreService.deleteDocument(url).subscribe(() => this.refresh());
-  }
-
-  get getEmViewerUrl(): string {
-    return '/viewer';
   }
 
   get getCurrentPage(): number {
