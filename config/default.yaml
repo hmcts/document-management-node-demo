@@ -5,3 +5,14 @@ dm_upload_url: http://localhost:3603/documents
 dm_find_documents_by_creator_url: http://localhost:3603/documents/owned/
 dm_find_documents_by_metadata_url: http://localhost:3603/documents/filter/
 em_viewer_url: http://localhost:3621
+dm_url: http://localhost:4603
+an_url: http://localhost:4621
+idam:
+  base_url: http://localhost:4501
+  service_key: AAAAAAAAAAAAAAAA
+  service_name: em_gw
+  s2s_url: http://localhost:4502
+logging:
+  microservice: document-management-node-demo
+  team: evidence
+  environment: local
