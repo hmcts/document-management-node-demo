@@ -1,7 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {SessionService} from '../auth/session.service';
-import {AppConfig} from '../app.config';
+import {AppConfig} from '../config/app.config';
+import {DocumentStoreService} from '../dm/document-store.service';
+import {DocumentService} from '../utils/document.service';
 
 
 export class DmPage {
@@ -18,71 +20,54 @@ export class DmPage {
 })
 export class DmListViewComponent implements OnInit {
 
-  @Input() page: number;
-  @Input() sortby: string;
-  @Input() order: string;
-  @Input() size: number;
+  @Input() page = 0;
+  @Input() sortby = 'desc';
+  @Input() order = 'createdOn';
+  @Input() size = 5;
   jwt: string;
   documents: string;
   error: string;
   dmPage: DmPage;
 
-  constructor(private http: HttpClient,
-              private sessionService: SessionService,
+  constructor(private sessionService: SessionService,
+              private documentStoreService: DocumentStoreService,
+              private documentService: DocumentService,
               private config: AppConfig) { }
 
   ngOnInit() {
-    this.jwt = this.sessionService.getSession().token;
+    this.jwt = this.sessionService.getSession();
     if (!this.jwt) {
-      throw new Error('jwt token are required arguments');
+      this.error = 'jwt token are required arguments';
     }
     this.refresh();
   }
 
-  private getHttpOptions() {
-    return {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${this.sessionService.getSession().token}`,
-        'Accept': 'application/json'
-      })
-    };
+  refresh() {
+    this.documentStoreService.getCreatorDocuments(this.page, this.sortby, this.order, this.size).subscribe(
+      resp => {
+        if (resp.page) { this.dmPage = resp.page; }
+        if (resp && resp._embedded && resp._embedded.documents) {
+          this.documents = resp._embedded.documents;
+        } else {
+          this.documents = null;
+          this.error = 'No Documents Found, Try Uploading a File.';
+        }
+      },
+      err => {
+        if (err.status === 401) {
+          this.sessionService.clearSession();
+          return;
+        }
+        this.error = err;
+      });
+  }
+
+  convertUrlToProxy(url: string): string {
+    return this.documentStoreService.convertUrlToProxy(url);
   }
 
   deleteDocument(url: string) {
-    this.http.delete(url, this.getHttpOptions())
-      .subscribe(() => this.refresh());
-  }
-
-  refresh() {
-    this.http.post<any>(this.getDmFindByCreatorUrlWithParams(), null, this.getHttpOptions())
-      .subscribe(
-        resp => {
-          if (resp.page) { this.dmPage = resp.page; }
-          if (resp && resp._embedded && resp._embedded.documents) {
-            this.documents = resp._embedded.documents;
-          } else {
-            this.documents = null;
-            this.error = 'No Documents Found, Try Uploading a File.';
-          }
-        },
-        err => {
-          if (err.status === 401) {
-            this.sessionService.clearSession();
-            return;
-          }
-          this.error = err;
-        });
-  }
-
-  get getEmViewerUrl(): string {
-    return this.config.getEmViewerUrl();
-  }
-
-  private getDmFindByCreatorUrlWithParams() {
-    return this.config.getDmFindByCreatorUrl()
-      + '?page=' + this.page
-      + '&sort=' + this.sortby + ',' + this.order
-      + '&size=' + this.size;
+    this.documentStoreService.deleteDocument(url).subscribe(() => this.refresh());
   }
 
   get getCurrentPage(): number {
@@ -116,7 +101,6 @@ export class DmListViewComponent implements OnInit {
       this.refresh();
     }
   }
-
 
   canPrevPage() {
     return this.page > 0;

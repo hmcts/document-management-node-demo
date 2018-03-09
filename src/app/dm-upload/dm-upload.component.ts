@@ -1,8 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {SessionService} from '../auth/session.service';
-import {AppConfig} from '../app.config';
 import {WindowService} from '../utils/window.service';
+import {DocumentStoreService} from '../dm/document-store.service';
 
 @Component({
   selector: 'app-dm-upload',
@@ -11,30 +10,19 @@ import {WindowService} from '../utils/window.service';
 })
 export class DmUploadComponent implements OnInit {
 
-  @ViewChild('dmUploadForm') dmUploadForm;
   jwt: string;
   error: string;
-  page: any;
   fileToUpload: File = null;
 
-  constructor(private http: HttpClient,
-              private sessionService: SessionService,
-              private windowService: WindowService,
-              private config: AppConfig) { }
+  constructor(private sessionService: SessionService,
+              private documentService: DocumentStoreService,
+              private windowService: WindowService) {}
 
   ngOnInit() {
-    this.jwt = this.sessionService.getSession().token;
+    this.jwt = this.sessionService.getSession();
     if (!this.jwt) {
       throw new Error('jwt token are required arguments');
     }
-  }
-
-  private getHttpOptions() {
-    return {
-      headers: new HttpHeaders({
-        'Authorization': `${this.sessionService.getSession().token}`
-      })
-    };
   }
 
   handleFileInput(files: FileList) {
@@ -55,15 +43,12 @@ export class DmUploadComponent implements OnInit {
   }
 
   postFile() {
-    const formData: FormData = new FormData();
-    formData.append('classification', 'PRIVATE');
-    formData.append('files', this.fileToUpload, this.fileToUpload.name);
-    formData.append('metadata[userGroup]', 'Group A');
-    formData.append('metadata[someref]', 'asfsafhgdsah');
-    formData.append('metadata[title]', 'this is a title');
+    const metadataObj: Map<string, string> = new Map<string, string>();
+    // metadataObj.set('title', 'some random Title');
+    // metadataObj.set('author', 'Joe');
+    // metadataObj.set('cake', 'yesplease');
 
-    this.http
-      .post<any>(this.config.getDmUploadUrl(), formData, this.getHttpOptions())
+    this.documentService.postFile('PRIVATE', metadataObj, this.fileToUpload)
       .subscribe( () => this.gotoListView(),
         err => {
           if (err.status === 401) {

@@ -1,15 +1,22 @@
 test_env: NODE_ENV
 login_url: IDAM_LOGIN_URL
-dm_gw_url: http://localhost:3603
+
+dm_store_app_url: DM_STORE_APP_URI
+dm_store_app_local_endpoint: /demproxy/dm/
+
+em_anno_app_url: EM_ANNO_APP_URI
+em_anno_app_local_endpoint: /demproxy/an/
+
+em_redact_app_url: EM_REDACT_APP_URI
+em_redact_app_local_endpoint: /demproxy/re/
+
 dm_upload_url: DM_UPLOAD_URL
 dm_find_documents_by_creator_url: DM_OWNED_URL
 dm_find_documents_by_metadata_url: DM_SEARCH_URL
-em_viewer_url: DM_VIEWER_URL
-dm_url: http://localhost:4603
-an_url: http://localhost:4621
+
 idam:
-  base_url: IDAM_BASE_URL
-  s2s_url: IDAM_S2S_URL
+  base_url: IDAM_USER_BASE_URI
+  s2s_url: IDAM_S2S_BASE_URI
   service_key: IDAM_SERVICE_KEY
   service_name: IDAM_SERVICE_NAME
 logging:

@@ -20,8 +20,8 @@ const ERROR_UNAUTHORISED_USER_ID = {
 }
 
 const authorise = (request) => {
-  let user
-  let bearerToken = request.get(AUTHORIZATION)
+  let user;
+  let bearerToken = request.get(AUTHORIZATION);
 
   if (!bearerToken && request.cookies !== undefined) {
     request.headers[AUTHORIZATION] = bearerToken = request.cookies[SECURITY_COOKIE]
@@ -31,19 +31,21 @@ const authorise = (request) => {
     return Promise.reject(ERROR_TOKEN_MISSING)
   }
 
+
+
   return userResolver
     .getTokenDetails(bearerToken)
     .then(tokenDetails => {
       if (!tokenDetails.id) {
         throw new Error('No user ID returned from IDAM')
       }
-      user = tokenDetails
+      user = tokenDetails;
       return null
     })
     .then(() => user)
-}
+};
 
-exports.ERROR_TOKEN_MISSING = ERROR_TOKEN_MISSING
-exports.ERROR_UNAUTHORISED_ROLE = ERROR_UNAUTHORISED_ROLE
-exports.ERROR_UNAUTHORISED_USER_ID = ERROR_UNAUTHORISED_USER_ID
-exports.authorise = authorise
+exports.ERROR_TOKEN_MISSING = ERROR_TOKEN_MISSING;
+exports.ERROR_UNAUTHORISED_ROLE = ERROR_UNAUTHORISED_ROLE;
+exports.ERROR_UNAUTHORISED_USER_ID = ERROR_UNAUTHORISED_USER_ID;
+exports.authorise = authorise;

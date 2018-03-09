@@ -6,7 +6,7 @@ import { WindowService } from '../utils/window.service';
 @Injectable()
 export class SessionService {
 
-  public static readonly KEY = '__dm-viewer-token';
+  public static readonly KEY = '__auth-token';
   public static readonly SESSION_LIFESPAN: number = 8 * 60 * 60 * 1000;
 
   constructor(private cookieService: CookieService,
@@ -35,7 +35,7 @@ export class SessionService {
     const session = this.getSession();
     if (session != null) {
       try {
-        const decoded = JwtService.decode(this.getSession()['token']);
+        const decoded = JwtService.decode(this.getSession());
         return decoded['id'];
       } catch (e) {
         console.log(e);

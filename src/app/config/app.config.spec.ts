@@ -21,9 +21,9 @@ describe('AppConfig tests', () => {
     const request = httpMock.expectOne('assets/config.json');
     request.flush({
         login_url: 'https://localhost:3501/login',
-        dm_gw_url: 'http://localhost:3603',
-        dm_upload_url: 'http://localhost:3603/documents',
-        dm_find_documents_by_creator_url: 'http://localhost:3603/documents/owned/',
+        dm_store_app_local_endpoint: '/demproxy/dm/',
+        dm_upload_url: '/demproxy/dm/documents',
+        dm_find_documents_by_creator_url: '/demproxy/dm/documents/owned/',
         dm_find_documents_by_metadata_url: 'http://localhost:3603/documents/filter/',
         em_viewer_url: 'http://localhost:3621'
       }
@@ -34,7 +34,7 @@ describe('AppConfig tests', () => {
     expect(appConfig.getLoginUrl()).toEqual('https://localhost:3501/login');
   });
 
-  it('should load dm_gw_url', () => {
+  it('should load dm_store_app_local_endpoint', () => {
     expect(appConfig.getDmGwUrl()).toEqual('http://localhost:3603');
   });
 

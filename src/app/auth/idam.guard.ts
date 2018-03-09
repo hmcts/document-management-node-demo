@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { SessionService } from './session.service';
 import { WindowService } from '../utils/window.service';
 import { DocumentService } from '../utils/document.service';
-import { AppConfig } from '../app.config';
+import { AppConfig } from '../config/app.config';
 import { Router } from '@angular/router';
 import { JwtService } from './jwt.service';
 
@@ -29,9 +29,7 @@ export class IdamGuard implements CanActivate {
       const tokenValue = activatedRouteSnapshot.queryParams[IdamGuard.TOKEN_PARAM];
       try {
         JwtService.decode(tokenValue);
-        session = {
-          token: tokenValue
-        };
+        session = tokenValue;
         this.sessionService.createSession(session);
         for (const param of Object.keys(activatedRouteSnapshot.queryParams)) {
           if (param !== IdamGuard.TOKEN_PARAM) {

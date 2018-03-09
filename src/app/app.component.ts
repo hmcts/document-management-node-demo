@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {SessionService} from './auth/session.service';
 
@@ -7,11 +7,15 @@ import {SessionService} from './auth/session.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  url: string;
+export class AppComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private sessionService: SessionService) { }
+
+  ngOnInit() {
+    this.route.queryParams
+      .subscribe();
+  }
 
   logout() {
     this.sessionService.clearSession();

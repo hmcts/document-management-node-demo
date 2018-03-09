@@ -61,18 +61,19 @@ variable "idam_api_url" {
 variable "s2s_url" {
     default = "http://betaDevBccidamS2SLB.reform.hmcts.net:80"
 }
+
 variable "idam_login_url" {
     default = "https://idam-test.dev.ccidam.reform.hmcts.net/login"
 }
 
-variable "em_viewer_web_url" {
-    default = "em-viewer-web"
-}
-variable "dm_gw_web_url" {
-    default = "dm-api-gw-web"
-}
 variable "dm_store_app_url" {
     default = "dm-store-app"
+}
+variable "em_anno_app_url" {
+    default = "em-anno-app"
+}
+variable "em_redact_app_url" {
+    default = "em-redact-app"
 }
 
 ////////////////////////////////////////////////
@@ -101,21 +102,6 @@ variable "log_output" {
 ////////////////////////////////////////////////
 // Addtional
 ////////////////////////////////////////////////
-variable "user_group_a_name" {
-    default = "Group A"
-}
-variable "user_group_b_name" {
-    default = "Group B"
-}
-variable "user_group_c_name" {
-    default = "Group C"
-}
-variable "user_group_a_users" {
-    default = "user1a@test.com"
-}
-variable "user_group_b_users" {
-    default = "user1b@test.com"
-}
-variable "user_group_c_users" {
-    default = "user1c@test.com"
+variable "idam_service_name" {
+  default = "em_gw"
 }

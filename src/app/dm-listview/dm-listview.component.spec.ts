@@ -3,18 +3,18 @@ import { DmListViewComponent } from './dm-listview.component';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import {SessionService} from '../auth/session.service';
 import {CookieModule} from 'ngx-cookie';
-import {AppConfig} from '../app.config';
+import {AppConfig} from '../config/app.config';
 import {WindowService} from '../utils/window.service';
 import {DebugElement} from '@angular/core';
+import {DocumentStoreService} from '../dm/document-store.service';
 
 const dmGwUrl = 'http://api-gateway.dm.com';
 const ownedDocumentUrl = dmGwUrl + '/documents/owned';
 const emVwUrl = 'http://viewer.em.com';
 const jwt = '12345';
-const urlParams = '?page=0&size=5&sort=createdOn,desc';
+const urlParams = '?page=0&sort=desc,createdOn&size=5';
 
 const configObject = {
-  'dm_gw_url': dmGwUrl,
   'dm_find_documents_by_creator_url': ownedDocumentUrl,
   'em_viewer_url': emVwUrl
 };
@@ -98,13 +98,13 @@ describe('DmListViewComponent tests', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, CookieModule.forRoot()],
       declarations: [ DmListViewComponent ],
-      providers: [SessionService, AppConfig, WindowService]
+      providers: [SessionService, AppConfig, WindowService, DocumentStoreService]
     })
       .compileComponents();
   }));
 
   describe('With JWT', () => {
-    beforeEach(() => {
+    beforeEach(async(() => {
       fixture = TestBed.createComponent(DmListViewComponent);
       component = fixture.componentInstance;
       sessionService = TestBed.get(SessionService);
@@ -120,6 +120,28 @@ describe('DmListViewComponent tests', () => {
       element = fixture.debugElement;
 
       fixture.detectChanges();
+    }));
+
+
+    describe('returns 0 item', () => {
+      beforeEach(async(() => {
+        const req = httpMock.expectOne(ownedDocumentUrl + urlParams);
+        req.flush({});
+        fixture.whenStable().then(() => fixture.detectChanges());
+      }));
+
+      it('should display document name', () => {
+        expect(element.nativeElement.querySelector('h1').textContent).toEqual('List View');
+      });
+
+      it('should display an error with the status', () => {
+        expect(element.nativeElement.querySelector('.error-summary').textContent)
+          .toContain('No Documents Found, Try Uploading a File.');
+      });
+
+      it('should only have one row', () => {
+        expect(element.nativeElement.querySelector('tr'));
+      });
     });
 
     describe('returns 1 item', () => {
@@ -132,28 +154,53 @@ describe('DmListViewComponent tests', () => {
       it('should display document name', () => {
         expect(element.nativeElement.querySelector('h1').textContent).toEqual('List View');
       });
-    });
-  });
 
-  describe('Without JWT', () => {
-    beforeEach(() => {
-      fixture = TestBed.createComponent(DmListViewComponent);
-      component = fixture.componentInstance;
-      sessionService = TestBed.get(SessionService);
-      sessionService.createSession({
-        // token: jwt
+      it('should only have one row', () => {
+        console.log(element.nativeElement.querySelector('tr'));
+        // expect(element.nativeElement.query('tr').cells.length).toBe(1);
       });
-      httpMock = TestBed.get(HttpTestingController);
-      component.jwt = null;
-      element = fixture.debugElement;
-
-      fixture.detectChanges();
-      spyOn(sessionService, 'clearSession');
     });
 
-    it('should display an error with the status', () => {
-      expect(element.nativeElement.querySelector('.error-summary').textContent)
-        .toContain('Something went wrong!');
+    describe('returns 2 item', () => {
+      beforeEach(() => {
+        const req = httpMock.expectOne(ownedDocumentUrl + urlParams);
+        req.flush(ownedDocuments);
+        fixture.detectChanges();
+      });
+
+      it('should display document name', () => {
+        expect(element.nativeElement.querySelector('h1').textContent).toEqual('List View');
+      });
+
+      it('should only have one row', () => {
+        expect(element.nativeElement.querySelector('tr'));
+      });
     });
+
   });
+
+  // describe('Without JWT', () => {
+  //   beforeEach(async(() => {
+  //     fixture = TestBed.createComponent(DmListViewComponent);
+  //     component = fixture.componentInstance;
+  //     sessionService = TestBed.get(SessionService);
+  //     sessionService.createSession({
+  //       // token: jwt
+  //     });
+  //     httpMock = TestBed.get(HttpTestingController);
+  //     appConfig = TestBed.get(AppConfig);
+  //     appConfig.load();
+  //     const configRequest = httpMock.expectOne('assets/config.json');
+  //     configRequest.flush(configObject);
+  //     element = fixture.debugElement;
+  //
+  //     fixture.detectChanges();
+  //     spyOn(sessionService, 'clearSession');
+  //   }));
+  //
+  //   it('should display an error with the status', () => {
+  //     expect(element.nativeElement.querySelector('.error-summary').textContent)
+  //       .toContain('jwt token are required arguments');
+  //   });
+  // });
 });

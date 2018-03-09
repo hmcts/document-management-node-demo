@@ -16,7 +16,7 @@ services:
     - IDAM_API_URL=http://idam-api:8080
     - IDAM_LOGIN_URL=https://localhost:3501/login
     - DM_GW_BASE_URL=http://localhost:3603
-    - DM_UPLOAD_URL=http://localhost:3603/documents
+    - DM_UPLOAD_URL=/demproxy/dm/documents
     - DM_OWNED_URL=http://localhost:3603/documents/owned
     - DM_SEARCH_URL=http://localhost:3603/documents/filter
     - DM_VIEWER_URL=http://localhost:3621

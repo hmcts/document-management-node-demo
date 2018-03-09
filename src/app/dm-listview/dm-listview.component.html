@@ -1,5 +1,5 @@
 <div class="grid-row">
-  <div [ngClass]="{'column-full': true}">
+  <div class="column-full">
     <h1 class="heading-large">List View</h1>
 
     <!-- Error Message -->
@@ -20,7 +20,7 @@
 
 <!--<div class="grid-row" *ngIf="documents">-->
 <div class="grid-row" *ngIf="!error">
-  <div [ngClass]="{'column-full': true}">
+  <div class="column-full">
     <table id="documentTable">
       <!-- Table Header -->
       <thead>
@@ -40,11 +40,11 @@
       <tbody>
       <tr *ngFor="let docs of documents">
         <td>
-          <a href="{{docs._links.thumbnail.href}}?jwt={{jwt}}">
-            <img src="{{docs._links.thumbnail.href}}?jwt={{jwt}}" width="48">
+          <a href="{{convertUrlToProxy(docs._links.thumbnail.href)}}?jwt={{jwt}}">
+            <img src="{{convertUrlToProxy(docs._links.thumbnail.href)}}?jwt={{jwt}}" width="48">
           </a>
         </td>
-        <td>
+        <td class="overflow-ellipsis">
           {{docs.originalDocumentName}}
         </td>
         <td>
@@ -54,13 +54,13 @@
           {{docs._modifiedOn}}
         </td>
         <td>
-          <a href="{{docs._links.binary.href}}?jwt={{jwt}}" download="{{docs.originalDocumentName}}">Download</a>
+          <a href="{{convertUrlToProxy(docs._links.binary.href)}}?jwt={{jwt}}" download="{{docs.originalDocumentName}}">Download</a>
         </td>
         <td>
-          <a href="{{getEmViewerUrl}}?url={{docs._links.self.href}}&jwt={{jwt}}" target="_blank">View</a>
+          <a href="/viewer?url={{docs._links.self.href}}">View</a>
         </td>
         <td>
-          <a href="{{getEmViewerUrl}}?url={{docs._links.self.href}}&jwt={{jwt}}&annotate=true" target="_blank">Annotate</a>
+          <a href="/viewer?url={{docs._links.self.href}}&annotate=true">Annotate</a>
         </td>
         <td>
           <input type="button" class="button" value="Delete" (click)="deleteDocument(docs._links.self.href + '?permanent=true')"/>

@@ -1,6 +1,7 @@
 locals {
   app_full_name = "${var.product}-${var.app_name}-${var.app_type}"
   ase_name = "${data.terraform_remote_state.core_apps_compute.ase_name[0]}"
+  vault_section = "test"
 }
 # "${local.ase_name}"
 # "${local.app_full_name}"
@@ -38,20 +39,28 @@ module "app" {
     JSON_CONSOLE_PRETTY_PRINT = "${var.json_console_pretty_print}"
     LOG_OUTPUT = "${var.log_output}"
 
-    IDAM_API_URL = "${var.idam_api_url}"
+    DM_STORE_APP_URI= "http://${var.dm_store_app_url}-${var.env}.service.${local.ase_name}.internal/"
+    EM_ANNO_APP_URI="http://${var.em_anno_app_url}-${var.env}.service.${local.ase_name}.internal/"
+    EM_REDACT_APP_URI="http://${var.em_redact_app_url}-${var.env}.service.${local.ase_name}.internal/"
+
+    DM_UPLOAD_URL="/demproxy/dm/documents"
+    DM_OWNED_URL="/demproxy/dm/documents/owned"
+    DM_SEARCH_URL="/demproxy/dm/documents/filter"
+
     IDAM_LOGIN_URL = "${var.idam_login_url}"
-    IDAM_CONTINUE_URL = "http://${local.app_full_name}-${var.env}.service.${local.ase_name}.internal"
-    DM_UPLOAD_URL = "http://${var.dm_gw_web_url}-${var.env}.service.${local.ase_name}.internal/documents"
-    DM_OWNED_URL = "http://${var.dm_gw_web_url}-${var.env}.service.${local.ase_name}.internal/documents/owned"
-    DM_SEARCH_URL = "http://${var.dm_gw_web_url}-${var.env}.service.${local.ase_name}.internal/documents/filter"
-    DM_VIEWER_URL = "http://${var.em_viewer_web_url}-${var.env}.service.${local.ase_name}.internal"
-    USER_GROUP_A = "${var.user_group_a_name}"
-    USER_GROUP_B = "${var.user_group_b_name}"
-    USER_GROUP_C = "${var.user_group_c_name}"
-    USER_GROUP_A_USERS = "${var.user_group_a_users}"
-    USER_GROUP_B_USERS = "${var.user_group_b_users}"
-    USER_GROUP_C_USERS = "${var.user_group_c_users}"
+    IDAM_USER_BASE_URI = "${var.idam_api_url}"
+    IDAM_S2S_BASE_URI = "${var.s2s_url}"
+    IDAM_SERVICE_KEY = "${data.vault_generic_secret.s2s_secret.data["value"]}"
+    IDAM_SERVICE_NAME = "${var.idam_service_name}"
   }
+}
+
+provider "vault" {
+  address = "https://vault.reform.hmcts.net:6200"
+}
+
+data "vault_generic_secret" "s2s_secret" {
+  path = "secret/${local.vault_section}/ccidam/service-auth-provider/api/microservice-keys/em-gw"
 }
 
 module "key_vault" {

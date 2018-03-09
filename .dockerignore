@@ -1,5 +1,6 @@
 *
 !config
+!node
 !src
 !.angular-cli.json
 !app.js

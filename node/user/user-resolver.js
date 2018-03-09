@@ -1,12 +1,12 @@
-const config = require('config')
-const fetch = require('../util/fetch')
+const config = require('config');
+const fetch = require('../util/fetch');
 
-const {logging} = require('../logging/dm-logger')
-const logger = logging.getLogger('user-resolver.js')
+const {logging} = require('../logging/dm-logger');
+const logger = logging.getLogger('user-resolver.js');
 
 const getTokenDetails = (jwt) => {
-  const bearerJwt = jwt.startsWith('Bearer ') ? jwt : 'Bearer ' + jwt
-
+  const bearerJwt = (jwt.startsWith('Bearer ') ? jwt : 'Bearer ' + jwt).replace(/"/g,'');
+  logger.info(bearerJwt);
   return fetch(`${config.get('idam.base_url')}/details`, {
     headers: {
       'Authorization': bearerJwt
@@ -19,9 +19,9 @@ const getTokenDetails = (jwt) => {
         status: error.status,
         url: error.url,
         stackTrace: error.stack
-      }))
+      }));
       throw error
     })
-}
+};
 
-exports.getTokenDetails = getTokenDetails
+exports.getTokenDetails = getTokenDetails;
