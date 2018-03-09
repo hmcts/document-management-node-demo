@@ -125,11 +125,11 @@ describe('DmListViewComponent tests', () => {
 
 
     describe('returns 0 item', () => {
-      beforeEach(() => {
+      beforeEach(async(() => {
         const req = httpMock.expectOne(ownedDocumentUrl + urlParams);
-        req.flush(ownedDocuments);
-        fixture.detectChanges();
-      });
+        req.flush({});
+        fixture.whenStable().then(() => fixture.detectChanges());
+      }));
 
       it('should display document name', () => {
         expect(element.nativeElement.querySelector('h1').textContent).toEqual('List View');
@@ -157,7 +157,8 @@ describe('DmListViewComponent tests', () => {
       });
 
       it('should only have one row', () => {
-        expect(element.nativeElement.querySelector('tr'));
+        console.log(element.nativeElement.querySelector('tr'));
+        // expect(element.nativeElement.query('tr').cells.length).toBe(1);
       });
     });
 
