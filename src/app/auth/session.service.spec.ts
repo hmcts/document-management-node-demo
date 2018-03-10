@@ -5,11 +5,8 @@ import {WindowService} from '../utils/window.service';
 
 describe('SessionService', () => {
 
-  const COOKIE_KEY = '__dm-viewer-token';
+  const COOKIE_KEY = '__auth-token';
   const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
-  const SESSION = {
-    token: TOKEN
-  };
   const DECODED_JWT = {
     'id': '0'
   };
@@ -48,9 +45,9 @@ describe('SessionService', () => {
     it('should create a new session with provided object and 8 hours lifespan', () => {
       jasmine.clock().mockDate(BASE_TIME);
 
-      sessionService.createSession(SESSION);
+      sessionService.createSession(TOKEN);
 
-      expect(cookieService.putObject).toHaveBeenCalledWith(COOKIE_KEY, SESSION, {
+      expect(cookieService.putObject).toHaveBeenCalledWith(COOKIE_KEY, TOKEN, {
         expires: BASE_PLUS_8H
       });
     });
@@ -67,10 +64,10 @@ describe('SessionService', () => {
     });
 
     it('should return session object when valid session', () => {
-      cookieService.getObject.and.returnValue(SESSION);
+      cookieService.getObject.and.returnValue(TOKEN);
 
       const session = sessionService.getSession();
-      expect(session).toEqual(SESSION);
+      expect(session).toEqual(TOKEN);
       expect(cookieService.getObject).toHaveBeenCalledWith(COOKIE_KEY);
     });
   });
@@ -78,7 +75,7 @@ describe('SessionService', () => {
   describe('getUID', () => {
 
     it('should be hardcoded to 0', () => {
-      cookieService.getObject.and.returnValue(SESSION);
+      cookieService.getObject.and.returnValue(TOKEN);
       spyOn(JwtService, 'decode').and.returnValue(DECODED_JWT);
       expect(sessionService.getUID()).toEqual('0');
     });

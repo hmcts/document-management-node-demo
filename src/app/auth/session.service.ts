@@ -12,7 +12,7 @@ export class SessionService {
   constructor(private cookieService: CookieService,
               private windowService: WindowService) {}
 
-  createSession(authToken: object) {
+  createSession(authToken: string) {
     const expiresAt: Date = new Date();
     expiresAt.setTime(expiresAt.getTime() + SessionService.SESSION_LIFESPAN);
 

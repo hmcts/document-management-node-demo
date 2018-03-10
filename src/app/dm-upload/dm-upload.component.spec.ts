@@ -37,9 +37,7 @@ describe('DmUploadComponent tests', () => {
       fixture = TestBed.createComponent(DmUploadComponent);
       component = fixture.componentInstance;
       sessionService = TestBed.get(SessionService);
-      sessionService.createSession({
-        token: jwt
-      });
+      sessionService.createSession(jwt);
       httpMock = TestBed.get(HttpTestingController);
       appConfig = TestBed.get(AppConfig);
       appConfig.load();

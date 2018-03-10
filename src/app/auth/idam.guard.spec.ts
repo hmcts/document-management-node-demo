@@ -60,9 +60,7 @@ describe('IdamGuard', () => {
       };
       guard.canActivate(routeSpy);
 
-      expect(sessionService.createSession).toHaveBeenCalledWith({
-        token: JWT_TOKEN
-      });
+      expect(sessionService.createSession).toHaveBeenCalledWith(JWT_TOKEN);
     });
 
     it('should create eliminate JWT token in URL', () => {

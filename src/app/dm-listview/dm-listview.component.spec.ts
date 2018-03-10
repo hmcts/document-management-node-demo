@@ -7,6 +7,7 @@ import {AppConfig} from '../config/app.config';
 import {WindowService} from '../utils/window.service';
 import {DebugElement} from '@angular/core';
 import {DocumentStoreService} from '../dm/document-store.service';
+import {DocumentService} from '../utils/document.service';
 
 const dmGwUrl = 'http://api-gateway.dm.com';
 const ownedDocumentUrl = dmGwUrl + '/documents/owned';
@@ -98,7 +99,7 @@ describe('DmListViewComponent tests', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, CookieModule.forRoot()],
       declarations: [ DmListViewComponent ],
-      providers: [SessionService, AppConfig, WindowService, DocumentStoreService]
+      providers: [SessionService, AppConfig, WindowService, DocumentStoreService, DocumentService]
     })
       .compileComponents();
   }));
@@ -108,9 +109,7 @@ describe('DmListViewComponent tests', () => {
       fixture = TestBed.createComponent(DmListViewComponent);
       component = fixture.componentInstance;
       sessionService = TestBed.get(SessionService);
-      sessionService.createSession({
-        token: jwt
-      });
+      sessionService.createSession(jwt);
       httpMock = TestBed.get(HttpTestingController);
       appConfig = TestBed.get(AppConfig);
       appConfig.load();
