@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-em-viewer-route',
   template: `
+    <a class="button" href="/summary?url={{url}}">Summary</a>
     <app-em-viewer *ngIf="url" [url]="url" [annotate]="annotate"></app-em-viewer>
   `
 })

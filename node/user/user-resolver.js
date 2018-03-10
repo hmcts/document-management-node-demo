@@ -6,7 +6,6 @@ const logger = logging.getLogger('user-resolver.js');
 
 const getTokenDetails = (jwt) => {
   const bearerJwt = (jwt.startsWith('Bearer ') ? jwt : 'Bearer ' + jwt).replace(/"/g,'');
-  logger.info(bearerJwt);
   return fetch(`${config.get('idam.base_url')}/details`, {
     headers: {
       'Authorization': bearerJwt
