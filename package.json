@@ -23,8 +23,7 @@
     "sonar-scan": "node_modules/sonar-scanner/bin/sonar-scanner",
     "test:codacy-upload": "cat ./coverage/lcov.info | codacy-coverage",
     "test:codecov-upload": "codecov -f ./coverage/lcov.info",
-    "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "snyk-protect": "snyk protect"
   },
   "private": true,
   "dependencies": {

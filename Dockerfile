@@ -1,5 +1,7 @@
 FROM node:8.1.4
-LABEL maintainer="evidence management"
+
+MAINTAINER "HMCTS Evidence Team <https://github.com/hmcts>"
+LABEL maintainer = "HMCTS Evidence Team <https://github.com/hmcts>"
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app

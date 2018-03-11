@@ -31,7 +31,7 @@ services:
 #    - PACKAGES_ENVIRONMENT=docker
 #    - PACKAGES_PROJECT=evidence
 #    - PACKAGES_NAME=dm-show-web
-#    - PACKAGES_VERSION=unkown
+#    - PACKAGES_VERSION=unknown
 #    links:
 #     - dm-store-app
 #     - idam-api
