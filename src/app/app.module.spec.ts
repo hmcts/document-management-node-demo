@@ -1,8 +1,8 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {AppModule} from './app.module';
 import {AppComponent} from './app.component';
-import {APP_BASE_HREF} from "@angular/common";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {APP_BASE_HREF} from '@angular/common';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 
 describe('DmUploadComponent tests', () => {
