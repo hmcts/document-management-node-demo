@@ -13,8 +13,30 @@ export class ViewerPage {
     }));
   }
 
+  isAnnotationsLoaded() {
+    return element.all(by.css('#currentNote')).count().then((count => {
+      return count > 0;
+    }));
+  }
+
   getTitleText() {
     return element(by.css('h1[data-hook="dm.viewer.docName"]')).getText();
   }
 
+  getCurrentNoteText() {
+    return element(by.css('#currentNote')).getAttribute('value');
+  }
+
+  setCurrentNoteText(note) {
+    return element(by.css('#currentNote')).sendKeys(note);
+  }
+
+  nextPage() {
+    // Obviously change this to use hooks
+    return element.all(by.css('app-em-viewer .button')).get(1).click();
+  }
+
+  previousPage() {
+    return element.all(by.css('app-em-viewer .button')).get(0).click();
+  }
 }

@@ -62,7 +62,7 @@ describe('Upload and View an Image', () => {
       });
 
       it('should open the viewer', () => {
-
+        expect(browser.driver.getCurrentUrl()).toContain('viewer');
       });
 
       it('should show the file name', () => {

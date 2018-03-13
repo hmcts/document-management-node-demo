@@ -33,4 +33,8 @@ export class DocumentRow {
   view() {
     return this.document.element(by.css('a[data-hook="dm-listview__document__view')).click();
   }
+
+  annotate() {
+    return this.document.element(by.css('a[data-hook="dm-listview__document__annotate')).click();
+  }
 }
