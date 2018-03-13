@@ -1,4 +1,6 @@
 import { browser, by, element } from 'protractor';
+import {promise as wdpromise} from 'selenium-webdriver';
+import {ElementFinder} from 'protractor/built/element';
 
 export class ListViewPage {
   navigateTo() {
@@ -7,5 +9,28 @@ export class ListViewPage {
 
   getTitleText() {
     return element(by.css('h1[data-hook="dm-listview__heading"]')).getText();
+  }
+
+  getDocument(row: number): DocumentRow {
+    return new DocumentRow(element.all(by.css('tr[data-hook="dm-listview__document"')).get(row));
+  }
+
+  hasDocuments() {
+   return element.all(by.css('tr[data-hook="dm-listview__document"')).count().then(count => {
+     return count > 0;
+   });
+  }
+}
+
+export class DocumentRow {
+
+  constructor(private document: ElementFinder) {}
+
+  name() {
+    return this.document.element(by.css('td[data-hook="dm-listview__document__name"')).getText();
+  }
+
+  view() {
+    return this.document.element(by.css('a[data-hook="dm-listview__document__view')).click();
   }
 }
