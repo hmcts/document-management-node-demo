@@ -3,6 +3,11 @@
 
 const { SpecReporter } = require('jasmine-spec-reporter');
 
+const url = 'http://webshow.test.dm.reform.hmcts.net';
+const idamUrl = `https://idam-test.dev.ccidam.reform.hmcts.net/login?continue-url=${url}`;
+const username = 'test@TEST.com';
+const password = '123';
+
 exports.config = {
   allScriptsTimeout: 11000,
   specs: [
@@ -12,7 +17,7 @@ exports.config = {
     'browserName': 'chrome'
   },
   directConnect: true,
-  baseUrl: 'http://webshow.test.dm.reform.hmcts.net',
+  baseUrl: url,
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
@@ -26,10 +31,11 @@ exports.config = {
     jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
     browser.waitForAngularEnabled(false);
 
-    browser.driver.get('https://idam-test.dev.ccidam.reform.hmcts.net/login?continue-url=https://webshow.test.dm.reform.hmcts.net');
+    browser.driver.get(idamUrl);
 
-    browser.driver.findElement(by.id('username')).sendKeys('test@TEST.com');
-    browser.driver.findElement(by.id('password')).sendKeys('123');
+    browser.driver.findElement(by.id('username')).sendKeys(username);
+
+    browser.driver.findElement(by.id('password')).sendKeys(password);
     browser.driver.findElement(by.css('input.button ')).click();
 
     // Login takes some time, so wait until it's done.
@@ -37,12 +43,13 @@ exports.config = {
     // index.html.
     browser.driver.wait(function() {
       return browser.driver.getCurrentUrl().then(function(url) {
-        console.log(url);
-        let test = /^https:\/\/webshow.test.dm.reform.hmcts.net\/$/.test(url);
-        console.log('is true =' + test);
+        // console.log(url);
+        const regexp = new RegExp(`^${url.replace('/', '\/')}$`);
+        // console.log(regexp);
+        let test = regexp.test(url);
+        // console.log('is true =' + test);
         return test;
       });
     });
-
   }
 };
