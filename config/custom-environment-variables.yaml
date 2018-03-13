@@ -1,18 +1,16 @@
-test_env: NODE_ENV
-login_url: IDAM_LOGIN_URL
+# Required by Angular
+ng_config:
+  login_url: IDAM_LOGIN_URL
+  dm_store_app_local_endpoint: /demproxy/dm/
+  em_anno_app_local_endpoint: /demproxy/an/
+  em_redact_app_local_endpoint: /demproxy/re/
+  dm_upload_url: DM_UPLOAD_URL
+  dm_find_documents_by_creator_url: DM_OWNED_URL
+  dm_find_documents_by_metadata_url: DM_SEARCH_URL
 
 dm_store_app_url: DM_STORE_APP_URI
-dm_store_app_local_endpoint: /demproxy/dm/
-
 em_anno_app_url: EM_ANNO_APP_URI
-em_anno_app_local_endpoint: /demproxy/an/
-
 em_redact_app_url: EM_REDACT_APP_URI
-em_redact_app_local_endpoint: /demproxy/re/
-
-dm_upload_url: DM_UPLOAD_URL
-dm_find_documents_by_creator_url: DM_OWNED_URL
-dm_find_documents_by_metadata_url: DM_SEARCH_URL
 
 idam:
   base_url: IDAM_USER_BASE_URI

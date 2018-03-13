@@ -20,13 +20,9 @@ describe('AppConfig tests', () => {
     appConfig.load();
     const request = httpMock.expectOne('assets/config.json');
     request.flush({
-      test_env: 'none',
       login_url: 'https://localhost:3501/login',
-      dm_store_app_url: 'http://localhost:4603',
       dm_store_app_local_endpoint: '/demproxy/dm/',
-      em_anno_app_url: 'http://localhost:4621',
       em_anno_app_local_endpoint: '/demproxy/an/',
-      em_redact_app_url: 'http://localhost:4621',
       em_redact_app_local_endpoint: '/demproxy/re/',
       dm_upload_url: '/demproxy/dm/documents',
       dm_find_documents_by_creator_url: '/demproxy/dm/documents/owned/',
@@ -37,32 +33,16 @@ describe('AppConfig tests', () => {
       expect(appConfig.getLoginUrl()).toEqual('https://localhost:3501/login');
     });
 
-    it('should load dm_store_app_url', () => {
-      expect(appConfig.getDmStoreUploadUrl()).toEqual('http://localhost:4603');
-    });
-
     it('should load dm_store_app_local_endpoint', () => {
       expect(appConfig.getDmStoreAppLocalUrl()).toEqual('/demproxy/dm/');
-    });
-
-    it('should load em_anno_app_url', () => {
-      expect(appConfig.getEmAnnoAppUrl()).toEqual('http://localhost:4621');
     });
 
     it('should load em_anno_app_local_endpoint', () => {
       expect(appConfig.getEmAnnoAppLocalUrl()).toEqual('/demproxy/an/');
     });
 
-    it('should load em_redact_app_url', () => {
-      expect(appConfig.getEmRedactAppUrl()).toEqual('http://localhost:4621');
-    });
-
     it('should load em_redact_app_local_endpoint', () => {
       expect(appConfig.getEmRedactAppLocalUrl()).toEqual('/demproxy/re/');
-    });
-
-    it('should load dm_upload_url', () => {
-      expect(appConfig.getDmStoreUploadUrl()).toEqual('/demproxy/dm/documents');
     });
 
     it('should load dm_find_documents_by_creator_url', () => {

@@ -53,7 +53,7 @@ app.use('/viewer',express.static('dist'));
 app.use('/summary',express.static('dist'));
 
 app.get("/config", (req, res) => {
-  res.send(config);
+  res.send(config.get ('ng_config'));
 });
 
 app.get("/health", healthcheck.configure({
