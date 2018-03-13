@@ -3,8 +3,10 @@
 
 const { SpecReporter } = require('jasmine-spec-reporter');
 
-const url = 'http://webshow.test.dm.reform.hmcts.net';
-const idamUrl = `https://idam-test.dev.ccidam.reform.hmcts.net/login?continue-url=${url}`;
+// const url = 'http://webshow.test.dm.reform.hmcts.net';
+const url = 'http://localhost:3608';
+// const idamUrl = `https://idam-test.dev.ccidam.reform.hmcts.net/login?continue-url=${url}`;
+const idamUrl = `https://localhost:3501/login?continue-url=${url}`;
 const username = 'test@TEST.com';
 const password = '123';
 

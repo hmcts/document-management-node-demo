@@ -5,7 +5,7 @@ import {ActivatedRoute} from '@angular/router';
   selector: 'app-dm-listview-route',
   template: `
     <app-dm-listview [page]="page" [sortby]="sortby" [order]="order" [size]="size"></app-dm-listview>
-    <a class="button" href="/upload" role="button">Upload</a>
+    <a class="button" href="/upload" role="button" data-hook="listview__document-upload">Upload</a>
   `
 })
 export class DmListViewRouteComponent implements OnInit {

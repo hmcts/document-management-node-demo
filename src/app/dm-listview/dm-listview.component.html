@@ -1,6 +1,6 @@
 <div class="grid-row">
   <div class="column-full">
-    <h1 class="heading-large">List View</h1>
+    <h1 class="heading-large" data-hook="dm-listview__heading">List View</h1>
 
     <!-- Error Message -->
     <div *ngIf="error" class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -21,7 +21,7 @@
 <!--<div class="grid-row" *ngIf="documents">-->
 <div class="grid-row" *ngIf="!error">
   <div class="column-full">
-    <table id="documentTable">
+    <table id="documentTable" data-hook="document-list">
       <!-- Table Header -->
       <thead>
       <tr>
@@ -38,7 +38,7 @@
       </thead>
       <!-- Table Content -->
       <tbody>
-      <tr *ngFor="let docs of documents">
+      <tr *ngFor="let docs of documents" data-hook="document-list__document">
         <td>
           <a href="{{convertUrlToProxy(docs._links.thumbnail.href)}}?jwt={{jwt}}">
             <img src="{{convertUrlToProxy(docs._links.thumbnail.href)}}?jwt={{jwt}}" width="48">
