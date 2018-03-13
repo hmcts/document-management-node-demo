@@ -7,4 +7,8 @@ describe('dm-viewer App', () => {
     page = new AppPage();
   });
 
+  it('should have a title', () => {
+    expect(page.getTitleText()).toEqual('Document Management Show');
+  });
+
 });
