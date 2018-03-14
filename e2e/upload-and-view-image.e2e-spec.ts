@@ -21,6 +21,7 @@ describe('Upload and View an Image', () => {
   describe('when I upload a file', () => {
     const fileToUpload = './files/image.jpg',
       absolutePath = path.resolve(__dirname, fileToUpload);
+
     const listViewPage = new ListViewPage();
 
     beforeEach(() => {

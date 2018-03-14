@@ -39,4 +39,12 @@ export class ViewerPage {
   previousPage() {
     return element.all(by.css('app-em-viewer .button')).get(0).click();
   }
+
+  getSaveButton() {
+    return element.all(by.css('#notesForm button')).get(0);
+  }
+
+  getCancelButton() {
+    return element.all(by.css('#notesForm button')).get(1);
+  }
 }

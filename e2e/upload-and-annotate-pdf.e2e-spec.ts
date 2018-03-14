@@ -82,14 +82,22 @@ describe('Upload and Annotate a PDF', () => {
           });
         });
 
-        describe('when I change pages back', () => {
-          beforeEach(() => {
-            viewerPage.previousPage();
+        xdescribe('when I add a note for page 2 and hit save', () => {
+          beforeEach(async(() => {
+            viewerPage.setCurrentNoteText('Great note on page 2');
+            viewerPage.getSaveButton().click();
+            browser.waitForAngular();
+          }));
+
+          it('should disable save', () => {
+            expect(viewerPage.getSaveButton().isEnabled()).toBe(false);
           });
 
-          it('should blank out the note for the next page', () => {
-            expect(viewerPage.getCurrentNoteText()).toEqual(note);
+
+          it('should disable cancel', () => {
+            expect(viewerPage.getCancelButton().isEnabled()).toBe(false);
           });
+
         });
       });
 
