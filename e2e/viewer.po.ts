@@ -50,6 +50,10 @@ export class ViewerPage {
   }
 
   clearCurrentNote() {
-    element(by.css('#currentNote')).clear();
+    return element(by.css('#currentNote')).clear();
+  }
+
+  viewSummary() {
+    return element.all(by.css('button[data-hook="em-viewer__summary"]')).get(0).click();
   }
 }

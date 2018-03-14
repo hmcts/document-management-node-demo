@@ -202,9 +202,19 @@ fdescribe('Upload and Annotate a PDF', () => {
                       });
                     });
 
+                    // Why you no work!?
                     xit('should have deleted the note', () => {
                       expect(viewerPage.getCurrentNoteText()).toEqual('');
                     });
+
+                    xdescribe('when i view a summary of the notes', () => {
+                      beforeAll(() => {
+                        browser.waitForAngularEnabled(false);
+                        viewerPage.viewSummary();
+                      });
+
+
+                    })
                   });
                 });
               });
