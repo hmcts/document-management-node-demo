@@ -18,4 +18,11 @@ export class UploadPage {
   getUploadButton() {
     return element(by.css('button[data-hook="dm-upload__upload-button"]'));
   }
+
+  isLoaded() {
+    return element.all(by.css('button[data-hook="dm-upload__upload-button"]')).count().then(count => {
+      console.log(count);
+      return count > 0;
+    });
+  }
 }

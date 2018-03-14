@@ -15,6 +15,7 @@ export class ViewerPage {
 
   isAnnotationsLoaded() {
     return element.all(by.css('#currentNote')).count().then((count => {
+      console.log(`Is note there: ${count > 0}`);
       return count > 0;
     }));
   }
@@ -46,5 +47,9 @@ export class ViewerPage {
 
   getCancelButton() {
     return element.all(by.css('#notesForm button')).get(1);
+  }
+
+  clearCurrentNote() {
+    element(by.css('#currentNote')).clear();
   }
 }

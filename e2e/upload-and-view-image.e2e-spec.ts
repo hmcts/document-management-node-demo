@@ -9,7 +9,7 @@ import {ViewerPage} from './viewer.po';
 describe('Upload and View an Image', () => {
   let page: UploadPage;
 
-  beforeEach(() => {
+  beforeAll(() => {
     page = new UploadPage();
     page.navigateTo();
   });
@@ -24,21 +24,28 @@ describe('Upload and View an Image', () => {
 
     const listViewPage = new ListViewPage();
 
-    beforeEach(() => {
+    beforeAll(() => {
+      browser.wait(page.isLoaded);
+    });
+
+    beforeAll(() => {
       page.addFileToUpload(absolutePath).then(() => {
+        browser.waitForAngularEnabled(false);
         page.getUploadButton().click();
       });
     });
 
-    beforeEach(() => {
+    beforeAll(() => {
       return browser.wait(function () {
         return listViewPage.hasDocuments();
+      }).then(() => {
+        browser.waitForAngularEnabled(true);
       });
     });
 
     let uploadedDocument: DocumentRow;
 
-    beforeEach(() => {
+    beforeAll(() => {
       uploadedDocument = listViewPage.getDocument(0);
     });
 
@@ -52,13 +59,16 @@ describe('Upload and View an Image', () => {
 
     describe('when I click view', () => {
       const viewerPage = new ViewerPage();
-      beforeEach(() => {
+      beforeAll(() => {
+        browser.waitForAngularEnabled(false);
         uploadedDocument.view();
       });
 
-      beforeEach(() => {
+      beforeAll(() => {
         return browser.wait(function () {
           return viewerPage.isLoaded();
+        }).then(() => {
+          browser.waitForAngularEnabled(true);
         });
       });
 
