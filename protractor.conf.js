@@ -3,6 +3,13 @@
 
 const { SpecReporter } = require('jasmine-spec-reporter');
 
+// const url = 'http://webshow.test.dm.reform.hmcts.net';
+const url = 'http://localhost:3608';
+// const idamUrl = `https://idam-test.dev.ccidam.reform.hmcts.net/login?continue-url=${url}`;
+const idamUrl = `https://localhost:3501/login?continue-url=${url}`;
+const username = 'test@TEST.com';
+const password = '123';
+
 exports.config = {
   allScriptsTimeout: 11000,
   specs: [
@@ -12,7 +19,7 @@ exports.config = {
     'browserName': 'chrome'
   },
   directConnect: true,
-  baseUrl: 'http://localhost:4200/',
+  baseUrl: url,
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
@@ -24,5 +31,27 @@ exports.config = {
       project: 'e2e/tsconfig.e2e.json'
     });
     jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
+    browser.waitForAngularEnabled(false);
+
+    browser.driver.get(idamUrl);
+
+    browser.driver.findElement(by.id('username')).sendKeys(username);
+
+    browser.driver.findElement(by.id('password')).sendKeys(password);
+    browser.driver.findElement(by.css('input.button ')).click();
+
+    // Login takes some time, so wait until it's done.
+    // For the test app's login, we know it's done when it redirects to
+    // index.html.
+    browser.driver.wait(function() {
+      return browser.driver.getCurrentUrl().then(function(url) {
+        // console.log(url);
+        const regexp = new RegExp(`^${url.replace('/', '\/')}$`);
+        // console.log(regexp);
+        let test = regexp.test(url);
+        // console.log('is true =' + test);
+        return test;
+      });
+    });
   }
 };

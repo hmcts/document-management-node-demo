@@ -5,7 +5,12 @@ export class AppPage {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  getTitleText() {
+    return element(by.id('proposition-name')).getText();
+  }
+
+  getUploadButton() {
+    return element(by.css('a.button'));
+    // return element(by.css('a[data-hook="listview__document-upload"]'));
   }
 }

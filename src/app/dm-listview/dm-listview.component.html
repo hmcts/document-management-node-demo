@@ -1,6 +1,6 @@
 <div class="grid-row">
   <div class="column-full">
-    <h1 class="heading-large">List View</h1>
+    <h1 class="heading-large" data-hook="dm-listview__heading">List View</h1>
 
     <!-- Error Message -->
     <div *ngIf="error" class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
@@ -21,7 +21,7 @@
 <!--<div class="grid-row" *ngIf="documents">-->
 <div class="grid-row" *ngIf="!error">
   <div class="column-full">
-    <table id="documentTable">
+    <table id="documentTable" data-hook="document-list">
       <!-- Table Header -->
       <thead>
       <tr>
@@ -38,13 +38,13 @@
       </thead>
       <!-- Table Content -->
       <tbody>
-      <tr *ngFor="let docs of documents">
+      <tr *ngFor="let docs of documents" data-hook="dm-listview__document">
         <td>
           <a href="{{convertUrlToProxy(docs._links.thumbnail.href)}}?jwt={{jwt}}">
             <img src="{{convertUrlToProxy(docs._links.thumbnail.href)}}?jwt={{jwt}}" width="48">
           </a>
         </td>
-        <td class="overflow-ellipsis">
+        <td class="overflow-ellipsis" data-hook="dm-listview__document__name">
           {{docs.originalDocumentName}}
         </td>
         <td>
@@ -57,10 +57,10 @@
           <a href="{{convertUrlToProxy(docs._links.binary.href)}}?jwt={{jwt}}" download="{{docs.originalDocumentName}}">Download</a>
         </td>
         <td>
-          <a href="/viewer?url={{docs._links.self.href}}">View</a>
+          <a href="/viewer?url={{docs._links.self.href}}" data-hook="dm-listview__document__view">View</a>
         </td>
         <td>
-          <a href="/viewer?url={{docs._links.self.href}}&annotate=true">Annotate</a>
+          <a href="/viewer?url={{docs._links.self.href}}&annotate=true" data-hook="dm-listview__document__annotate">Annotate</a>
         </td>
         <td>
           <input type="button" class="button" value="Delete" (click)="deleteDocument(docs._links.self.href + '?permanent=true')"/>
