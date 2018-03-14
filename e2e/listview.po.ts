@@ -2,6 +2,23 @@ import { browser, by, element } from 'protractor';
 import {promise as wdpromise} from 'selenium-webdriver';
 import {ElementFinder} from 'protractor/built/element';
 
+export class DocumentRow {
+
+  constructor(private document: ElementFinder) {}
+
+  name() {
+    return this.document.element(by.css('td[data-hook="dm-listview__document__name"')).getText();
+  }
+
+  view() {
+    return this.document.element(by.css('a[data-hook="dm-listview__document__view')).click();
+  }
+
+  annotate() {
+    return this.document.element(by.css('a[data-hook="dm-listview__document__annotate')).click();
+  }
+}
+
 export class ListViewPage {
   navigateTo() {
     return browser.get('/list');
@@ -22,19 +39,3 @@ export class ListViewPage {
   }
 }
 
-export class DocumentRow {
-
-  constructor(private document: ElementFinder) {}
-
-  name() {
-    return this.document.element(by.css('td[data-hook="dm-listview__document__name"')).getText();
-  }
-
-  view() {
-    return this.document.element(by.css('a[data-hook="dm-listview__document__view')).click();
-  }
-
-  annotate() {
-    return this.document.element(by.css('a[data-hook="dm-listview__document__annotate')).click();
-  }
-}
