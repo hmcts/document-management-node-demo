@@ -15,7 +15,6 @@ export class ViewerPage {
 
   isAnnotationsLoaded() {
     return element.all(by.css('#currentNote')).count().then((count => {
-      console.log(`Is note there: ${count > 0}`);
       return count > 0;
     }));
   }
@@ -54,6 +53,6 @@ export class ViewerPage {
   }
 
   viewSummary() {
-    return element.all(by.css('button[data-hook="em-viewer__summary"]')).get(0).click();
+    return element.all(by.css('app-em-viewer-route a')).get(0).click();
   }
 }

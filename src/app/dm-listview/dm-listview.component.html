@@ -60,7 +60,7 @@
           <a href="/viewer?url={{docs._links.self.href}}" data-hook="dm-listview__document__view">View</a>
         </td>
         <td>
-          <a [routerLink]="['//viewer?url={{docs._links.self.href}}&annotate=true']" data-hook="dm-listview__document__annotate">Annotate</a>
+          <a href="/viewer?url={{docs._links.self.href}}&annotate=true" data-hook="dm-listview__document__annotate">Annotate</a>
         </td>
         <td>
           <input type="button" class="button" value="Delete" (click)="deleteDocument(docs._links.self.href + '?permanent=true')"/>

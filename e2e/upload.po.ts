@@ -21,7 +21,6 @@ export class UploadPage {
 
   isLoaded() {
     return element.all(by.css('button[data-hook="dm-upload__upload-button"]')).count().then(count => {
-      console.log(count);
       return count > 0;
     });
   }

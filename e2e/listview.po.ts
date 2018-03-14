@@ -34,7 +34,6 @@ export class ListViewPage {
 
   hasDocuments() {
    return element.all(by.css('tr[data-hook="dm-listview__document"')).count().then(count => {
-     console.log('Number of docs' + count);
      return count > 0;
    });
   }

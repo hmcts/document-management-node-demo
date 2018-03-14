@@ -6,6 +6,7 @@ import {DocumentRow, ListViewPage} from './listview.po';
 import {browser, by, element} from 'protractor';
 import {async} from 'q';
 import {ViewerPage} from './viewer.po';
+import {SummaryPage} from './summary.po';
 fdescribe('Upload and Annotate a PDF', () => {
   let page: UploadPage;
 
@@ -25,7 +26,6 @@ fdescribe('Upload and Annotate a PDF', () => {
 
     beforeAll(() => {
       page.addFileToUpload(absolutePath).then(() => {
-        console.log(`Uploading ${absolutePath}`);
         browser.waitForAngularEnabled(false);
         page.getUploadButton().click();
       });
@@ -163,7 +163,6 @@ fdescribe('Upload and Annotate a PDF', () => {
                   beforeAll(() => {
                     return browser.wait(function () {
                       return viewerPage.getSaveButton().isEnabled().then(enabled => {
-                        console.log(enabled);
                         return !enabled;
                       });
                     });
@@ -180,45 +179,44 @@ fdescribe('Upload and Annotate a PDF', () => {
                     expect(viewerPage.getCurrentNoteText()).toEqual(updatedPageOneNote);
                   });
 
-                  describe('when I delete the note, save and refresh', () => {
-                    beforeAll(() => {
-                      viewerPage.clearCurrentNote();
-                      viewerPage.getSaveButton().click();
-                    });
+                  describe('when i view a summary of the notes', () => {
+                    const summaryPage = new SummaryPage();
 
                     beforeAll(() => {
-                      return browser.wait(function () {
-                        return viewerPage.getSaveButton().isEnabled().then(enabled => {
-                          console.log(enabled);
-                          return !enabled;
-                        });
-                      });
+                      browser.waitForAngularEnabled(false);
+                      viewerPage.viewSummary();
                     });
 
                     beforeAll(() => {
-                      browser.refresh();
-                      return browser.wait(function () {
-                        return viewerPage.isAnnotationsLoaded();
+                      browser.wait(summaryPage.isLoaded).then(() => {
+                        browser.waitForAngularEnabled(true);
                       });
                     });
 
-                    // Why you no work!?
-                    xit('should have deleted the note', () => {
-                      expect(viewerPage.getCurrentNoteText()).toEqual('');
+                    const annotation = summaryPage.getAnnotation(1);
+
+                    it('should have annotationa', () => {
+                      expect(summaryPage.getNumberOfAnnotations()).toEqual(2);
                     });
 
-                    xdescribe('when i view a summary of the notes', () => {
-                      beforeAll(() => {
-                        browser.waitForAngularEnabled(false);
-                        viewerPage.viewSummary();
-                      });
+                    it('should display the annotation text', () => {
+                      expect(annotation.getText()).toEqual(pageTwoNote);
+                    });
 
+                    it('should display created By', () => {
+                      expect(annotation.getCreatedBy()).toBeTruthy();
+                    });
 
-                    })
+                    it('should display created On', () => {
+                      expect(annotation.getCreatedOn()).toBeTruthy();
+                    });
+
+                    it('should display the page', () => {
+                      expect(annotation.getPage()).toEqual('Page 2');
+                    });
                   });
-                });
+                  });
               });
-
             });
           });
         });
