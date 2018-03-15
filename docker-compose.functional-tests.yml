@@ -1,0 +1,16 @@
+version: '2.1'
+
+services:
+    node-demo-tests:
+      build:
+        context: .
+        dockerfile: e2e/Dockerfile
+      environment:
+        - WEB_DRIVER_HOST=http://remote-webdriver:4444/wd/hub
+        - APP_URL=https://webshow.dev.dm.reform.hmcts.net
+        - IDAM_URL=https://idam.dev.ccidam.reform.hmcts.net
+      depends_on:
+        - remote-webdriver
+
+    remote-webdriver:
+      image: selenium/standalone-chrome

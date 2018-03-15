@@ -1,6 +1,4 @@
 import { browser, by, element } from 'protractor';
-import {until} from 'selenium-webdriver';
-import ableToSwitchToFrame = until.ableToSwitchToFrame;
 
 export class ViewerPage {
   navigateTo() {
