@@ -9,6 +9,8 @@ services:
         - WEB_DRIVER_HOST=http://remote-webdriver:4444/wd/hub
         - APP_URL=https://webshow.dev.dm.reform.hmcts.net
         - IDAM_URL=https://idam.dev.ccidam.reform.hmcts.net
+        - http_proxy
+        - https_proxy
       depends_on:
         - remote-webdriver
 
