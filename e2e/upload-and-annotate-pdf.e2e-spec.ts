@@ -7,7 +7,7 @@ import {browser, by, element} from 'protractor';
 import {async} from 'q';
 import {ViewerPage} from './viewer.po';
 import {SummaryPage} from './summary.po';
-fdescribe('Upload and Annotate a PDF', () => {
+describe('Upload and Annotate a PDF and then delete', () => {
   let page: UploadPage;
 
   beforeAll(() => {
