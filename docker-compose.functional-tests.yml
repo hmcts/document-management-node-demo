@@ -11,6 +11,7 @@ services:
         - IDAM_URL=https://idam.dev.ccidam.reform.hmcts.net
         - http_proxy
         - https_proxy
+        - no_proxy
       depends_on:
         - remote-webdriver
 
