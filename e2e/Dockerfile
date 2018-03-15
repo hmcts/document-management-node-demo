@@ -4,6 +4,6 @@ COPY . /tests
 
 WORKDIR /tests
 
-RUN npm install
+RUN yarn install
 
 CMD yarn test:functional:e2e
