@@ -6,10 +6,11 @@ import {DocumentRow, ListViewPage} from './listview.po';
 import {browser, by, element} from 'protractor';
 import {async} from 'q';
 import {ViewerPage} from './viewer.po';
-describe('Upload and Annotate a PDF', () => {
+import {SummaryPage} from './summary.po';
+describe('Upload and Annotate a PDF and then delete', () => {
   let page: UploadPage;
 
-  beforeEach(() => {
+  beforeAll(() => {
     page = new UploadPage();
     page.navigateTo();
   });
@@ -19,33 +20,43 @@ describe('Upload and Annotate a PDF', () => {
       absolutePath = path.resolve(__dirname, fileToUpload);
     const listViewPage = new ListViewPage();
 
-    beforeEach(() => {
+    beforeAll(() => {
+      browser.wait(page.isLoaded);
+    });
+
+    beforeAll(() => {
       page.addFileToUpload(absolutePath).then(() => {
+        browser.waitForAngularEnabled(false);
         page.getUploadButton().click();
       });
     });
 
-    beforeEach(() => {
+    beforeAll(() => {
       return browser.wait(function () {
         return listViewPage.hasDocuments();
+      }).then(() => {
+        browser.waitForAngularEnabled(true);
       });
     });
 
     let uploadedDocument: DocumentRow;
 
-    beforeEach(() => {
+    beforeAll(() => {
       uploadedDocument = listViewPage.getDocument(0);
     });
 
     describe('when I click annotate', () => {
       const viewerPage = new ViewerPage();
-      beforeEach(() => {
+      beforeAll(() => {
+        browser.waitForAngularEnabled(false);
         uploadedDocument.annotate();
       });
 
-      beforeEach(() => {
+      beforeAll(() => {
         return browser.wait(function () {
           return viewerPage.isAnnotationsLoaded();
+        }).then(() => {
+          browser.waitForAngularEnabled(true);
         });
       });
 
@@ -61,19 +72,28 @@ describe('Upload and Annotate a PDF', () => {
         expect(viewerPage.getCurrentNoteText()).toEqual('');
       });
 
-      describe('when I add a note', () => {
-        const note = `A rockin' note`;
+      describe('when I add a note and save', () => {
+        const pageOneNote = `A rockin note`;
 
-        beforeEach(() => {
-          viewerPage.setCurrentNoteText(note);
+        beforeAll(() => {
+          viewerPage.setCurrentNoteText(pageOneNote);
+          viewerPage.getSaveButton().click();
+        });
+
+        it('should disable save', () => {
+          expect(viewerPage.getSaveButton().isEnabled()).toBe(false);
+        });
+
+        it('should disable cancel', () => {
+          expect(viewerPage.getCancelButton().isEnabled()).toBe(false);
         });
 
         it('should display to the note', () => {
-          expect(viewerPage.getCurrentNoteText()).toEqual(note);
+          expect(viewerPage.getCurrentNoteText()).toEqual(pageOneNote);
         });
 
         describe('when I change pages', () => {
-          beforeEach(() => {
+          beforeAll(() => {
             viewerPage.nextPage();
           });
 
@@ -82,25 +102,125 @@ describe('Upload and Annotate a PDF', () => {
           });
         });
 
-        xdescribe('when I add a note for page 2 and hit save', () => {
-          beforeEach(async(() => {
-            viewerPage.setCurrentNoteText('Great note on page 2');
+        describe('when I add a note for page 2 and hit save', () => {
+          const pageTwoNote = 'Great note on page 2';
+
+          beforeAll(() => {
+            viewerPage.setCurrentNoteText(pageTwoNote);
             viewerPage.getSaveButton().click();
-            browser.waitForAngular();
-          }));
+          });
 
           it('should disable save', () => {
             expect(viewerPage.getSaveButton().isEnabled()).toBe(false);
           });
 
-
           it('should disable cancel', () => {
             expect(viewerPage.getCancelButton().isEnabled()).toBe(false);
           });
 
+          describe('when i refresh the page', () => {
+            beforeAll(() => {
+              browser.refresh();
+            });
+
+            beforeAll(() => {
+              return browser.wait(function () {
+                return viewerPage.isAnnotationsLoaded();
+              });
+            });
+
+            it('should have loaded the page 1 note', () => {
+              expect(viewerPage.getCurrentNoteText()).toEqual(pageOneNote);
+            });
+
+            describe('when I swap to page 2', () => {
+              beforeAll(() => {
+                viewerPage.nextPage();
+              });
+
+              it('should have loaded page 2 note', () => {
+                expect(viewerPage.getCurrentNoteText()).toEqual(pageTwoNote);
+              });
+
+              describe('when I flick back to page 1', () => {
+                beforeAll(() => {
+                  viewerPage.previousPage();
+                });
+
+                it('should go back to the page 1 note', () => {
+                  expect(viewerPage.getCurrentNoteText()).toEqual(pageOneNote);
+                });
+
+                describe('when I update the note, save and refresh', () => {
+                  const updatedPageOneNote = 'Updated page 1 note';
+
+                  beforeAll(() => {
+                    viewerPage.clearCurrentNote();
+                    viewerPage.setCurrentNoteText(updatedPageOneNote);
+                    viewerPage.getSaveButton().click();
+                  });
+
+                  beforeAll(() => {
+                    return browser.wait(function () {
+                      return viewerPage.getSaveButton().isEnabled().then(enabled => {
+                        return !enabled;
+                      });
+                    });
+                  });
+
+                  beforeAll(() => {
+                    browser.refresh();
+                    return browser.wait(function () {
+                      return viewerPage.isAnnotationsLoaded();
+                    });
+                  });
+
+                  it('should have saved the updated note', () => {
+                    expect(viewerPage.getCurrentNoteText()).toEqual(updatedPageOneNote);
+                  });
+
+                  describe('when i view a summary of the notes', () => {
+                    const summaryPage = new SummaryPage();
+
+                    beforeAll(() => {
+                      browser.waitForAngularEnabled(false);
+                      viewerPage.viewSummary();
+                    });
+
+                    beforeAll(() => {
+                      browser.wait(summaryPage.isLoaded).then(() => {
+                        browser.waitForAngularEnabled(true);
+                      });
+                    });
+
+                    const annotation = summaryPage.getAnnotation(1);
+
+                    it('should have annotationa', () => {
+                      expect(summaryPage.getNumberOfAnnotations()).toEqual(2);
+                    });
+
+                    it('should display the annotation text', () => {
+                      expect(annotation.getText()).toEqual(pageTwoNote);
+                    });
+
+                    it('should display created By', () => {
+                      expect(annotation.getCreatedBy()).toBeTruthy();
+                    });
+
+                    it('should display created On', () => {
+                      expect(annotation.getCreatedOn()).toBeTruthy();
+                    });
+
+                    it('should display the page', () => {
+                      expect(annotation.getPage()).toEqual('Page 2');
+                    });
+                  });
+                  });
+              });
+            });
+          });
         });
       });
-
     });
   });
 });

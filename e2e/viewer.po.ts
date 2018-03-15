@@ -47,4 +47,12 @@ export class ViewerPage {
   getCancelButton() {
     return element.all(by.css('#notesForm button')).get(1);
   }
+
+  clearCurrentNote() {
+    return element(by.css('#currentNote')).clear();
+  }
+
+  viewSummary() {
+    return element.all(by.css('app-em-viewer-route a')).get(0).click();
+  }
 }
