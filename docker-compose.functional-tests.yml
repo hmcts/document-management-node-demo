@@ -13,4 +13,4 @@ services:
         - remote-webdriver
 
     remote-webdriver:
-      image: selenium/standalone-chrome
+      image: docker.artifactory.reform.hmcts.net/selenium/standalone-chrome:3.8.1
