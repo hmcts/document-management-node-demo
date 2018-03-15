@@ -1,5 +1,6 @@
 // Protractor configuration file, see link for more information
 // https://github.com/angular/protractor/blob/master/lib/config.ts
+var remote = require('selenium-webdriver/remote');
 
 const { SpecReporter } = require('jasmine-spec-reporter');
 
@@ -18,7 +19,8 @@ exports.config = {
   capabilities: {
     'browserName': 'chrome'
   },
-  directConnect: true,
+  // directConnect: true,
+  seleniumAddress: process.env.WEB_DRIVER_HOST,
   baseUrl: url,
   framework: 'jasmine',
   jasmineNodeOpts: {
@@ -31,6 +33,9 @@ exports.config = {
       project: 'e2e/tsconfig.e2e.json'
     });
     jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
+
+    browser.setFileDetector(new remote.FileDetector());
+
     browser.waitForAngularEnabled(false);
 
     browser.driver.get(idamUrl);

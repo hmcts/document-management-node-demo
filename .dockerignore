@@ -1,4 +1,5 @@
 *
+!e2e
 !config
 !node
 !src
@@ -7,3 +8,4 @@
 !package.json
 !tsconfig.json
 !yarn.lock
+!protractor.conf.js

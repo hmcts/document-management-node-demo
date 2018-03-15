@@ -114,14 +114,23 @@ node {
                 ansible.run("{}", "dev", "install_show_web.yml")
                 ansible.run("{}", "dev", "deploy_show_web.yml")
                 rpmTagger.tagDeploymentSuccessfulOn('dev')
-                rpmTagger.tagTestingPassedOn("dev")
+
             }
 
+            stage('IT on Dev') {
+              build job: 'hmcts/dm-it-pipeline/master', parameters: [
+                [$class: 'StringParameterValue', name: 'ENVIRONMENT', value: "dev"],
+                [$class: 'StringParameterValue', name: 'APP_TYPE', value: "show"]
+              ]
+              rpmTagger.tagTestingPassedOn("dev")
+            }
+
+
             stage ('Deploy on Test') {
-                ansible.run("{}", "test", "install_show_web.yml")
-                ansible.run("{}", "test", "deploy_show_web.yml")
-                rpmTagger.tagDeploymentSuccessfulOn('test')
-                rpmTagger.tagTestingPassedOn("test")
+                  ansible.run("{}", "test", "install_show_web.yml")
+                  ansible.run("{}", "test", "deploy_show_web.yml")
+                  rpmTagger.tagDeploymentSuccessfulOn('test')
+                  rpmTagger.tagTestingPassedOn("test")
             }
 
             stage ('Deploy on Demo') {
