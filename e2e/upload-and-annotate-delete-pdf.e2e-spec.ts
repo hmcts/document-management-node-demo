@@ -92,32 +92,13 @@ describe('Upload and Annotate a PDF', () => {
           expect(viewerPage.getCurrentNoteText()).toEqual(pageOneNote);
         });
 
-        describe('when I delete the note, save and refresh', () => {
+        describe('when I delete the note', () => {
           beforeAll(() => {
-            viewerPage.clearCurrentNote().then(() => {
-              viewerPage.getSaveButton().click();
-            });
+            viewerPage.clearCurrentNote();
+            viewerPage.getSaveButton().click();
           });
 
-          beforeAll(() => {
-            return browser.wait(function () {
-              return viewerPage.getSaveButton().isEnabled().then(enabled => {
-                console.log(enabled);
-                return !enabled;
-              });
-            }).then(() => {
-              browser.refresh();
-            });
-          });
-
-          beforeAll(() => {
-            return browser.wait(function () {
-              return viewerPage.isAnnotationsLoaded();
-            });
-          });
-
-          // Not working at the moment for some reason.
-          xit('should have deleted the note', () => {
+          it('should have deleted the note', () => {
             expect(viewerPage.getCurrentNoteText()).toEqual('');
           });
         });

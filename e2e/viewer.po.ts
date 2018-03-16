@@ -1,4 +1,4 @@
-import { browser, by, element } from 'protractor';
+import {browser, by, element, protractor} from 'protractor';
 
 export class ViewerPage {
   navigateTo() {
@@ -39,7 +39,7 @@ export class ViewerPage {
   }
 
   getSaveButton() {
-    return element.all(by.css('#notesForm button')).get(0);
+    return element(by.css('button[data-hook="dm.viewer.save-note"'));
   }
 
   getCancelButton() {
@@ -47,7 +47,10 @@ export class ViewerPage {
   }
 
   clearCurrentNote() {
-    return element(by.css('#currentNote')).clear();
+    const field = element(by.css('#currentNote'));
+    field.sendKeys(protractor.Key.chord(protractor.Key.CONTROL, 'a'));
+    field.sendKeys(protractor.Key.BACK_SPACE);
+    field.clear();
   }
 
   viewSummary() {
