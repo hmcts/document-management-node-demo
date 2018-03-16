@@ -20,15 +20,6 @@ export class DocumentStoreService {
     };
   }
 
-  // private getHttpOptions() {
-  //   return {
-  //     headers: new HttpHeaders({
-  //       'Authorization': `Bearer ${this.sessionService.getSession().token}`,
-  //       'Accept': 'application/json'
-  //     })
-  //   };
-  // }
-
   convertUrlToProxy(url: string): string {
     const URLsplit = url.split('/');
     const host = URLsplit[0] + '//' + URLsplit[2] + '/';
