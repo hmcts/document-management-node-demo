@@ -38,10 +38,6 @@ export class DmUploadComponent implements OnInit {
     }
   }
 
-  gotoListView() {
-    this.windowService.locationAssign('/list');
-  }
-
   postFile() {
     const metadataObj: Map<string, string> = new Map<string, string>();
     // metadataObj.set('title', 'some random Title');
@@ -58,6 +54,10 @@ export class DmUploadComponent implements OnInit {
           this.error = err;
         }
       );
+  }
+
+  gotoListView() {
+    this.windowService.locationAssign('/list');
   }
 
   cancelUpload() {

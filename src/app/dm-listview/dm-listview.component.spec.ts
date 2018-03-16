@@ -10,14 +10,12 @@ import {DocumentStoreService} from '../dm/document-store.service';
 import {DocumentService} from '../utils/document.service';
 
 const dmGwUrl = 'http://api-gateway.dm.com';
-const ownedDocumentUrl = dmGwUrl + '/documents/owned';
-const emVwUrl = 'http://viewer.em.com';
+const ownedDocumentUrl = '/demproxy/dm/documents/owned/';
 const jwt = '12345';
 const urlParams = '?page=0&sort=desc,createdOn&size=5';
 
 const configObject = {
-  'dm_find_documents_by_creator_url': ownedDocumentUrl,
-  'em_viewer_url': emVwUrl
+  'dm_find_documents_by_creator_url': '/demproxy/dm/documents/owned/',
 };
 
 const ownedDocuments = {
