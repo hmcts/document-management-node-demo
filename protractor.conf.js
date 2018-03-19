@@ -5,9 +5,10 @@ var remote = require('selenium-webdriver/remote');
 const { SpecReporter } = require('jasmine-spec-reporter');
 
 // const url = 'http://webshow.test.dm.reform.hmcts.net';
-const url = process.env.TEST_URL || 'http://localhost:3608' ;
+const url = process.env.APP_URL || 'http://localhost:3608' ;
 // const idamUrl = `https://idam-test.dev.ccidam.reform.hmcts.net/login?continue-url=${url}`;
-const idamUrl = `https://localhost:3501/login?continue-url=${url}`;
+const idamUrl =` ${process.env.IDAM_URL || 'https://localhost:3501'}/login?continue-url=${url}`;
+// const idamUrl = `https://localhost:3501/login?continue-url=${url}`;
 const username = 'test@test.com';
 const password = '123';
 
@@ -19,7 +20,7 @@ exports.config = {
   capabilities: {
     'browserName': 'chrome'
   },
-  // directConnect: true,
+  directConnect: !process.env.WEB_DRIVER_HOST,
   seleniumAddress: process.env.WEB_DRIVER_HOST,
   baseUrl: url,
   framework: 'jasmine',
