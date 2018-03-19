@@ -9,22 +9,22 @@ import {DebugElement} from '@angular/core';
 import {DocumentStoreService} from '../dm/document-store.service';
 import {DocumentService} from '../utils/document.service';
 
-let httpMock: HttpTestingController;
-let sessionService: SessionService;
-let windowService: WindowService;
-let appConfig: AppConfig;
-let component: DmUploadComponent;
-let fixture: ComponentFixture<DmUploadComponent>;
-let element: DebugElement;
-
-const jwt = '12345';
-
-const configObject = {
-  'dm_store_app_local_endpoint': '/demproxy/dm/',
-  'dm_upload_url': '/demproxy/dm/documents'
-};
-
 describe('DmUploadComponent', () => {
+  const jwt = '12345';
+
+  const configObject = {
+    'dm_store_app_local_endpoint': '/demproxy/dm/',
+    'dm_upload_url': '/demproxy/dm/documents'
+  };
+
+  let httpMock: HttpTestingController;
+  let sessionService: SessionService;
+  let windowService: WindowService;
+  let appConfig: AppConfig;
+  let component: DmUploadComponent;
+  let fixture: ComponentFixture<DmUploadComponent>;
+  let element: DebugElement;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, CookieModule.forRoot()],
@@ -57,8 +57,7 @@ describe('DmUploadComponent', () => {
       beforeEach(async(() => {
         windowService = TestBed.get(WindowService);
         spyOn(windowService, 'locationAssign').and.callFake(() => {});
-        // element.nativeElement.querySelector('button[data-hook="dm-upload__upload-button"]').click();
-        component.cancelUpload();
+        element.nativeElement.querySelector('button[data-hook="dm-upload__cancel-button"]').click();
       }));
 
       it('should goto listView', () => {
@@ -92,8 +91,7 @@ describe('DmUploadComponent', () => {
         beforeEach(() => {
           windowService = TestBed.get(WindowService);
           spyOn(windowService, 'locationAssign').and.callFake(() => {});
-          // element.nativeElement.querySelector('button[data-hook="dm-upload__upload-button"]').click();
-          component.uploadDocument();
+          element.nativeElement.querySelector('button[data-hook="dm-upload__upload-button"]').click();
           httpMock.expectOne('/demproxy/dm/documents').flush({}, {
             status: 200,
             statusText: 'ok'
@@ -111,8 +109,7 @@ describe('DmUploadComponent', () => {
         beforeEach(() => {
           windowService = TestBed.get(WindowService);
           spyOn(sessionService, 'clearSession').and.callFake(() => {});
-          // element.nativeElement.querySelector('button[data-hook="dm-upload__upload-button"]').click();
-          component.uploadDocument();
+          element.nativeElement.querySelector('button[data-hook="dm-upload__upload-button"]').click();
           httpMock.expectOne('/demproxy/dm/documents').flush({}, {
             status: 401,
             statusText: 'unAuth'
@@ -130,8 +127,7 @@ describe('DmUploadComponent', () => {
         beforeEach(() => {
           windowService = TestBed.get(WindowService);
           spyOn(windowService, 'locationAssign').and.callFake(() => {});
-          // element.nativeElement.querySelector('button[data-hook="dm-upload__upload-button"]').click();
-          component.uploadDocument();
+          element.nativeElement.querySelector('button[data-hook="dm-upload__upload-button"]').click();
           httpMock.expectOne('/demproxy/dm/documents').flush({}, {
             status: 403,
             statusText: 'forbid'
