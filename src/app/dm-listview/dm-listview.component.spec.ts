@@ -8,6 +8,7 @@ import {WindowService} from '../utils/window.service';
 import {DebugElement} from '@angular/core';
 import {DocumentStoreService} from '../dm/document-store.service';
 import {DocumentService} from '../utils/document.service';
+import {By} from '@angular/platform-browser';
 
 const dmGwUrl = 'http://api-gateway.dm.com';
 const ownedDocumentUrl = '/demproxy/dm/documents/owned/';
@@ -85,6 +86,202 @@ const ownedDocuments = {
 };
 
 
+const zeroOwnedDocuments = {};
+const oneOwnedDocuments = {
+  '_embedded' : {
+    'documents' : [ {
+      'originalDocumentName' : 'jpg.jpg',
+      'createdBy' : '28',
+      'modifiedOn' : '2018-03-07T09:20:57.484+0000',
+      '_links' : {
+        'self' : {
+          'href' : dmGwUrl + '/documents/12345'
+        },
+        'binary' : {
+          'href' : dmGwUrl + '/documents/12345/binary'
+        },
+        'thumbnail' : {
+          'href' : dmGwUrl + '/documents/12345/thumbnail'
+        }
+      }
+    } ]
+  },
+  'page' : {
+    'size' : 5,
+    'totalElements' : 1,
+    'totalPages' : 1,
+    'number' : 0
+  }
+};
+const twoOwnedDocuments = {
+  '_embedded' : {
+    'documents' : [
+      {
+        'originalDocumentName' : 'jpg1.jpg',
+        'createdBy' : '28',
+        'modifiedOn' : '2018-03-07T09:20:57.484+0000',
+        '_links' : {
+          'self' : {
+            'href' : dmGwUrl + '/documents/1'
+          },
+          'binary' : {
+            'href' : dmGwUrl + '/documents/1/binary'
+          },
+          'thumbnail' : {
+            'href' : dmGwUrl + '/documents/1/thumbnail'
+          }
+        }
+      },
+      {
+        'originalDocumentName' : 'jpg2.jpg',
+        'createdBy' : '28',
+        'modifiedOn' : '2018-03-07T09:20:57.484+0000',
+        '_links' : {
+          'self' : {
+            'href' : dmGwUrl + '/documents/2'
+          },
+          'binary' : {
+            'href' : dmGwUrl + '/documents/2/binary'
+          },
+          'thumbnail' : {
+            'href' : dmGwUrl + '/documents/2/thumbnail'
+          }
+        }
+      }
+    ]
+  },
+  'page' : {
+    'size' : 5,
+    'totalElements' : 2,
+    'totalPages' : 1,
+    'number' : 0
+  }
+};
+const sevenOwnedDocuments = {
+  '_embedded' : {
+    'documents' : [
+      {
+        'originalDocumentName' : 'jpg1.jpg',
+        'createdBy' : '28',
+        'modifiedOn' : '2018-03-07T09:20:57.484+0000',
+        '_links' : {
+          'self' : {
+            'href' : dmGwUrl + '/documents/1'
+          },
+          'binary' : {
+            'href' : dmGwUrl + '/documents/1/binary'
+          },
+          'thumbnail' : {
+            'href' : dmGwUrl + '/documents/1/thumbnail'
+          }
+        }
+      },
+      {
+        'originalDocumentName' : 'jpg2.jpg',
+        'createdBy' : '28',
+        'modifiedOn' : '2018-03-07T09:20:57.484+0000',
+        '_links' : {
+          'self' : {
+            'href' : dmGwUrl + '/documents/2'
+          },
+          'binary' : {
+            'href' : dmGwUrl + '/documents/2/binary'
+          },
+          'thumbnail' : {
+            'href' : dmGwUrl + '/documents/2/thumbnail'
+          }
+        }
+      },
+      {
+        'originalDocumentName' : 'jpg3.jpg',
+        'createdBy' : '28',
+        'modifiedOn' : '2018-03-07T09:20:57.484+0000',
+        '_links' : {
+          'self' : {
+            'href' : dmGwUrl + '/documents/2'
+          },
+          'binary' : {
+            'href' : dmGwUrl + '/documents/3/binary'
+          },
+          'thumbnail' : {
+            'href' : dmGwUrl + '/documents/3/thumbnail'
+          }
+        }
+      },
+      {
+        'originalDocumentName' : 'jpg4.jpg',
+        'createdBy' : '28',
+        'modifiedOn' : '2018-03-07T09:20:57.484+0000',
+        '_links' : {
+          'self' : {
+            'href' : dmGwUrl + '/documents/4'
+          },
+          'binary' : {
+            'href' : dmGwUrl + '/documents/4/binary'
+          },
+          'thumbnail' : {
+            'href' : dmGwUrl + '/documents/4/thumbnail'
+          }
+        }
+      },
+      {
+        'originalDocumentName' : 'jpg5.jpg',
+        'createdBy' : '28',
+        'modifiedOn' : '2018-03-07T09:20:57.484+0000',
+        '_links' : {
+          'self' : {
+            'href' : dmGwUrl + '/documents/5'
+          },
+          'binary' : {
+            'href' : dmGwUrl + '/documents/5/binary'
+          },
+          'thumbnail' : {
+            'href' : dmGwUrl + '/documents/5/thumbnail'
+          }
+        }
+      },
+      {
+        'originalDocumentName' : 'jpg6.jpg',
+        'createdBy' : '28',
+        'modifiedOn' : '2018-03-07T09:20:57.484+0000',
+        '_links' : {
+          'self' : {
+            'href' : dmGwUrl + '/documents/6'
+          },
+          'binary' : {
+            'href' : dmGwUrl + '/documents/6/binary'
+          },
+          'thumbnail' : {
+            'href' : dmGwUrl + '/documents/6/thumbnail'
+          }
+        }
+      },
+      {
+        'originalDocumentName' : 'jpg7.jpg',
+        'createdBy' : '28',
+        'modifiedOn' : '2018-03-07T09:20:57.484+0000',
+        '_links' : {
+          'self' : {
+            'href' : dmGwUrl + '/documents/7'
+          },
+          'binary' : {
+            'href' : dmGwUrl + '/documents/7/binary'
+          },
+          'thumbnail' : {
+            'href' : dmGwUrl + '/documents/7/thumbnail'
+          }
+        }
+      }
+    ]
+  },
+  'page' : {
+    'size' : 5,
+    'totalElements' : 7,
+    'totalPages' : 2,
+    'number' : 0
+  }
+};
+
 describe('DmListViewComponent tests', () => {
   let httpMock: HttpTestingController;
   let sessionService: SessionService;
@@ -119,83 +316,97 @@ describe('DmListViewComponent tests', () => {
       fixture.detectChanges();
     }));
 
-
     describe('returns 0 item', () => {
       beforeEach(async(() => {
-        const req = httpMock.expectOne(ownedDocumentUrl + urlParams);
-        req.flush({});
-        fixture.whenStable().then(() => fixture.detectChanges());
+        httpMock.expectOne(ownedDocumentUrl + urlParams)
+          .flush(zeroOwnedDocuments);
+        fixture.detectChanges();
       }));
-
-      it('should display document name', () => {
-        expect(element.nativeElement.querySelector('h1').textContent).toEqual('List View');
-      });
 
       it('should display an error with the status', () => {
         expect(element.nativeElement.querySelector('.error-summary').textContent)
           .toContain('No Documents Found, Try Uploading a File.');
       });
 
-      it('should only have one row', () => {
-        expect(element.nativeElement.querySelector('tr'));
+      it('should only have no row', () => {
+        expect(element.queryAll(By.css('tr[data-hook="dm-listview__document"]')).length).toBe(0);
       });
     });
 
     describe('returns 1 item', () => {
       beforeEach(() => {
-        const req = httpMock.expectOne(ownedDocumentUrl + urlParams);
-        req.flush(ownedDocuments);
+        httpMock.expectOne(ownedDocumentUrl + urlParams)
+          .flush(oneOwnedDocuments);
         fixture.detectChanges();
       });
 
-      it('should display document name', () => {
-        expect(element.nativeElement.querySelector('h1').textContent).toEqual('List View');
+      it('should only have one row', () => {
+        expect(element.queryAll(By.css('tr[data-hook="dm-listview__document"]')).length).toBe(1);
       });
 
-      it('should only have one row', () => {
-      });
     });
 
     describe('returns 2 item', () => {
       beforeEach(() => {
-        const req = httpMock.expectOne(ownedDocumentUrl + urlParams);
-        req.flush(ownedDocuments);
+        httpMock.expectOne(ownedDocumentUrl + urlParams)
+          .flush(twoOwnedDocuments);
         fixture.detectChanges();
       });
 
-      it('should display document name', () => {
-        expect(element.nativeElement.querySelector('h1').textContent).toEqual('List View');
+      it('should only have two row', () => {
+        expect(element.queryAll(By.css('tr[data-hook="dm-listview__document"]')).length).toBe(2);
+      });
+    });
+
+    describe('returns 7 item', () => {
+      beforeEach(() => {
+        httpMock.expectOne(ownedDocumentUrl + urlParams)
+          .flush(sevenOwnedDocuments);
+        fixture.detectChanges();
       });
 
-      it('should only have one row', () => {
-        expect(element.nativeElement.querySelector('tr'));
+      it('should only have seven row', () => {
+        expect(element.queryAll(By.css('tr[data-hook="dm-listview__document"]')).length).toBe(7);
+      });
+    });
+
+    describe('returns 401 error', () => {
+      beforeEach(() => {
+        spyOn(sessionService, 'clearSession').and.callFake(() => {});
+        httpMock.expectOne(ownedDocumentUrl + urlParams)
+          .flush({}, {
+            status: 401,
+            statusText: 'unAuth'
+          });
+        fixture.detectChanges();
+      });
+
+      it('should clear session', () => {
+        expect(sessionService.clearSession).toHaveBeenCalled();
+      });
+    });
+
+    describe('returns 4xx error', () => {
+      beforeEach(() => {
+        httpMock.expectOne(ownedDocumentUrl + urlParams)
+          .flush({}, {
+            status: 403,
+            statusText: 'forbid'
+          });
+        fixture.detectChanges();
+      });
+
+      it('should not display list', () => {
+        expect(element.nativeElement.querySelector('.error-summary').textContent)
+          .toContain('Response status was 403.');
+      });
+
+      it('should display an error with the status', () => {
+        expect(element.nativeElement.querySelector('.error-summary').textContent)
+          .toContain('Response status was 403.');
       });
     });
 
   });
 
-  // describe('Without JWT', () => {
-  //   beforeEach(async(() => {
-  //     fixture = TestBed.createComponent(DmListViewComponent);
-  //     component = fixture.componentInstance;
-  //     sessionService = TestBed.get(SessionService);
-  //     sessionService.createSession({
-  //       // token: jwt
-  //     });
-  //     httpMock = TestBed.get(HttpTestingController);
-  //     appConfig = TestBed.get(AppConfig);
-  //     appConfig.load();
-  //     const configRequest = httpMock.expectOne('assets/config.json');
-  //     configRequest.flush(configObject);
-  //     element = fixture.debugElement;
-  //
-  //     fixture.detectChanges();
-  //     spyOn(sessionService, 'clearSession');
-  //   }));
-  //
-  //   it('should display an error with the status', () => {
-  //     expect(element.nativeElement.querySelector('.error-summary').textContent)
-  //       .toContain('jwt token are required arguments');
-  //   });
-  // });
 });

@@ -54,7 +54,6 @@ export class DmUploadComponent implements OnInit {
   }
 
   gotoListView() {
-    console.log('let go to  list view');
     this.windowService.locationAssign('/list');
   }
 
