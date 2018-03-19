@@ -73,59 +73,61 @@ describe('DmUploadComponent', () => {
       });
 
       // 200
-      // describe('When I choose to upload file and is 200 successful', () => {
-      //   beforeEach(async(() => {
-      //     element.nativeElement.querySelector('button[data-hook="dm-upload__upload-button"]').click();
-      //     httpMock.expectOne('/demproxy/dm/documents').flush({}, {
-      //       status: 200,
-      //       statusText: 'ok'
-      //     });
-      //     windowService = TestBed.get(WindowService);
-      //     spyOn(windowService, 'locationAssign').and.callFake(() => {});
-      //   }));
-      //
-      //   it('should move to listView', () => {
-      //     expect(windowService.locationAssign).toHaveBeenCalledWith('/list');
-      //   });
-      // });
+      describe('When I choose to upload file and is 200 successful', () => {
+        beforeEach(() => {
+          windowService = TestBed.get(WindowService);
+          spyOn(windowService, 'locationAssign').and.callFake(() => {});
+          // element.nativeElement.querySelector('button[data-hook="dm-upload__upload-button"]').click();
+          component.uploadDocument();
+          httpMock.expectOne('/demproxy/dm/documents').flush({}, {
+            status: 200,
+            statusText: 'ok'
+          });
+        });
+
+        it('should move to listView', () => {
+          expect(windowService.locationAssign).toHaveBeenCalledWith('/list');
+        });
+      });
 
       // 401
-      // describe('When I choose to upload file and is 401 unsuccessful', () => {
-      //   beforeEach(() => {
-      //     element.nativeElement.querySelector('button[data-hook="dm-upload__upload-button"]').click();
-      //     httpMock.expectOne('/demproxy/dm/documents').flush({}, {
-      //       status: 401,
-      //       statusText: 'unAuth'
-      //     });
-      //     windowService = TestBed.get(WindowService);
-      //     spyOn(windowService, 'locationAssign').and.callFake(() => {});
-      //   });
-      //
-      //   it('should display an error with the status', () => {
-      //     expect(element.nativeElement.querySelector('.error-summary').textContent)
-      //       .toContain('You have not selected a file for upload.');
-      //   });
-      // });
+      describe('When I choose to upload file and is 401 unsuccessful', () => {
+        beforeEach(() => {
+          windowService = TestBed.get(WindowService);
+          spyOn(sessionService, 'clearSession').and.callFake(() => {});
+          // element.nativeElement.querySelector('button[data-hook="dm-upload__upload-button"]').click();
+          component.uploadDocument();
+          httpMock.expectOne('/demproxy/dm/documents').flush({}, {
+            status: 401,
+            statusText: 'unAuth'
+          });
+          fixture.detectChanges();
+        });
+
+        it('should clear session', () => {
+          expect(sessionService.clearSession).toHaveBeenCalled();
+        });
+      });
 
       // 403
-      // describe('When I choose to upload file and is 403 successful', () => {
-      //   beforeEach(() => {
-      //     element.nativeElement.querySelector('button[data-hook="dm-upload__upload-button"]').click();
-      //     windowService = TestBed.get(WindowService);
-      //     spyOn(windowService, 'locationAssign').and.callFake(() => {});
-      //     httpMock.expectOne('/demproxy/dm/documents').flush({}, {
-      //       status: 403,
-      //       statusText: 'forbid'
-      //     });
-      //     windowService = TestBed.get(WindowService);
-      //     spyOn(windowService, 'locationAssign');
-      //   });
-      //
-      //   it('should display an error with the status', () => {
-      //     expect(element.nativeElement.querySelector('.error-summary').textContent)
-      //       .toContain('You have not selected a file for upload.');
-      //   });
-      // });
+      describe('When I choose to upload file and is 403 successful', () => {
+        beforeEach(() => {
+          windowService = TestBed.get(WindowService);
+          spyOn(windowService, 'locationAssign').and.callFake(() => {});
+          // element.nativeElement.querySelector('button[data-hook="dm-upload__upload-button"]').click();
+          component.uploadDocument();
+          httpMock.expectOne('/demproxy/dm/documents').flush({}, {
+            status: 403,
+            statusText: 'forbid'
+          });
+          fixture.detectChanges();
+        });
+
+        it('should display an error with the status', () => {
+          expect(element.nativeElement.querySelector('.error-summary').textContent)
+            .toContain('Response status was 403.');
+        });
+      });
 
     });
 
@@ -147,6 +149,6 @@ describe('DmUploadComponent', () => {
         });
       });
     });
-
   });
+
 });

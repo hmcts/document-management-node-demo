@@ -30,15 +30,10 @@ export class DmListViewComponent implements OnInit {
   dmPage: DmPage;
 
   constructor(private sessionService: SessionService,
-              private documentStoreService: DocumentStoreService,
-              private documentService: DocumentService,
-              private config: AppConfig) { }
+              private documentStoreService: DocumentStoreService) { }
 
   ngOnInit() {
     this.jwt = this.sessionService.getSession();
-    if (!this.jwt) {
-      this.error = 'jwt token are required arguments';
-    }
     this.refresh();
   }
 

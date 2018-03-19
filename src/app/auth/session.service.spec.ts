@@ -59,7 +59,7 @@ describe('SessionService', () => {
       cookieService.getObject.and.returnValue(null);
 
       const session = sessionService.getSession();
-      expect(session).toBeNull();
+      expect(session).toBeFalsy();
       expect(cookieService.getObject).toHaveBeenCalledWith(COOKIE_KEY);
     });
 
