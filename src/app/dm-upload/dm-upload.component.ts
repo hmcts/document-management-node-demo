@@ -25,8 +25,8 @@ export class DmUploadComponent implements OnInit {
     }
   }
 
-  handleFileInput(files: FileList) {
-    this.fileToUpload = files.item(0);
+  handleFileInput(file: File) {
+    this.fileToUpload = file;
     this.error = null;
   }
 
@@ -57,6 +57,7 @@ export class DmUploadComponent implements OnInit {
   }
 
   gotoListView() {
+    console.log('let go to  list view');
     this.windowService.locationAssign('/list');
   }
 

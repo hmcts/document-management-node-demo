@@ -57,10 +57,10 @@
 
       <div class="form-group">
         <label class="form-label" for="files">File:</label>
-        <input type="file" id="files" name="files" (change)="handleFileInput($event.target.files)"/>
+        <input type="file" id="files" name="files" (change)="handleFileInput($event.target.files[0])"/>
       </div>
 
-      <button class="button"  (click)="uploadDocument()" data-hook="dm-upload__upload-button">Upload</button>
+      <button class="button" (click)="uploadDocument()" data-hook="dm-upload__upload-button">Upload</button>
       <button class="button button-warning"(click)="cancelUpload()">Cancel</button>
     </form>
 
