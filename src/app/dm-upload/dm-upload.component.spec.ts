@@ -53,6 +53,21 @@ describe('DmUploadComponent', () => {
         .toContain('Upload Document');
     });
 
+    describe('when I click cancel', () => {
+      beforeEach(async(() => {
+        windowService = TestBed.get(WindowService);
+        spyOn(windowService, 'locationAssign').and.callFake(() => {});
+        // element.nativeElement.querySelector('button[data-hook="dm-upload__upload-button"]').click();
+        component.cancelUpload();
+      }));
+
+      it('should goto listView', () => {
+        expect(windowService.locationAssign)
+          .toHaveBeenCalledWith('/list');
+      });
+
+    });
+
     describe('when I choose a file', () => {
       // https://stackoverflow.com/questions/24488985/how-to-mock-file-in-javascript
       const blob = new Blob([''], { type: 'image/jpeg' });
@@ -85,8 +100,9 @@ describe('DmUploadComponent', () => {
           });
         });
 
-        it('should move to listView', () => {
-          expect(windowService.locationAssign).toHaveBeenCalledWith('/list');
+        it('should goto listView', () => {
+          expect(windowService.locationAssign)
+            .toHaveBeenCalledWith('/list');
         });
       });
 
