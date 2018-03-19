@@ -9,7 +9,6 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class EmAnnotationSummaryRouteComponent implements OnInit {
   url: string;
-  annotate: boolean;
 
   constructor(private route: ActivatedRoute) { }
 
@@ -17,7 +16,6 @@ export class EmAnnotationSummaryRouteComponent implements OnInit {
     this.route.queryParams
       .subscribe(params => {
         this.url = params.url;
-        this.annotate = params.annotate === 'true';
       });
   }
 }

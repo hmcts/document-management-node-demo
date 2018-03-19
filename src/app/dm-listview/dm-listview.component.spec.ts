@@ -153,8 +153,6 @@ describe('DmListViewComponent tests', () => {
       });
 
       it('should only have one row', () => {
-        console.log(element.nativeElement.querySelector('tr'));
-        // expect(element.nativeElement.query('tr').cells.length).toBe(1);
       });
     });
 

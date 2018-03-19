@@ -20,7 +20,7 @@ import {DocumentService} from './utils/document.service';
 import {DocumentStoreService} from './dm/document-store.service';
 import {EmAnnotationSummaryModule, EmViewerModule} from 'em-viewer-web';
 import {EmViewerRouteComponent} from './em/em-viewer-route.component';
-import {EmAnnotationSummaryRouteComponent} from './em/em-annotation-summary.component';
+import {EmAnnotationSummaryRouteComponent} from './em/em-annotation-summary-route.component';
 
 const appRoutes: Routes = [
   { path: '', canActivate: [IdamGuard], component: DmListViewRouteComponent },
