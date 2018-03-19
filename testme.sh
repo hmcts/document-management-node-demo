@@ -2,7 +2,7 @@
 #sudo apt-get install -y docker docker-compose
 clear;
 yarn install
-yarn setup
+yarn setup-dev
 yarn lint
 ./bin/test/test_dependency.sh
 ./bin/test/test_unit.sh

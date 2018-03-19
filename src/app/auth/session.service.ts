@@ -28,7 +28,12 @@ export class SessionService {
     } catch (e) {
       console.log(e);
     }
-    return authToken;
+
+    if (!authToken) {
+      this.clearSession();
+    } else {
+      return authToken;
+    }
   }
 
   getUID(): string {

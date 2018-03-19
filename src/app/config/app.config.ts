@@ -13,8 +13,6 @@ export class AppConfig {
   constructor(private http: HttpClient) {}
 
   public load(): Promise<void> {
-    console.log('Loading app config...');
-
     const configUrl = environment.configUrl;
 
     return new Promise<void>((resolve, reject) => {
@@ -22,10 +20,8 @@ export class AppConfig {
         .get(configUrl)
         .subscribe((config: Config) => {
           this.config = config;
-          console.log('Loading app config: OK');
           resolve();
         }, error => {
-          console.error('Configuration file "config.json" could not be read');
           reject();
           return Observable.throw(error.json().error || 'Server error');
         });

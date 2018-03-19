@@ -2114,9 +2114,9 @@ elliptic@^6.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.0"
 
-em-viewer-web@0.0.10:
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/em-viewer-web/-/em-viewer-web-0.0.10.tgz#548c056caf676632712b393b8ebc836b2f9a891e"
+em-viewer-web@0.0.13:
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/em-viewer-web/-/em-viewer-web-0.0.13.tgz#bb9d81ec8385691647b7625a44521cd454268b20"
   dependencies:
     "@angular/animations" "^5.0.0"
     "@angular/common" "^5.0.0"

@@ -20,13 +20,10 @@ export class DmUploadComponent implements OnInit {
 
   ngOnInit() {
     this.jwt = this.sessionService.getSession();
-    if (!this.jwt) {
-      throw new Error('jwt token are required arguments');
-    }
   }
 
-  handleFileInput(files: FileList) {
-    this.fileToUpload = files.item(0);
+  handleFileInput(file: File) {
+    this.fileToUpload = file;
     this.error = null;
   }
 
