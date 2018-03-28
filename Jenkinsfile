@@ -1,14 +1,14 @@
 #!groovy
 
 properties([
-    [
-        $class: 'GithubProjectProperty',
-        projectUrlStr: 'https://github.com/hmcts/document-management-node-demo'
-    ],
-    pipelineTriggers([
-        [$class: 'GitHubPushTrigger']
-    ]),
-    disableConcurrentBuilds()
+  [
+    $class: 'GithubProjectProperty',
+    projectUrlStr: 'https://github.com/hmcts/document-management-node-demo'
+  ],
+  pipelineTriggers([
+    [$class: 'GitHubPushTrigger']
+  ]),
+  disableConcurrentBuilds()
 ])
 
 
@@ -34,88 +34,90 @@ def rpmVersion
 def version
 
 node {
-    try {
-        stage('Checkout') {
-            deleteDir()
-            checkout scm
-        }
+  try {
+    stage('Checkout') {
+      deleteDir()
+      checkout scm
+    }
 
-        stage('Build') {
-            sh "yarn install"
-            sh "yarn setup"
-        }
+    stage('Build') {
+      sh "yarn install"
+      sh "yarn setup"
+    }
 
-        stage('Lint') {
-            sh 'yarn lint'
-        }
+    stage('Lint') {
+      sh 'yarn lint'
+    }
 
-        stage('Node security check') {
-            try {
-                sh 'yarn test:nsp'
-            } catch (Throwable e) {
-                def errors = sh(script: 'yarn test:nsp-warn', returnStdout: true)
-                slackSend(
-                    channel: channel,
-                    color: 'warn',
-                    message: "${env.JOB_NAME}:  <${env.BUILD_URL}console|Build ${env.BUILD_DISPLAY_NAME}> has vunerabilities: ${errors}"
-                )
-            } finally {
+    stage('Node security check') {
+      try {
+        sh 'yarn test:nsp'
+      } catch (Throwable e) {
+        def errors = sh(script: 'yarn test:nsp-warn', returnStdout: true)
+        slackSend(
+          channel: channel,
+          color: 'warn',
+          message: "${env.JOB_NAME}:  <${env.BUILD_URL}console|Build ${env.BUILD_DISPLAY_NAME}> has vunerabilities: ${errors}"
+        )
+      } finally {
 //                need to generate a nsp report somehow
-            }
-        }
+      }
+    }
 
-        stage('Test') {
-            try {
-                sh "yarn test:coverage -browsers Chrome"
-            } finally {
-                publishHTML([
-                    allowMissing         : true,
-                    alwaysLinkToLastBuild: true,
-                    keepAll              : true,
-                    reportDir            : "report/",
-                    reportFiles          : 'units.html',
-                    reportName           : 'Unit Test Report'
-                ])
-                publishHTML([
-                    allowMissing         : true,
-                    alwaysLinkToLastBuild: true,
-                    keepAll              : true,
-                    reportDir            : "coverage/",
-                    reportFiles          : 'index.html',
-                    reportName           : 'Coverage Report'
-                ])
-            }
-        }
+    stage('Test') {
+      try {
+        sh 'which chromium-headless'
+        env.CHROME_BIN = '/usr/bin/chromium-headless'
+        sh "yarn test:coverage -browsers Chrome"
+      } finally {
+        publishHTML([
+          allowMissing         : true,
+          alwaysLinkToLastBuild: true,
+          keepAll              : true,
+          reportDir            : "report/",
+          reportFiles          : 'units.html',
+          reportName           : 'Unit Test Report'
+        ])
+        publishHTML([
+          allowMissing         : true,
+          alwaysLinkToLastBuild: true,
+          keepAll              : true,
+          reportDir            : "coverage/",
+          reportFiles          : 'index.html',
+          reportName           : 'Coverage Report'
+        ])
+      }
+    }
 
-        if ("master" == "${env.BRANCH_NAME}") {
-            stage('Sonar') {
-                sh "yarn sonar-scan -Dsonar.host.url=$SONARQUBE_URL"
-            }
-        }
+    if ("master" == "${env.BRANCH_NAME}") {
+      stage('Sonar') {
+        sh "yarn sonar-scan -Dsonar.host.url=$SONARQUBE_URL"
+      }
+    }
 
-        if ("master" == "${env.BRANCH_NAME}") {
+    if ("master" == "${env.BRANCH_NAME}") {
 
-            stage('Publish Docker') {
-                dockerImage imageName: "evidence/${app}", pushToLatestOnMaster: true
-            }
+      stage('Publish Docker') {
+        dockerImage imageName: "evidence/${app}", pushToLatestOnMaster: true
+      }
 
-            stage('Package (RPM)') {
-                rpmVersion = packager.nodeRPM(app)
-                version = "{ app: ${app}, rpmversion: ${rpmVersion}}"
-            }
+      stage('Package (RPM)') {
+        rpmVersion = packager.nodeRPM(app)
+        version = "{ app: ${app}, rpmversion: ${rpmVersion}}"
+      }
 
-            stage('Publish RPM') {
-                packager.publishNodeRPM(app)
-                rpmTagger = new RPMTagger(this, app, packager.rpmName(app, rpmVersion), artifactorySourceRepo)
-            }
+      stage('Publish RPM') {
+        packager.publishNodeRPM(app)
+        rpmTagger = new RPMTagger(this, app, packager.rpmName(app, rpmVersion), artifactorySourceRepo)
+      }
 
-            stage ('Deploy on Dev') {
-                ansible.run("{}", "dev", "install_show_web.yml")
-                ansible.run("{}", "dev", "deploy_show_web.yml")
-                rpmTagger.tagDeploymentSuccessfulOn('dev')
-                rpmTagger.tagTestingPassedOn("dev")
+      stage ('Deploy on Dev') {
+        ansible.run("{}", "dev", "install_show_web.yml")
+        ansible.run("{}", "dev", "deploy_show_web.yml")
+        rpmTagger.tagDeploymentSuccessfulOn('dev')
+        rpmTagger.tagTestingPassedOn("dev")
 
-            }
+      }
 
 //            stage('IT on Dev') {
 //              build job: 'hmcts/dm-it-pipeline/master', parameters: [
@@ -125,24 +127,24 @@ node {
 //            }
 
 
-            stage ('Deploy on Test') {
-                  ansible.run("{}", "test", "install_show_web.yml")
-                  ansible.run("{}", "test", "deploy_show_web.yml")
-                  rpmTagger.tagDeploymentSuccessfulOn('test')
-                  rpmTagger.tagTestingPassedOn("test")
-            }
+      stage ('Deploy on Test') {
+        ansible.run("{}", "test", "install_show_web.yml")
+        ansible.run("{}", "test", "deploy_show_web.yml")
+        rpmTagger.tagDeploymentSuccessfulOn('test')
+        rpmTagger.tagTestingPassedOn("test")
+      }
 
-            stage ('Deploy on Demo') {
-                ansible.run("{}", "demo", "install_show_web.yml")
-                ansible.run("{}", "demo", "deploy_show_web.yml")
-                rpmTagger.tagDeploymentSuccessfulOn('demo')
-                rpmTagger.tagTestingPassedOn("demo")
-            }
-        }
-        notifyBuildFixed channel: channel
+      stage ('Deploy on Demo') {
+        ansible.run("{}", "demo", "install_show_web.yml")
+        ansible.run("{}", "demo", "deploy_show_web.yml")
+        rpmTagger.tagDeploymentSuccessfulOn('demo')
+        rpmTagger.tagTestingPassedOn("demo")
+      }
     }
-    catch (e) {
-        notifyBuildFailure channel: channel
-        throw e
-    }
+    notifyBuildFixed channel: channel
+  }
+  catch (e) {
+    notifyBuildFailure channel: channel
+    throw e
+  }
 }
