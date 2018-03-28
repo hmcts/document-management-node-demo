@@ -24,32 +24,36 @@ export class IdamGuard implements CanActivate {
   canActivate(activatedRouteSnapshot: ActivatedRouteSnapshot): boolean | Observable<boolean> | Promise<boolean> {
     const myQueryParams: { [details: string]: string; } = {};
     let session: any;
+    //
+    // if (activatedRouteSnapshot.queryParams && activatedRouteSnapshot.queryParams[IdamGuard.TOKEN_PARAM]) {
+    //   const tokenValue = activatedRouteSnapshot.queryParams[IdamGuard.TOKEN_PARAM];
+    //   try {
+    //     JwtService.decode(tokenValue);
+    //     session = tokenValue;
+    //     this.sessionService.createSession(session);
+    //     for (const param of Object.keys(activatedRouteSnapshot.queryParams)) {
+    //       if (param !== IdamGuard.TOKEN_PARAM) {
+    //         myQueryParams[param] = activatedRouteSnapshot.queryParams[param];
+    //       }
+    //     }
+    //     this.router.navigate(['/'], {
+    //       queryParams:  myQueryParams
+    //     });
+    //   } catch (e) {
+    //     console.log(e);
+    //   }
+    // } else {
+    //   session = this.sessionService.getSession();
+    // }
+    //debugger
+    //session = this.sessionService.getSession();
 
-    if (activatedRouteSnapshot.queryParams && activatedRouteSnapshot.queryParams[IdamGuard.TOKEN_PARAM]) {
-      const tokenValue = activatedRouteSnapshot.queryParams[IdamGuard.TOKEN_PARAM];
-      try {
-        JwtService.decode(tokenValue);
-        session = tokenValue;
-        this.sessionService.createSession(session);
-        for (const param of Object.keys(activatedRouteSnapshot.queryParams)) {
-          if (param !== IdamGuard.TOKEN_PARAM) {
-            myQueryParams[param] = activatedRouteSnapshot.queryParams[param];
-          }
-        }
-        this.router.navigate(['/'], {
-          queryParams:  myQueryParams
-        });
-      } catch (e) {
-        console.log(e);
-      }
-    } else {
-      session = this.sessionService.getSession();
-    }
-    if (!session) {
-      const idamUrl = this.appConfig.getLoginUrl();
-      this.windowService.locationAssign(idamUrl + '?continue-url=' + encodeURIComponent(this.documentService.getUrl()));
-      return false;
-    }
+    // if (!session) {
+    //   console.log('xxx')
+    //   const idamUrl = this.appConfig.getLoginUrl();
+    //   this.windowService.locationAssign(idamUrl + '?continue-url=' + encodeURIComponent(this.documentService.getUrl()));
+    //   return false;
+    // }
     return true;
   }
 }

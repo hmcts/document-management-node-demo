@@ -60,7 +60,9 @@
     "rxjs": "^5.5.2",
     "snyk": "^1.69.10",
     "yarn": "1.2.1",
-    "zone.js": "^0.8.14"
+    "zone.js": "^0.8.14",
+    "superagent": "^3.8.2",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "@angular/cli": "1.6.0",

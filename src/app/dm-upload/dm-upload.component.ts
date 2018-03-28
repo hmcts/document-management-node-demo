@@ -8,7 +8,7 @@ import {DocumentStoreService} from '../dm/document-store.service';
   templateUrl: './dm-upload.component.html',
   styleUrls: ['./dm-upload.component.scss']
 })
-export class DmUploadComponent implements OnInit {
+export class DmUploadComponent {
 
   jwt: string;
   error: string;
@@ -17,10 +17,6 @@ export class DmUploadComponent implements OnInit {
   constructor(private sessionService: SessionService,
               private documentService: DocumentStoreService,
               private windowService: WindowService) {}
-
-  ngOnInit() {
-    this.jwt = this.sessionService.getSession();
-  }
 
   handleFileInput(file: File) {
     this.fileToUpload = file;

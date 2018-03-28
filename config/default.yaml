@@ -17,8 +17,13 @@ idam:
   s2s_url: http://localhost:4502
   service_key: AAAAAAAAAAAAAAAA
   service_name: em_gw
+  login_url: https://localhost:3501/login
+  registration_url: https://localhost:3502/register
+  client_id: webshow
+  client_secret: WEBSHOWWEBSHOW
 
 logging:
   microservice: dm-show-web
   team: evidence
   environment: local
+

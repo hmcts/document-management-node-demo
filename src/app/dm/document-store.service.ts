@@ -12,13 +12,13 @@ export class DocumentStoreService {
               private sessionService: SessionService,
               private config: AppConfig) {}
 
-  private getHttpOptions() {
-    return {
-      headers: new HttpHeaders({
-        'Authorization': `${this.sessionService.getSession()}`
-      })
-    };
-  }
+  // private getHttpOptions() {
+  //   return {
+  //     headers: new HttpHeaders({
+  //       'Authorization': `${this.sessionService.getSession()}`
+  //     })
+  //   };
+  // }
 
   convertUrlToProxy(url: string): string {
     const URLsplit = url.split('/');
@@ -38,15 +38,15 @@ export class DocumentStoreService {
         console.log('metadata[' + k + '] = ' + v);
       });
     }
-    return this.http.post<any>(this.config.getDmStoreUploadUrl(), formData, this.getHttpOptions());
+    return this.http.post<any>(this.config.getDmStoreUploadUrl(), formData);
   }
 
   deleteDocument(url: string) {
-    return this.http.delete(this.convertUrlToProxy(url), this.getHttpOptions());
+    return this.http.delete(this.convertUrlToProxy(url));
   }
 
   getCreatorDocuments(page: number, sortby: string, order: string, size: number)  {
-    return this.http.post<any>(this.getDmFindByCreatorUrlWithParams(page, sortby, order, size), null, this.getHttpOptions());
+    return this.http.post<any>(this.getDmFindByCreatorUrlWithParams(page, sortby, order, size), null);
   }
 
   private getDmFindByCreatorUrlWithParams(page: number, sortby: string, order: string, size: number) {
