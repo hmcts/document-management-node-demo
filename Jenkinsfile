@@ -66,8 +66,7 @@ node {
 
         stage('Test') {
             try {
-                sh "yarn test"
-                sh "yarn test:coverage"
+                sh "yarn test:coverage -browsers Chrome"
             } finally {
                 publishHTML([
                     allowMissing         : true,
