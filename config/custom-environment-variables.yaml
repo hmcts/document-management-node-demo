@@ -17,6 +17,11 @@ idam:
   s2s_url: IDAM_S2S_BASE_URI
   service_key: IDAM_SERVICE_KEY
   service_name: IDAM_SERVICE_NAME
+  login_url: IDAM_LOGIN_URL
+  registration_url: IDAM_REGISTRATION_URL
+  client_id: webshow
+  client_secret: IDAM_API_OAUTH2_CLIENT_CLIENT_SECRETS_WEBSHOW
+
 logging:
   microservice: REFORM_SERVICE_NAME
   team: REFORM_TEAM

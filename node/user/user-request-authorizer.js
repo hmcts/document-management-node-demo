@@ -23,15 +23,14 @@ const authorise = (request) => {
   let user;
   let bearerToken = request.get(AUTHORIZATION);
 
-  if (!bearerToken && request.cookies !== undefined) {
-    request.headers[AUTHORIZATION] = bearerToken = request.cookies[SECURITY_COOKIE]
+  if (request.cookies !== undefined) {
+    bearerToken = request.cookies[SECURITY_COOKIE]
+    request.headers[AUTHORIZATION] = bearerToken
   }
 
   if (!bearerToken) {
     return Promise.reject(ERROR_TOKEN_MISSING)
   }
-
-
 
   return userResolver
     .getTokenDetails(bearerToken)

@@ -5,8 +5,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {CookieModule} from 'ngx-cookie';
 
-import {IdamGuard} from './auth/idam.guard';
-
 import {AppComponent} from './app.component';
 import {DmListViewComponent} from './dm-listview/dm-listview.component';
 import {DmListViewRouteComponent} from './dm-listview/dm-listview-route.component';
@@ -23,11 +21,11 @@ import {EmViewerRouteComponent} from './em/em-viewer-route.component';
 import {EmAnnotationSummaryRouteComponent} from './em/em-annotation-summary-route.component';
 
 const appRoutes: Routes = [
-  { path: '', canActivate: [IdamGuard], component: DmListViewRouteComponent },
-  { path: 'list', canActivate: [IdamGuard], component: DmListViewRouteComponent },
-  { path: 'upload', canActivate: [IdamGuard], component: DmUploadRouteComponent },
-  { path: 'viewer', canActivate: [IdamGuard], component: EmViewerRouteComponent },
-  { path: 'summary', canActivate: [IdamGuard], component: EmAnnotationSummaryRouteComponent }
+  { path: '',  component: DmListViewRouteComponent },
+  { path: 'list',  component: DmListViewRouteComponent },
+  { path: 'upload',  component: DmUploadRouteComponent },
+  { path: 'viewer',  component: EmViewerRouteComponent },
+  { path: 'summary',  component: EmAnnotationSummaryRouteComponent }
 ];
 
 
@@ -55,7 +53,6 @@ const appRoutes: Routes = [
     CookieModule.forRoot()
   ],
   providers: [
-    IdamGuard,
     WindowService,
     DocumentService,
     DocumentStoreService,

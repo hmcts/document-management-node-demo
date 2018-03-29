@@ -19,7 +19,7 @@ services:
     - IDAM_API_URL=http://idam-api:8080
     - IDAM_LOGIN_URL=http://idam-api:8080/login
     - IDAM_REGISTRATION_URL=http://idam-api:8080/register
-    - IDAM_API_OAUTH2_CLIENT_CLIENT_SECRETS_REGISTRATION_WEB=AAAAAAAAAAAAAAAA
+    - IDAM_API_OAUTH2_CLIENT_CLIENT_SECRETS_REGISTRATION_WEB=QM5RQQ53LZFOSIXJ
     links:
     - idam-api
     - service-auth-provider-api
@@ -36,6 +36,7 @@ services:
       - IDAM_AUTHENTICATION_WEB_HOST=https://idam-authentication-web:8000
       - IDAM_REGISTRATION_WEB_HOST=https://idam-registration-web:8000
       - IDAM_API_OAUTH2_CLIENT_CLIENT_SECRETS_REGISTRATION_WEB=QM5RQQ53LZFOSIXJ
+      - IDAM_API_OAUTH2_CLIENT_CLIENT_SECRETS_WEBSHOW=WEBSHOWWEBSHOW
       - http_proxy
       - https_proxy
       - no_proxy

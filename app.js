@@ -11,20 +11,35 @@ const authCheckerUserOnlyFilter = require('./node/user/auth-checker-user-only-fi
 const serviceFilter = require('./node/service/service-filter');
 const cookieParser = require('cookie-parser');
 
+const Security = require('node/idam/security');
+
+const security = new Security({
+  clientId : config.get('idam').get('client_id'),
+  clientSecret : config.get('idam').get('client_secret'),
+  loginUrl: config.get('idam').get('login_url'),
+  registrationUrl: config.get('idam').get('registration_url'),
+  apiUrl: config.get('idam').get('base_url'),
+  redirectUri: '/oauth2/callback'
+});
+
 let app = express();
 let http = require("http");
 let proxy = require('http-proxy-middleware');
-
+app.use(cookieParser());
 // Logger.config(config.get('logging')); // 2.2.0 version
 // app.use(Express.accessLogger()); // 2.2.0 version
 logging.config(config.get('logging')); // 1.4.6 version
 app.use(logging.express.accessLogger()); // 1.4.6 version
 
-app.use(cookieParser());
+app.use('/logout', security.logout());
+app.use('/oauth2/callback', security.OAuth2CallbackEndpoint());
+//see https://git.reform.hmcts.net/reform-idam/registration-web/blob/master/app.js for how to use security
+
+
 app.use('/demproxy', authCheckerUserOnlyFilter);
 app.use('/demproxy', serviceFilter);
 
-app.use('/demproxy', proxy({
+app.use('/demproxy', security.protect('caseworker-probate') , proxy({
     target: config.get('dm_store_app_url'),
     logLevel: 'debug',
     router: {
@@ -46,11 +61,11 @@ app.use('/demproxy', proxy({
   }
 ));
 
-app.use('',express.static('dist'));
-app.use('/list',express.static('dist'));
-app.use('/upload',express.static('dist'));
-app.use('/viewer',express.static('dist'));
-app.use('/summary',express.static('dist'));
+app.use('', security.protect('caseworker-probate'), express.static('dist'));
+app.use('/list', security.protect('caseworker-probate'), express.static('dist'));
+app.use('/upload', security.protect('caseworker-probate'), express.static('dist'));
+app.use('/viewer', security.protect('caseworker-probate'), express.static('dist'));
+app.use('/summary', security.protect('caseworker-probate') ,express.static('dist'));
 
 app.get("/config", (req, res) => {
   res.send(config.get ('ng_config'));
