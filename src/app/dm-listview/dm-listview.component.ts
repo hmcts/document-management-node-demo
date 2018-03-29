@@ -33,7 +33,6 @@ export class DmListViewComponent implements OnInit {
               private documentStoreService: DocumentStoreService) { }
 
   ngOnInit() {
-    //this.jwt = this.sessionService.getSession();
     this.refresh();
   }
 
