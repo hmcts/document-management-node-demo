@@ -1,7 +1,6 @@
 locals {
   app_full_name = "${var.product}-${var.app_name}-${var.app_type}"
   ase_name = "${data.terraform_remote_state.core_apps_compute.ase_name[0]}"
-  vault_section = "test"
 }
 # "${local.ase_name}"
 # "${local.app_full_name}"
@@ -52,6 +51,7 @@ module "app" {
     IDAM_S2S_BASE_URI = "${var.s2s_url}"
     IDAM_SERVICE_KEY = "${data.vault_generic_secret.s2s_secret.data["value"]}"
     IDAM_SERVICE_NAME = "${var.idam_service_name}"
+    IDAM_API_OAUTH2_CLIENT_CLIENT_SECRETS_WEBSHOW = "${data.vault_generic_secret.oauth2_secret.data["value"]}"
   }
 }
 
@@ -60,7 +60,11 @@ provider "vault" {
 }
 
 data "vault_generic_secret" "s2s_secret" {
-  path = "secret/${local.vault_section}/ccidam/service-auth-provider/api/microservice-keys/em-gw"
+  path = "secret/${var.vault_section}/ccidam/service-auth-provider/api/microservice-keys/em-gw"
+}
+
+data "vault_generic_secret" "oauth2_secret" {
+  path = "secret/${var.vault_section}/ccidam/idam-api/oauth2/client-secrets/webshow"
 }
 
 module "key_vault" {
