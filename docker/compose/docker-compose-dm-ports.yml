@@ -12,6 +12,6 @@ services:
      - 4603:8080
 #     - 5005:5005
 
-#  dm-store-app-db:
-#    ports:
-#     - 5432:5432
+  dm-store-app-db:
+    ports:
+     - 5432:5432

@@ -42,7 +42,7 @@ services:
       - no_proxy
 #      logging env vars
       - ROOT_APPENDER=JSON_CONSOLE
-      - JSON_CONSOLE_PRETTY_PRINT=false
+      - JSON_CONSOLE_PRETTY_PRINT=true
       - REFORM_SERVICE_TYPE=java
       - REFORM_SERVICE_NAME=idam-api
       - REFORM_TEAM=cc
@@ -74,7 +74,7 @@ services:
       - auth.provider.service.testing-support.enabled=true
 #      logging env vars
       - ROOT_APPENDER=JSON_CONSOLE
-      - JSON_CONSOLE_PRETTY_PRINT=false
+      - JSON_CONSOLE_PRETTY_PRINT=true
       - REFORM_SERVICE_TYPE=java
       - REFORM_SERVICE_NAME=service-auth-provider-api
       - REFORM_TEAM=cc

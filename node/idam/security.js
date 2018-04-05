@@ -62,6 +62,10 @@ function forbidAccess(next, msg) {
 
 function authorize(roles, res, next, self) {
 
+  if(!self.roles.length){
+    return next();
+  }
+
   if (roles !== null) {
     for (let role in self.roles) {
       if (roles.includes(self.roles[role])) {
@@ -121,16 +125,17 @@ Security.prototype.logout = function () {
 // eslint-disable-next-line no-unused-vars
   return function (req, res, next) {
 
-    let token = req.cookies[SECURITY_COOKIE];
+    // let token = req.cookies[SECURITY_COOKIE];
 
     res.clearCookie(SECURITY_COOKIE);
     res.clearCookie(REDIRECT_COOKIE);
 
-    if (token) {
-      res.redirect(self.opts.loginUrl + "/logout?jwt=" + token);
-    } else {
-      res.redirect(self.opts.loginUrl + "/logout");
-    }
+    // if (token) {
+    //   res.redirect(self.opts.loginUrl + "/logout?jwt=" + token);
+    // } else {
+    //   res.redirect(self.opts.loginUrl + "/logout");
+    // }
+    res.redirect("/");
   }
 
 };
@@ -170,9 +175,9 @@ function protectImpl(req, res, next, self) {
     });
 }
 
-Security.prototype.protect = function (role) {
+Security.prototype.protect = function (roles) {
   const self = {
-    roles: [role],
+    roles: roles || [],
     new: false,
     opts: this.opts
   };
