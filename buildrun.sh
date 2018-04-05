@@ -2,5 +2,5 @@
 clear;
 ./bin/fakeversion.sh
 yarn install
-yarn setup
+yarn setup-dev
 yarn start

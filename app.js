@@ -11,7 +11,7 @@ const authCheckerUserOnlyFilter = require('./node/user/auth-checker-user-only-fi
 const serviceFilter = require('./node/service/service-filter');
 const cookieParser = require('cookie-parser');
 
-const Security = require('node/idam/security');
+const Security = require('./node/idam/security');
 
 const security = new Security({
   clientId : config.get('idam').get('client_id'),
@@ -39,7 +39,7 @@ app.use('/oauth2/callback', security.OAuth2CallbackEndpoint());
 app.use('/demproxy', authCheckerUserOnlyFilter);
 app.use('/demproxy', serviceFilter);
 
-app.use('/demproxy', security.protect('caseworker-probate') , proxy({
+app.use('/demproxy', security.protect() , proxy({
     target: config.get('dm_store_app_url'),
     logLevel: 'debug',
     router: {
@@ -61,11 +61,11 @@ app.use('/demproxy', security.protect('caseworker-probate') , proxy({
   }
 ));
 
-app.use('', security.protect('caseworker-probate'), express.static('dist'));
-app.use('/list', security.protect('caseworker-probate'), express.static('dist'));
-app.use('/upload', security.protect('caseworker-probate'), express.static('dist'));
-app.use('/viewer', security.protect('caseworker-probate'), express.static('dist'));
-app.use('/summary', security.protect('caseworker-probate') ,express.static('dist'));
+app.use('', security.protect(), express.static('dist'));
+app.use('/list', security.protect(), express.static('dist'));
+app.use('/upload', security.protect(), express.static('dist'));
+app.use('/viewer', security.protect(), express.static('dist'));
+app.use('/summary', security.protect() ,express.static('dist'));
 
 app.get("/config", (req, res) => {
   res.send(config.get ('ng_config'));

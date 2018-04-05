@@ -62,6 +62,10 @@ function forbidAccess(next, msg) {
 
 function authorize(roles, res, next, self) {
 
+  if(!self.roles.length){
+    return next();
+  }
+
   if (roles !== null) {
     for (let role in self.roles) {
       if (roles.includes(self.roles[role])) {
@@ -170,9 +174,9 @@ function protectImpl(req, res, next, self) {
     });
 }
 
-Security.prototype.protect = function (role) {
+Security.prototype.protect = function (roles) {
   const self = {
-    roles: [role],
+    roles: roles || [],
     new: false,
     opts: this.opts
   };
