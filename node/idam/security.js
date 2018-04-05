@@ -125,16 +125,17 @@ Security.prototype.logout = function () {
 // eslint-disable-next-line no-unused-vars
   return function (req, res, next) {
 
-    let token = req.cookies[SECURITY_COOKIE];
+    // let token = req.cookies[SECURITY_COOKIE];
 
     res.clearCookie(SECURITY_COOKIE);
     res.clearCookie(REDIRECT_COOKIE);
 
-    if (token) {
-      res.redirect(self.opts.loginUrl + "/logout?jwt=" + token);
-    } else {
-      res.redirect(self.opts.loginUrl + "/logout");
-    }
+    // if (token) {
+    //   res.redirect(self.opts.loginUrl + "/logout?jwt=" + token);
+    // } else {
+    //   res.redirect(self.opts.loginUrl + "/logout");
+    // }
+    res.redirect("/");
   }
 
 };
