@@ -31,6 +31,35 @@ app.use(cookieParser());
 logging.config(config.get('logging')); // 1.4.6 version
 app.use(logging.express.accessLogger()); // 1.4.6 version
 
+
+app.get("/health", healthcheck.configure({
+  checks: {
+    'dmStoreApp' : healthcheck.web(config.get('dm_store_app_url') + "/health"),
+    'emAnnoApp' : healthcheck.web(config.get('em_anno_app_url') + "/health"),
+    // 'emRedactApp' : healthcheck.web(config.get('em_redact_app_url') + "/health"),
+    'idam' : healthcheck.web(config.get('idam').get('base_url') + "/health"),
+    'idamS2S' : healthcheck.web(config.get('idam').get('s2s_url') + "/health")
+  },
+  buildInfo: {
+
+  }
+}));
+
+app.get('/info', infoRequestHandler({
+  info: {
+    'dmStoreApp' :new InfoContributor(config.get('dm_store_app_url') + "/info"),
+    'emAnnoApp' : new InfoContributor(config.get('em_anno_app_url') + "/info"),
+    // 'emRedactApp' : new InfoContributor(config.get('em_redact_app_url') + "/info"),
+    'idam' : new InfoContributor(config.get('idam').get('base_url') + "/info"),
+    'idamS2S' : new InfoContributor(config.get('idam').get('s2s_url') + "/info")
+  },
+  extraBuildInfo: {
+    // featureToggles: config.get('featureToggles'),
+    // hostname: hostname()
+  }
+}));
+
+
 app.use('/logout', security.logout());
 app.use('/oauth2/callback', security.OAuth2CallbackEndpoint());
 //see https://git.reform.hmcts.net/reform-idam/registration-web/blob/master/app.js for how to use security
@@ -71,32 +100,6 @@ app.get("/config", (req, res) => {
   res.send(config.get ('ng_config'));
 });
 
-app.get("/health", healthcheck.configure({
-  checks: {
-    'dmStoreApp' : healthcheck.web(config.get('dm_store_app_url') + "/health"),
-    'emAnnoApp' : healthcheck.web(config.get('em_anno_app_url') + "/health"),
-    // 'emRedactApp' : healthcheck.web(config.get('em_redact_app_url') + "/health"),
-    'idam' : healthcheck.web(config.get('idam').get('base_url') + "/health"),
-    'idamS2S' : healthcheck.web(config.get('idam').get('s2s_url') + "/health")
-  },
-  buildInfo: {
-
-  }
-}));
-
-app.get('/info', infoRequestHandler({
-  info: {
-    'dmStoreApp' :new InfoContributor(config.get('dm_store_app_url') + "/info"),
-    'emAnnoApp' : new InfoContributor(config.get('em_anno_app_url') + "/info"),
-    // 'emRedactApp' : new InfoContributor(config.get('em_redact_app_url') + "/info"),
-    'idam' : new InfoContributor(config.get('idam').get('base_url') + "/info"),
-    'idamS2S' : new InfoContributor(config.get('idam').get('s2s_url') + "/info")
-  },
-  extraBuildInfo: {
-    // featureToggles: config.get('featureToggles'),
-    // hostname: hostname()
-  }
-}));
 
 app.use('/demproxy', (err, req, res, next) => {
   res.contentType('application/json');
