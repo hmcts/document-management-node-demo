@@ -13,6 +13,7 @@ module "app" {
   ilbIp = "${var.ilbIp}"
   subscription = "${var.subscription}"
   is_frontend = true
+  additional_host_name="${local.app_full_name}-${var.env}.platform.hmcts.net"
 
   app_settings = {
     # REDIS_HOST = "${module.redis-cache.host_name}"
