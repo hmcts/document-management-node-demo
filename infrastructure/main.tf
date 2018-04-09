@@ -13,6 +13,7 @@ module "app" {
   ilbIp = "${var.ilbIp}"
   subscription = "${var.subscription}"
   is_frontend = true
+  https_only="true"
   additional_host_name="${local.app_full_name}-${var.env}.platform.hmcts.net"
 
   app_settings = {
@@ -39,9 +40,9 @@ module "app" {
     JSON_CONSOLE_PRETTY_PRINT = "${var.json_console_pretty_print}"
     LOG_OUTPUT = "${var.log_output}"
 
-    DM_STORE_APP_URI= "https://${var.dm_store_app_url}-${var.env}.service.${local.ase_name}.internal"
-    EM_ANNO_APP_URI="https://${var.em_anno_app_url}-${var.env}.service.${local.ase_name}.internal"
-    EM_REDACT_APP_URI="https://${var.em_redact_app_url}-${var.env}.service.${local.ase_name}.internal"
+    DM_STORE_APP_URI= "http://${var.dm_store_app_url}-${var.env}.service.${local.ase_name}.internal"
+    EM_ANNO_APP_URI="http://${var.em_anno_app_url}-${var.env}.service.${local.ase_name}.internal"
+    EM_REDACT_APP_URI="http://${var.em_redact_app_url}-${var.env}.service.${local.ase_name}.internal"
 
     DM_UPLOAD_URL="/demproxy/dm/documents"
     DM_OWNED_URL="/demproxy/dm/documents/owned"
