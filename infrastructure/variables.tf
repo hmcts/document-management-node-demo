@@ -8,10 +8,6 @@ variable "app_name" {
     default = "show"
 }
 
-variable "app_type" {
-    default = "web"
-}
-
 variable "team_name" {
     default = "evidence"
 }
@@ -72,13 +68,13 @@ variable "idam_login_url" {
 }
 
 variable "dm_store_app_url" {
-    default = "dm-store-app"
+    default = "dm-store"
 }
 variable "em_anno_app_url" {
-    default = "em-anno-app"
+    default = "em-anno"
 }
 variable "em_redact_app_url" {
-    default = "em-redact-app"
+    default = "em-redact"
 }
 
 ////////////////////////////////////////////////

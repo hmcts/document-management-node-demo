@@ -15,11 +15,13 @@ properties([
 
 def type = "nodejs"
 def product = "dm"
-def component = "show-web"
+def component = "show"
 
 def channel = '#dm-pipeline'
 
 withPipeline(type , product, component) {
+    enableSlackNotifications(channel)
+
     after('checkout') {
         echo '${component} out'
     }
@@ -27,6 +29,4 @@ withPipeline(type , product, component) {
     after('build') {
       sh 'yarn setup'
     }
-
-    enableSlackNotifications(channel)
 }
