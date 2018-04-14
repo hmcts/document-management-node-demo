@@ -1,6 +1,9 @@
 locals {
-  app_full_name = "${var.product}-${var.app_name}"
+  app_full_name = "${var.product}-${var.component}"
   ase_name = "${data.terraform_remote_state.core_apps_compute.ase_name[0]}"
+  local_env = "${(var.env == "preview" || var.env == "spreview") ? (var.env == "preview" ) ? "aat" : "saat" : var.env}"
+  prod_hostname = "${local.app_full_name}.platform.hmcts.net"
+  non_prod_hostname = "${local.app_full_name}.${var.env}.platform.hmcts.net"
 }
 # "${local.ase_name}"
 # "${local.app_full_name}"
@@ -14,7 +17,7 @@ module "app" {
   subscription = "${var.subscription}"
   is_frontend = true
   https_only="true"
-  additional_host_name="${local.app_full_name}-${var.env}.platform.hmcts.net"
+  additional_host_name = "${var.env == "prod" ? local.prod_hostname : local.non_prod_hostname}"
 
   app_settings = {
     # REDIS_HOST = "${module.redis-cache.host_name}"
@@ -50,7 +53,7 @@ module "app" {
 
     IDAM_LOGIN_URL = "${var.idam_login_url}"
     IDAM_USER_BASE_URI = "${var.idam_api_url}"
-    IDAM_S2S_BASE_URI = "${var.s2s_url}"
+    IDAM_S2S_BASE_URI = "http://${var.s2s_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
     IDAM_SERVICE_KEY = "${data.vault_generic_secret.s2s_secret.data["value"]}"
     IDAM_SERVICE_NAME = "${var.idam_service_name}"
     IDAM_API_OAUTH2_CLIENT_CLIENT_SECRETS_WEBSHOW = "${data.vault_generic_secret.oauth2_secret.data["value"]}"

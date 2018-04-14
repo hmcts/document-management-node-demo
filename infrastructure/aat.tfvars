@@ -1,7 +1,9 @@
+////////////////////////////////////////////////
+// Endpoints
+////////////////////////////////////////////////
 vault_section = "preprod"
-
 idam_api_url = "http://betaDevBccidamAppLB.reform.hmcts.net:80"
-s2s_url = "http://betaDevBccidamS2SLB.reform.hmcts.net:80"
+//s2s_url = "http://betaDevBccidamS2SLB.reform.hmcts.net:80"
 idam_login_url = "https://idam-test.dev.ccidam.reform.hmcts.net/login"
 
 dm_store_app_url = "dm-store"
@@ -27,3 +29,4 @@ log_output = "single"
 // Addtional
 ////////////////////////////////////////////////
 idam_service_name = "em_gw"
+

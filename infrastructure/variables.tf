@@ -1,11 +1,9 @@
 variable "product" {
-    type = "string"
-    default = "dm"
-    description = "The name of your application"
+  type = "string"
 }
 
-variable "app_name" {
-    default = "show"
+variable "component" {
+  type = "string"
 }
 
 variable "team_name" {
@@ -60,8 +58,10 @@ variable "idam_api_url" {
 }
 
 variable "s2s_url" {
-    default = "http://betaDevBccidamS2SLB.reform.hmcts.net:80"
+  //  default = "http://betaDevBccidamS2SLB.reform.hmcts.net:80"
+  default = "rpe-service-auth-provider"
 }
+
 
 variable "idam_login_url" {
     default = "https://idam-test.dev.ccidam.reform.hmcts.net/login"

@@ -1,5 +1,5 @@
 output "microserviceName" {
-  value = "${var.product}-${var.app_name}"
+  value = "${var.product}-${var.component}"
 }
 
 output "vaultName" {
@@ -15,5 +15,13 @@ output "idam_api_url" {
 }
 
 output "s2s_url" {
-  value = "${var.s2s_url}"
+  value = "http://${var.s2s_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
+}
+
+output "dm_store_app_url" {
+  value = "http://${var.dm_store_app_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
+}
+
+output "em_anno_app_url" {
+  value = "http://${var.em_anno_app_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
 }

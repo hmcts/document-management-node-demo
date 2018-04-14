@@ -1,7 +1,9 @@
+////////////////////////////////////////////////
+// Endpoints
+////////////////////////////////////////////////
 vault_section = "prod"
-
-idam_api_url = "http://betaDevBccidamAppLB.reform.hmcts.net:80"
-s2s_url = "http://betaDevBccidamS2SLB.reform.hmcts.net:80"
+idam_api_url = "https://prod-idamapi.reform.hmcts.net:3511"
+//s2s_url = "http://betaDevBccidamS2SLB.reform.hmcts.net:80"
 idam_login_url = "https://idam-test.dev.ccidam.reform.hmcts.net/login"
 
 dm_store_app_url = "dm-store"
