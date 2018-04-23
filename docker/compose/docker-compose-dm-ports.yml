@@ -3,15 +3,15 @@ version: '2.1'
 
 services:
 
-  dm-show-web:
+  dm-show:
     ports:
      - 3608:8080
 
-  dm-store-app:
+  dm-store:
     ports:
      - 4603:8080
 #     - 5005:5005
 
-  dm-store-app-db:
+  dm-store-db:
     ports:
      - 5432:5432

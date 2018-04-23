@@ -3,21 +3,20 @@ version: '2.1'
 
 services:
 
-  em-annotation-app:
+  em-anno:
     ports:
       - 4621:8080
 #     - 5005:5005
 
-#  em-annotation-app-db:
+#  em-anno-db:
 #    ports:
 #      - 5432:5432
 
-  em-redaction-app:
-    ports:
-      - 4623:8080
-#     - 5005:5005
+#  em-redact:
+#    ports:
+#      - 4623:8080
 
-#  em-redaction-app-db:
+#  em-redact-db:
 #    ports:
 #      - 5432:5432
 

@@ -3,6 +3,7 @@
 properties([
     [
         $class: 'GithubProjectProperty',
+        displayName: 'Document Management Show',
         projectUrlStr: 'https://github.com/hmcts/document-management-node-demo'
     ],
     pipelineTriggers([
@@ -11,8 +12,8 @@ properties([
     disableConcurrentBuilds()
 ])
 
-
 @Library('Reform') _
+
 import uk.gov.hmcts.Ansible
 import uk.gov.hmcts.Artifactory
 import uk.gov.hmcts.Packager
@@ -141,8 +142,7 @@ node {
             }
         }
         notifyBuildFixed channel: channel
-    }
-    catch (e) {
+    } catch (e) {
         notifyBuildFailure channel: channel
         throw e
     }
