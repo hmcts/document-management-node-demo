@@ -1,6 +1,5 @@
 const otp = require('otp')
 const config = require('config')
-const FormData = require('form-data')
 const jwtDecode = require('jwt-decode')
 const fetch = require('../util/fetch')
 
@@ -16,20 +15,24 @@ const cache = {}
 const serviceTokenGenerator = () => {
   const currentTime = Math.floor(Date.now() / 1000)
 
-  if (cache[serviceName] &&
-        currentTime < cache[serviceName].expiresAt) {
+  if (cache[serviceName] && currentTime < cache[serviceName].expiresAt) {
     return Promise.resolve(cache[serviceName].token)
   } else {
-    const oneTimePassword = otp({secret: secret}).totp()
-    const form = new FormData()
-    form.append('microservice', serviceName)
-    form.append('oneTimePassword', oneTimePassword)
 
-    return fetch(`${idamS2SUrl}/lease`, {method: 'POST', body: form})
+    const body = {
+      microservice: serviceName,
+      oneTimePassword: otp({secret: secret}).totp()
+    }
+
+    return fetch(`${idamS2SUrl}/lease`,
+      {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(body)
+      })
       .then(res => res.text())
       .then(token => {
         const tokenData = jwtDecode(token)
-
         cache[serviceName] = {
           expiresAt: tokenData.exp,
           token: token
@@ -39,7 +42,7 @@ const serviceTokenGenerator = () => {
       })
       .catch(error => {
         logger.warn(JSON.stringify({
-          errorMessage: 'Non 200 status received from IDAM when getting service token.',
+          errorMessage: 'Non 200 status received from S2S when getting service token.',
           statusText: error.statusText,
           status: error.status,
           url: error.url,

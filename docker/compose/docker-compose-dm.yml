@@ -16,7 +16,7 @@ services:
     - DM_OWNED_URL=/demproxy/dm/documents/owned
     - DM_SEARCH_URL=/demproxy/dm/documents/filter
     - IDAM_USER_BASE_URI=http://idam-api:8080
-    - IDAM_S2S_BASE_URI=http://service-auth-provider-api:8080
+    - IDAM_S2S_BASE_URI=http://service-auth-provider-app:8489
     - IDAM_SERVICE_KEY=AAAAAAAAAAAAAAAA
     - IDAM_SERVICE_NAME=em_gw
     - IDAM_API_OAUTH2_CLIENT_CLIENT_SECRETS_WEBSHOW=WEBSHOWWEBSHOW
