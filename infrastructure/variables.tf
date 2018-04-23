@@ -57,14 +57,12 @@ variable "idam_api_url" {
     default = "http://betaDevBccidamAppLB.reform.hmcts.net:80"
 }
 
-variable "s2s_url" {
-  //  default = "http://betaDevBccidamS2SLB.reform.hmcts.net:80"
-  default = "rpe-service-auth-provider"
+variable "idam_login_url" {
+  default = "https://idam-test.dev.ccidam.reform.hmcts.net/login"
 }
 
-
-variable "idam_login_url" {
-    default = "https://idam-test.dev.ccidam.reform.hmcts.net/login"
+variable "s2s_url" {
+  default = "rpe-service-auth-provider"
 }
 
 variable "dm_store_app_url" {
