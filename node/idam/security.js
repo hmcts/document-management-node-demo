@@ -1,13 +1,11 @@
 /* eslint-disable max-lines */
 'use strict';
 
-//const logger = require('../logging/dm-logger').logger;
 const request = require('superagent');
 const URL = require("url");
 const UUID = require("uuid/v4");
 const { Logger } = require('@hmcts/nodejs-logging');
-const logger = Logger.getLogger('security.js')
-
+const logger = Logger.getLogger('security.js');
 
 const SECURITY_COOKIE = '__auth-token';
 const REDIRECT_COOKIE = '__redirect';

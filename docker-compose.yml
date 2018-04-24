@@ -1,7 +1,7 @@
 version: '2.1'
 
 services:
-  dm-show-web:
+  dm-show:
     build:
       context: .
     image: docker.artifactory.reform.hmcts.net/evidence/document-management-node-demo:latest
@@ -9,9 +9,9 @@ services:
     - NODE_ENV=development
     - PORT=8080
     - IDAM_LOGIN_URL=https://localhost:3501/login
-    - DM_STORE_APP_URI=http://dm-store-app:8080
-    - EM_ANNO_APP_URI=http://em-annotation-app:8080
-#    - EM_REDACT_APP_URI=http://em-redaction-app:8080
+    - DM_STORE_APP_URI=http://dm-store:8080
+    - EM_ANNO_APP_URI=http://em-anno:8080
+#    - EM_REDACT_APP_URI=http://em-redact:8080
     - DM_UPLOAD_URL=/demproxy/dm/documents
     - DM_OWNED_URL=/demproxy/dm/documents/owned
     - DM_SEARCH_URL=/demproxy/dm/documents/filter
@@ -24,13 +24,13 @@ services:
     - LOG_OUTPUT=single
     - JSON_CONSOLE_PRETTY_PRINT=false
     - REFORM_SERVICE_TYPE=node
-    - REFORM_SERVICE_NAME=dm-show-web
+    - REFORM_SERVICE_NAME=dm-show
     - REFORM_TEAM=evidence
     - REFORM_ENVIRONMENT=docker
     #      healthcheck env vars
     - PACKAGES_ENVIRONMENT=docker
     - PACKAGES_PROJECT=evidence
-    - PACKAGES_NAME=dm-show-web
+    - PACKAGES_NAME=dm-show
     - PACKAGES_VERSION=unknown
     ports:
       - 3608:8080

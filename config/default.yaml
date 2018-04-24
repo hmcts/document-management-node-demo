@@ -23,7 +23,7 @@ idam:
   client_secret: WEBSHOWWEBSHOW
 
 logging:
-  microservice: dm-show-web
+  microservice: dm-show
   team: evidence
   environment: local
 

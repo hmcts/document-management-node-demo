@@ -19,7 +19,7 @@ services:
 #      healthcheck env vars
       - PACKAGES_ENVIRONMENT=docker
       - PACKAGES_PROJECT=evidence
-      - PACKAGES_NAME=em-annotation-app
+      - PACKAGES_NAME=em-anno
       - PACKAGES_VERSION=unkown
 #      debug mode
       - JAVA_OPTS=-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005
@@ -52,7 +52,7 @@ services:
 #      healthcheck env vars
       - PACKAGES_ENVIRONMENT=docker
       - PACKAGES_PROJECT=evidence
-      - PACKAGES_NAME=em-annotation-app
+      - PACKAGES_NAME=em-anno
       - PACKAGES_VERSION=unkown
 #      debug mode
       - JAVA_OPTS=-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005
