@@ -66,6 +66,9 @@ app.use('/demproxy', serviceFilter);
 app.use('/demproxy', security.protect() , proxy({
     target: config.get('dm_store_app_url'),
     logLevel: 'info',
+    secure: false,
+    rejectUnauthorized: false,
+    changeOrigin: true,
     router: {
       '/demproxy/dm': config.get('dm_store_app_url'),
       '/demproxy/an': config.get('em_anno_app_url'),
