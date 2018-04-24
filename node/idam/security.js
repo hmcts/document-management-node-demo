@@ -5,6 +5,9 @@
 const request = require('superagent');
 const URL = require("url");
 const UUID = require("uuid/v4");
+const { Logger } = require('@hmcts/nodejs-logging');
+const logger = Logger.getLogger('security.js')
+
 
 const SECURITY_COOKIE = '__auth-token';
 const REDIRECT_COOKIE = '__redirect';
@@ -78,10 +81,7 @@ function authorize(roles, res, next, self) {
 }
 
 function getTokenFromCode(self, req) {
-
   let url = URL.parse(self.opts.apiUrl + "/oauth2/token", true);
-
-  console.log("url: " + url);
 
   return request.post(url.format())
     .auth(self.opts.clientId, self.opts.clientSecret)

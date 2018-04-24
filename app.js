@@ -1,9 +1,8 @@
 const express = require('express');
 const config = require('config');
 
-// const { Logger, Express } = require('@hmcts/nodejs-logging'); // 2.2.0 version
-// const logging = require('@hmcts/nodejs-logging'); // 1.4.6 version
-const { logging } = require('./node/logging/dm-logger'); // 1.4.6 version + our internal flavour
+const { Logger, Express } = require('@hmcts/nodejs-logging');
+const logger = Logger.getLogger('app.js')
 const healthcheck = require('@hmcts/nodejs-healthcheck');
 const { InfoContributor, infoRequestHandler  } = require('@hmcts/info-provider');
 
@@ -26,19 +25,15 @@ let app = express();
 let http = require("http");
 let proxy = require('http-proxy-middleware');
 app.use(cookieParser());
-// Logger.config(config.get('logging')); // 2.2.0 version
-// app.use(Express.accessLogger()); // 2.2.0 version
-logging.config(config.get('logging')); // 1.4.6 version
-app.use(logging.express.accessLogger()); // 1.4.6 version
-
+app.use(Express.accessLogger());
 
 app.get("/health", healthcheck.configure({
   checks: {
-    'dmStoreApp' : healthcheck.web(config.get('dm_store_app_url') + "/health"),
-    'emAnnoApp' : healthcheck.web(config.get('em_anno_app_url') + "/health"),
+    'dmStore' : healthcheck.web(config.get('dm_store_app_url') + "/health"),
+    'emAnno' : healthcheck.web(config.get('em_anno_app_url') + "/health"),
     // 'emRedactApp' : healthcheck.web(config.get('em_redact_app_url') + "/health"),
     'idam' : healthcheck.web(config.get('idam').get('base_url') + "/health"),
-    'idamS2S' : healthcheck.web(config.get('idam').get('s2s_url') + "/health")
+    's2s' : healthcheck.web(config.get('idam').get('s2s_url') + "/health")
   },
   buildInfo: {
 
@@ -47,11 +42,11 @@ app.get("/health", healthcheck.configure({
 
 app.get('/info', infoRequestHandler({
   info: {
-    'dmStoreApp' :new InfoContributor(config.get('dm_store_app_url') + "/info"),
-    'emAnnoApp' : new InfoContributor(config.get('em_anno_app_url') + "/info"),
+    'dmStore' :new InfoContributor(config.get('dm_store_app_url') + "/info"),
+    'emAnno' : new InfoContributor(config.get('em_anno_app_url') + "/info"),
     // 'emRedactApp' : new InfoContributor(config.get('em_redact_app_url') + "/info"),
     'idam' : new InfoContributor(config.get('idam').get('base_url') + "/info"),
-    'idamS2S' : new InfoContributor(config.get('idam').get('s2s_url') + "/info")
+    's2s' : new InfoContributor(config.get('idam').get('s2s_url') + "/info")
   },
   extraBuildInfo: {
     // featureToggles: config.get('featureToggles'),
@@ -70,7 +65,7 @@ app.use('/demproxy', serviceFilter);
 
 app.use('/demproxy', security.protect() , proxy({
     target: config.get('dm_store_app_url'),
-    logLevel: 'debug',
+    logLevel: 'info',
     router: {
       '/demproxy/dm': config.get('dm_store_app_url'),
       '/demproxy/an': config.get('em_anno_app_url'),
@@ -86,7 +81,7 @@ app.use('/demproxy', security.protect() , proxy({
         throw new Error("Missing DEM required headers")
       }
     },
-    logProvider: () => logging.getLogger('HPM')
+    logProvider: () => Logger.getLogger('http-proxy-middleware')
   }
 ));
 
@@ -102,6 +97,8 @@ app.get("/config", (req, res) => {
 
 
 app.use('/demproxy', (err, req, res, next) => {
+  logger.info({message:'demproxy()' + JSON.stringify(err)})
+
   res.contentType('application/json');
   res.json(err);
 });

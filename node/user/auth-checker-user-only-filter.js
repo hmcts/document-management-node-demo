@@ -1,6 +1,6 @@
 const userRequestAuthorizer = require('./user-request-authorizer')
-const {logging} = require('../logging/dm-logger')
-const logger = logging.getLogger('auth-checker-user-only-filter.js')
+const { Logger } = require('@hmcts/nodejs-logging')
+const logger = Logger.getLogger('auth-checker-user-only-filter.js')
 
 const authCheckerUserOnlyFilter = (req, res, next) => {
 
@@ -16,13 +16,12 @@ const authCheckerUserOnlyFilter = (req, res, next) => {
       })
       .then(() => next())
       .catch(error => {
-        let logEntry = (error.error ? JSON.stringify(error) : 'Unsuccessful user authentication')
+        let logEntry = (error.error ? JSON.stringify(error) : { message: 'Unsuccessful user authentication'})
         logger.warn(logEntry)
         // Just return 401 as idam returns 400 for bad token.
         error.status = error.status && error.status !== 400 ? error.status : 401
         next(error)
       });
-
 }
 
 module.exports = authCheckerUserOnlyFilter

@@ -1,8 +1,8 @@
 const config = require('config');
 const fetch = require('../util/fetch');
 
-const {logging} = require('../logging/dm-logger');
-const logger = logging.getLogger('user-resolver.js');
+const { Logger } = require('@hmcts/nodejs-logging')
+const logger = Logger.getLogger('user-resolver.js');
 
 const getTokenDetails = (jwt) => {
   const bearerJwt = (jwt.startsWith('Bearer ') ? jwt : 'Bearer ' + jwt).replace(/"/g,'');
@@ -12,13 +12,13 @@ const getTokenDetails = (jwt) => {
     }
   }).then(res => res.json())
     .catch(error => {
-      logger.warn(JSON.stringify({
-        errorMessage: 'Non 200 status received from IDAM when authenticating user. Is your token valid?',
-        statusText: error.statusText,
-        status: error.status,
-        url: error.url,
-        stackTrace: error.stack
-      }));
+      logger.warn({
+        message: 'Non 200 status received from IDAM when authenticating user. Is your token valid?'
+        + ' Status Text: ' + error.statusText
+        + ' Status: ' + error.status
+        + ' url: ' + error.url
+        + ' stackTrace: ' + error.stack
+      })
       throw error
     })
 };

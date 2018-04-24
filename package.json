@@ -40,7 +40,7 @@
     "@angular/router": "^5.0.0",
     "@hmcts/info-provider": "^1.0.0",
     "@hmcts/nodejs-healthcheck": "^1.4.6",
-    "@hmcts/nodejs-logging": "^1.4.2",
+    "@hmcts/nodejs-logging": "^3.0.0",
     "config": "^1.30.0",
     "cookie-parser": "^1.4.3",
     "core-js": "^2.4.1",
