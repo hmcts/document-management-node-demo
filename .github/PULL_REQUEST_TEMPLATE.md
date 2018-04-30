@@ -7,7 +7,7 @@
 Please remove this line and everything above and fill the following sections:
 
 
-### JIRA link ###
+### JIRA link (if applicable) ###
 
 
 
