@@ -7,7 +7,7 @@ variable "component" {
 }
 
 variable "team_name" {
-    default = "evidence"
+  default = "evidence"
 }
 
 variable "app_language" {
@@ -15,40 +15,37 @@ variable "app_language" {
 }
 
 variable "location" {
-    type = "string"
-    default = "UK South"
+  type    = "string"
+  default = "UK South"
 }
 
 variable "env" {
-    type = "string"
-    description = "(Required) The environment in which to deploy the application infrastructure."
+  type = "string"
 }
 
 variable "subscription" {
-    type = "string"
+  type = "string"
 }
 
-variable "ilbIp"{
+variable "ilbIp"{}
 
-}
-
-variable "tenant_id" {
-
-}
+variable "tenant_id" {}
 
 variable "jenkins_AAD_objectId" {
-    type                        = "string"
-    description                 = "(Required) The Azure AD object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies."
+  type                        = "string"
+  description                 = "(Required) The Azure AD object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies."
 }
 
 ////////////////////////////////////////////////
 //Addtional Vars ///////////////////////////////
 ////////////////////////////////////////////////
+variable "capacity" {
+  default = "2"
+}
 
 ////////////////////////////////////////////////
 // Endpoints
 ////////////////////////////////////////////////
-
 variable "vault_section" {
   default = "test"
 }
@@ -68,6 +65,7 @@ variable "s2s_url" {
 variable "dm_store_app_url" {
     default = "dm-store"
 }
+
 variable "em_anno_app_url" {
     default = "em-anno"
 }
@@ -79,15 +77,15 @@ variable "em_redact_app_url" {
 // Logging
 ////////////////////////////////////////////////
 variable "root_appender" {
-    default = "JSON_CONSOLE"
+  default = "JSON_CONSOLE"
 }
 
 variable "json_console_pretty_print" {
-    default = "false"
+  default = "false"
 }
 
 variable "log_output" {
-    default = "single"
+  default = "single"
 }
 
 ////////////////////////////////////////////////
@@ -95,7 +93,7 @@ variable "log_output" {
 ////////////////////////////////////////////////
 
 ////////////////////////////////////////////////
-//// Whitelists
+// Whitelists
 ////////////////////////////////////////////////
 
 ////////////////////////////////////////////////
