@@ -15,7 +15,7 @@ variable "app_language" {
 }
 
 variable "location" {
-  type    = "string"
+  type = "string"
   default = "UK South"
 }
 
