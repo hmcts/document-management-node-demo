@@ -1,0 +1,24 @@
+#!groovy
+
+properties([
+    // H allow predefined but random minute see https://en.wikipedia.org/wiki/Cron#Non-standard_characters
+    pipelineTriggers([cron('H 05 * * *')])
+])
+
+@Library("Infrastructure") _
+
+def type = "nodejs"
+def product = "dm"
+def component = "show"
+
+withNightlyPipeline(type, product, component) {
+    enableSlackNotifications('#ccd-nightly-builds')
+
+    after('checkout') {
+        echo '${component} out'
+    }
+
+    after('build') {
+      sh 'yarn setup'
+    }
+}
