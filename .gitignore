@@ -16,7 +16,6 @@ node_modules
 .settings/
 *.sublime-workspace
 *.iml
-yarn-error.log
 # IDE - VSCode
 .vscode/*
 !.vscode/settings.json
@@ -24,12 +23,16 @@ yarn-error.log
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# Package management
+yarn-error.log
+npm-debug.log
+package-lock.json
+
 # misc
 /.sass-cache
 /connect.lock
 /coverage
 /libpeerconnection.log
-npm-debug.log
 testem.log
 /typings
 
