@@ -26,6 +26,7 @@ node_modules
 # Package management
 yarn-error.log
 npm-debug.log
+package-lock.json
 
 # misc
 /.sass-cache
