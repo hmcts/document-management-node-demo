@@ -79,6 +79,7 @@ services:
   service-auth-provider-app:
     image: hmcts/service-auth-provider-app:latest
     environment:
+      - TESTING_SUPPORT_ENABLED=true
       - MICROSERVICE_KEYS_JUI_WEBAPP=AAAAAAAAAAAAAAAA
       - MICROSERVICE_KEYS_EM_GW=AAAAAAAAAAAAAAAA
       - MICROSERVICE_KEYS_CCD_DATA=AAAAAAAAAAAAAAAA
