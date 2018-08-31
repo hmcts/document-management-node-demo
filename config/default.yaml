@@ -20,7 +20,7 @@ idam:
   login_url: https://localhost:3501/login
   registration_url: https://localhost:3502/register
   client_id: webshow
-  client_secret: WEBSHOWWEBSHOW
+  client_secret: AAAAAAAAAAAAAAAA
 
 logging:
   microservice: dm-show
