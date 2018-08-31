@@ -6,7 +6,7 @@ services:
     image: hmcts/em-anno:latest
     environment:
       - SERVER_PORT=8080
-      - IDAM_USER_BASE_URI=http://idam-api:8080
+      - IDAM_API_URI=http://idam-api:8080
       - IDAM_S2S_BASE_URI=http://service-auth-provider-app:8489
       - SPRING_DATASOURCE_URL=jdbc:postgresql://em-anno-db:5432/annotation
 #      logging env vars
@@ -31,15 +31,20 @@ services:
      - em-anno-db
      - idam-api
      - service-auth-provider-app
+    ports:
+      - 4621:8080
+#     - 5005:5005
 
   em-anno-db:
     image: hmcts/em-anno-db:latest
+#    ports:
+#      - 5432:5432
 
   em-redact:
     image: hmcts/em-redact:latest
     environment:
       - SERVER_PORT=8080
-      - IDAM_USER_BASE_URI=http://idam-api:8080
+      - IDAM_API_URI=http://idam-api:8080
       - IDAM_S2S_BASE_URI=http://service-auth-provider-app:8489
       - SPRING_DATASOURCE_URL=jdbc:postgresql://em-redact-db:5432/redaction
 #      logging env vars
@@ -64,6 +69,10 @@ services:
      - em-redact-db
      - idam-api
      - service-auth-provider-app
+#    ports:
+#      - 4623:8080
 
   em-redact-db:
     image: hmcts/em-redact-db:latest
+#    ports:
+#      - 5432:5432
