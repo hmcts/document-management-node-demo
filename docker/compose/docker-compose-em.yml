@@ -37,8 +37,8 @@ services:
 
   em-anno-db:
     image: hmcts/em-anno-db:latest
-#    ports:
-#      - 5432:5432
+    ports:
+      - 5432:5432
 
   em-redact:
     image: hmcts/em-redact:latest
