@@ -75,15 +75,3 @@ module "key_vault" {
   resource_group_name = "${module.app.resource_group_name}"
   product_group_object_id = "5d9cd025-a293-4b97-a0e5-6f43efce02c0"
 }
-
-resource "azurerm_key_vault_secret" "S2S_TOKEN" {
-  name = "s2s-token"
-  value = "${data.vault_generic_secret.s2s_secret.data["value"]}"
-  vault_uri = "${module.key_vault.key_vault_uri}"
-}
-
-resource "azurerm_key_vault_secret" "OAUTH2_TOKEN" {
-  name = "oauth2-token"
-  value = "${data.vault_generic_secret.s2s_secret.data["value"]}"
-  vault_uri = "${module.key_vault.key_vault_uri}"
-}
