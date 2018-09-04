@@ -2,6 +2,16 @@ locals {
   app_full_name = "${var.product}-${var.component}"
   ase_name = "${data.terraform_remote_state.core_apps_compute.ase_name[0]}"
   local_env = "${(var.env == "preview" || var.env == "spreview") ? (var.env == "preview" ) ? "aat" : "saat" : var.env}"
+
+  // Vault name
+  previewVaultName = "${var.raw_product}-aat"
+  nonPreviewVaultName = "${var.raw_product}-${var.env}"
+  vaultName = "${(var.env == "preview" || var.env == "spreview") ? local.previewVaultName : local.nonPreviewVaultName}"
+
+  // Shared Resource Group
+  previewResourceGroup = "${var.raw_product}-shared-aat"
+  nonPreviewResourceGroup = "${var.raw_product}-shared-${var.env}"
+  sharedResourceGroup = "${(var.env == "preview" || var.env == "spreview") ? local.previewResourceGroup : local.nonPreviewResourceGroup}"
 }
 
 module "app" {
@@ -56,6 +66,11 @@ module "app" {
 
 provider "vault" {
   address = "https://vault.reform.hmcts.net:6200"
+}
+
+data "azurerm_key_vault" "shared_key_vault" {
+  name = "${local.vaultName}"
+  resource_group_name = "${local.sharedResourceGroup}"
 }
 
 data "vault_generic_secret" "s2s_secret" {
