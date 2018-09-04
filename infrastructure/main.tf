@@ -73,12 +73,14 @@ data "azurerm_key_vault" "shared_key_vault" {
   resource_group_name = "${local.sharedResourceGroup}"
 }
 
-data "vault_generic_secret" "s2s_secret" {
-  path = "secret/${var.vault_section}/ccidam/service-auth-provider/api/microservice-keys/em-gw"
+data "azurerm_key_vault_secret" "s2s_secret" {
+  name = "em-gateway-s2s-token"
+  vault_uri = "${data.azurerm_key_vault.shared_key_vault.vault_uri}"
 }
 
-data "vault_generic_secret" "oauth2_secret" {
-  path = "secret/${var.vault_section}/ccidam/idam-api/oauth2/client-secrets/webshow"
+data "azurerm_key_vault_secret" "oauth2_secret" {
+  name = "dm-show-oauth2-client-secret"
+  vault_uri = "${data.azurerm_key_vault.shared_key_vault.vault_uri}"
 }
 
 module "key_vault" {
