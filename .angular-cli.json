@@ -29,7 +29,11 @@
           "../node_modules/govuk-elements-sass/public/sass"
         ]
       },
-      "scripts": [],
+      "scripts": [
+        "assets/shared/pdf.js",
+        "assets/shared/pdf_viewer.js",
+        "assets/shared/pdf-annotate.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
