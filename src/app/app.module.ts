@@ -16,16 +16,17 @@ import {AppConfig} from './config/app.config';
 import {WindowService} from './utils/window.service';
 import {DocumentService} from './utils/document.service';
 import {DocumentStoreService} from './dm/document-store.service';
-import {EmAnnotationSummaryModule, EmViewerModule} from 'em-viewer-web';
-import {EmViewerRouteComponent} from './em/em-viewer-route.component';
-import {EmAnnotationSummaryRouteComponent} from './em/em-annotation-summary-route.component';
+
+import {ViewerComponent} from './viewer/viewer.component';
+import { CommentsComponent } from './viewer/comments/comments.component';
+import { ScrollEventModule } from 'ngx-scroll-event';
+import { ToolbarComponent } from './viewer/toolbar/toolbar.component';
 
 const appRoutes: Routes = [
   { path: '',  component: DmListViewRouteComponent },
   { path: 'list',  component: DmListViewRouteComponent },
   { path: 'upload',  component: DmUploadRouteComponent },
-  { path: 'viewer',  component: EmViewerRouteComponent },
-  { path: 'summary',  component: EmAnnotationSummaryRouteComponent }
+  { path: 'viewer',  component: ViewerComponent }
 ];
 
 
@@ -36,21 +37,21 @@ const appRoutes: Routes = [
     DmListViewRouteComponent,
     DmUploadComponent,
     DmUploadRouteComponent,
-    EmViewerRouteComponent,
-    EmAnnotationSummaryRouteComponent
+    ViewerComponent,
+    CommentsComponent,
+    ToolbarComponent
   ],
   entryComponents: [],
   imports: [
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      { enableTracing: true }, // <-- debugging purposes only
     ),
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    EmViewerModule,
-    EmAnnotationSummaryModule,
-    CookieModule.forRoot()
+    CookieModule.forRoot(),
+    ScrollEventModule
   ],
   providers: [
     WindowService,

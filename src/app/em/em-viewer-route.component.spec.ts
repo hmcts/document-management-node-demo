@@ -1,7 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {DebugElement} from '@angular/core';
-import {EmViewerComponent, EmViewerModule} from 'em-viewer-web';
 import {ActivatedRoute} from '@angular/router';
 import {of} from 'rxjs/observable/of';
 import {EmViewerRouteComponent} from './em-viewer-route.component';
@@ -16,7 +15,7 @@ describe('EmAnnotationSummaryRoute', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [EmViewerModule, HttpClientTestingModule],
+      imports: [HttpClientTestingModule],
       declarations: [ EmViewerRouteComponent],
       providers: [{
         provide: ActivatedRoute,

@@ -1,0 +1,26 @@
+<div id="comment-wrapper">
+  <h4 id="comment-header">Page {{pageNumber}}</h4>
+  <div class="comment-list">
+    <div class="comment-list-container" 
+      #commentList
+      (click)="handleCommentClick($event)"
+      >
+      <div class="comment-list-item">No comments</div>
+      
+      <div *ngFor="let comment of comments" class="comment-list-item" attr.data-linked-annotation="{{comment.annotation}}">
+        {{comment.content}}
+        <div>
+          <button (click)="handleEditComment()">✎</button>
+          <button (click)="handleDeleteComment()">×</button>
+        </div>
+      </div>
+    </div>
+    <form class="comment-list-form" 
+      #commentForm="ngForm" (ngSubmit)="onSubmit(commentForm)" novalidate
+      [style.display]="!commentFormActive ? 'none' : 'block'"
+      >
+      <input name="content" ngModel type="text" placeholder="Add a Comment" #commentText/>
+    </form>
+    {{commentFormActive}}
+  </div>
+</div>
