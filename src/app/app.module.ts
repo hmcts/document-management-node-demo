@@ -22,6 +22,8 @@ import { CommentsComponent } from './viewer/comments/comments.component';
 import { ScrollEventModule } from 'ngx-scroll-event';
 import { ToolbarComponent } from './viewer/toolbar/toolbar.component';
 import { AnnotationStoreService } from './viewer/annotation-store.service';
+import { CommentFormComponent } from './viewer/comments/comment-form/comment-form.component';
+import { CommentItemComponent } from './viewer/comments/comment-item/comment-item.component';
 
 const appRoutes: Routes = [
   { path: '',  component: DmListViewRouteComponent },
@@ -40,7 +42,9 @@ const appRoutes: Routes = [
     DmUploadRouteComponent,
     ViewerComponent,
     CommentsComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    CommentFormComponent,
+    CommentItemComponent
   ],
   entryComponents: [],
   imports: [

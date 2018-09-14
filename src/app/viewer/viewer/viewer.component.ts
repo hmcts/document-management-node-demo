@@ -18,9 +18,6 @@ export class ViewerComponent implements OnInit, OnChanges {
   lastViewedPage: number;
   pageNumber: number;
   tool: String;
-  pdfPages: number;
-
-  RENDER_OPTIONS: { documentId: string, pdfDocument: any, scale: any, rotate: number };
 
   @ViewChild("contentWrapper") contentWrapper: ElementRef;
 
@@ -36,17 +33,15 @@ export class ViewerComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.RENDER_OPTIONS = {
+    this.annotationService.setRenderOptions({
       documentId: '/assets/example.pdf',
       pdfDocument: null,
       scale: parseFloat("1.33"),
       rotate: parseInt(localStorage.getItem('/assets/example.pdf' + '/rotate'), 10) || 0
-    };
+      });
 
     this.renderedPages = {};
-    this.annotationService.render(this.RENDER_OPTIONS, function(pdfPages) {
-      this.pdfPages = pdfPages;
-    }.bind(this));
+    this.annotationService.render();
 
     this.lastViewedPage = 1;
     this.pageNumber = 1;
@@ -78,11 +73,13 @@ export class ViewerComponent implements OnInit, OnChanges {
 		if (visiblePage && !this.renderedPages[visiblePageNum]) {
 			// Prevent invoking UI.renderPage on the same page more than once.
         this.renderedPages[visiblePageNum] = true;
-        setTimeout(this.annotationService.renderPage(this.RENDER_OPTIONS, visiblePageNum));
+        setTimeout(this.annotationService.renderPage(visiblePageNum));
     }
     if (this.lastViewedPage != visiblePageNum) {
       this.lastViewedPage = visiblePageNum;
-      this.pageNumber = visiblePageNum;
+      if (!isNaN(visiblePageNum)) {
+        this.pageNumber = visiblePageNum;
+      }
     }
   }
 }
