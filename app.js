@@ -30,8 +30,7 @@ app.use(Express.accessLogger());
 app.get("/health", healthcheck.configure({
   checks: {
     'dmStore' : healthcheck.web(config.get('dm_store_app_url') + "/health"),
-    'emAnno' : healthcheck.web(config.get('em_anno_app_url') + "/health"),
-    // 'emRedactApp' : healthcheck.web(config.get('em_redact_app_url') + "/health"),
+    // 'emAnno' : healthcheck.web(config.get('em_anno_app_url') + "/health"),
     'idam' : healthcheck.web(config.get('idam').get('base_url') + "/health"),
     's2s' : healthcheck.web(config.get('idam').get('s2s_url') + "/health")
   },
@@ -43,8 +42,7 @@ app.get("/health", healthcheck.configure({
 app.get('/info', infoRequestHandler({
   info: {
     'dmStore' :new InfoContributor(config.get('dm_store_app_url') + "/info"),
-    'emAnno' : new InfoContributor(config.get('em_anno_app_url') + "/info"),
-    // 'emRedactApp' : new InfoContributor(config.get('em_redact_app_url') + "/info"),
+    // 'emAnno' : new InfoContributor(config.get('em_anno_app_url') + "/info"),
     'idam' : new InfoContributor(config.get('idam').get('base_url') + "/info"),
     's2s' : new InfoContributor(config.get('idam').get('s2s_url') + "/info")
   },
