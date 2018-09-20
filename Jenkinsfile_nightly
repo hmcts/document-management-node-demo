@@ -25,4 +25,7 @@ withNightlyPipeline(type, product, component) {
     after('build') {
       sh 'yarn setup'
     }
+    before('buildinfra:prod') {
+        error('Halting pipeline before prod stages')
+    }
 }
