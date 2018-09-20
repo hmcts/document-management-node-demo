@@ -2,23 +2,26 @@ locals {
   app_full_name = "${var.product}-${var.component}"
   ase_name = "${data.terraform_remote_state.core_apps_compute.ase_name[0]}"
   local_env = "${(var.env == "preview" || var.env == "spreview") ? (var.env == "preview" ) ? "aat" : "saat" : var.env}"
+  shared_vault_name = "${var.shared_product_name}-${local.local_env}"
 }
 # "${local.ase_name}"
 # "${local.app_full_name}"
 # "${local.local_env}"
 
 module "app" {
-  source = "git@github.com:hmcts/moj-module-webapp?ref=master"
+  source = "git@github.com:hmcts/cnp-module-webapp?ref=master"
   product = "${local.app_full_name}"
   location = "${var.location}"
   env = "${var.env}"
   ilbIp = "${var.ilbIp}"
   subscription = "${var.subscription}"
   capacity     = "${var.capacity}"
-  is_frontend = true
-  additional_host_name = "${local.app_full_name}-${var.env}.service.${var.env}.platform.hmcts.net"
+    is_frontend = "${!(var.env == "preview" || var.env == "spreview") ? 1 : 0}"
+    additional_host_name = "${!(var.env == "preview" || var.env == "spreview") ? "${local.app_full_name}-${var.env}.service.${var.env}.platform.hmcts.net" : "null"}"
   https_only="false"
   common_tags  = "${var.common_tags}"
+  asp_rg = "${var.shared_product_name}-${var.env}"
+  asp_name = "${var.shared_product_name}-${var.env}"
 
   app_settings = {
     # REDIS_HOST = "${module.redis-cache.host_name}"
@@ -40,10 +43,6 @@ module "app" {
     PACKAGES_PROJECT = "${var.team_name}"
     PACKAGES_ENVIRONMENT = "${var.env}"
 
-    ROOT_APPENDER = "${var.root_appender}"
-    JSON_CONSOLE_PRETTY_PRINT = "${var.json_console_pretty_print}"
-    LOG_OUTPUT = "${var.log_output}"
-
     DM_STORE_APP_URI= "http://${var.dm_store_app_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
     EM_ANNO_APP_URI="http://${var.em_anno_app_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
     EM_REDACT_APP_URI="http://${var.em_redact_app_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
@@ -55,11 +54,27 @@ module "app" {
     IDAM_LOGIN_URL = "${var.idam_login_url}"
     IDAM_USER_BASE_URI = "${var.idam_api_url}"
     IDAM_S2S_BASE_URI = "http://${var.s2s_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
-    IDAM_SERVICE_KEY = "${data.vault_generic_secret.s2s_secret.data["value"]}"
-    IDAM_SERVICE_NAME = "${var.idam_service_name}"
-    IDAM_API_OAUTH2_CLIENT_CLIENT_SECRETS_WEBSHOW = "${data.vault_generic_secret.oauth2_secret.data["value"]}"
+    IDAM_SERVICE_KEY = "${data.azurerm_key_vault_secret.s2s_secret.value}"
+    IDAM_SERVICE_NAME = "em_gw"
+    IDAM_API_OAUTH2_CLIENT_CLIENT_SECRETS_WEBSHOW = "${data.azurerm_key_vault_secret.oauth2_secret.value}"
   }
 }
+
+data "azurerm_key_vault" "key_vault" {
+    name = "${local.shared_vault_name}"
+    resource_group_name = "${local.shared_vault_name}"
+}
+
+data "azurerm_key_vault_secret" "s2s_secret" {
+    name = "em-s2s-token"
+    vault_uri = "${data.azurerm_key_vault.key_vault.vault_uri}"
+}
+
+data "azurerm_key_vault_secret" "oauth2_secret" {
+    name = "show-oauth2-token"
+    vault_uri = "${data.azurerm_key_vault.key_vault.vault_uri}"
+}
+
 
 provider "vault" {
   address = "https://vault.reform.hmcts.net:6200"
@@ -83,18 +98,6 @@ module "key_vault" {
   product_group_object_id = "5d9cd025-a293-4b97-a0e5-6f43efce02c0"
 }
 
-resource "azurerm_key_vault_secret" "S2S_TOKEN" {
-  name = "s2s-token"
-  value = "${data.vault_generic_secret.s2s_secret.data["value"]}"
-  vault_uri = "${module.key_vault.key_vault_uri}"
-}
-
-resource "azurerm_key_vault_secret" "OAUTH2_TOKEN" {
-  name = "oauth2-token"
-  value = "${data.vault_generic_secret.s2s_secret.data["value"]}"
-  vault_uri = "${module.key_vault.key_vault_uri}"
-}
-
 # module "redis-cache" {
 # source = "git@github.com:hmcts/moj-module-redis?ref=master"
 # product = "${var.product}"
@@ -102,3 +105,6 @@ resource "azurerm_key_vault_secret" "OAUTH2_TOKEN" {
 # env = "${var.env}"
 # subnetid = "${data.terraform_remote_state.core_apps_infrastructure.subnet_ids[2]}"
 # }
+
+
+

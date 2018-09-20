@@ -3,8 +3,8 @@
 properties([
   [
     $class       : 'GithubProjectProperty',
-    displayName  : 'Document Management Webshow',
-    projectUrlStr: 'https://github.com/hmcts/document-management-node-demo/'
+    displayName  : 'Evidence Management Show',
+    projectUrlStr: 'https://github.com/hmcts/em-show/'
   ],
   pipelineTriggers([
     [$class: 'GitHubPushTrigger']
@@ -14,17 +14,13 @@ properties([
 @Library("Infrastructure") _
 
 def type = "nodejs"
-def product = "dm"
+def product = "em"
 def component = "show"
 
-def channel = '#dm-pipeline'
+def channel = '#rpa-pipeline'
 
-withPipeline(type , product, component) {
+withPipeline(type, product, component) {
     enableSlackNotifications(channel)
-
-    after('checkout') {
-        echo '${component} out'
-    }
 
     after('build') {
       sh 'yarn setup'

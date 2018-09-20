@@ -1,22 +1,26 @@
 #!groovy
 
 properties([
-    // H allow predefined but random minute see https://en.wikipedia.org/wiki/Cron#Non-standard_characters
-    pipelineTriggers([cron('H 05 * * *')])
+  [
+    $class       : 'GithubProjectProperty',
+    displayName  : 'Evidence Management Show',
+    projectUrlStr: 'https://github.com/hmcts/em-show/'
+  ],
+  pipelineTriggers([
+     cron('H 05 * * *')
+  ])
 ])
 
 @Library("Infrastructure") _
 
 def type = "nodejs"
-def product = "dm"
+def product = "em"
 def component = "show"
 
-withNightlyPipeline(type, product, component) {
-    enableSlackNotifications('#ccd-nightly-builds')
+def channel = '#rpa-pipeline'
 
-    after('checkout') {
-        echo '${component} out'
-    }
+withNightlyPipeline(type, product, component) {
+    enableSlackNotifications(channel)
 
     after('build') {
       sh 'yarn setup'

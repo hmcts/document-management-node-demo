@@ -2,6 +2,10 @@ variable "product" {
   type = "string"
 }
 
+variable "shared_product_name" {
+    default = "rpa"
+}
+
 variable "component" {
   type = "string"
 }
@@ -36,15 +40,15 @@ variable "jenkins_AAD_objectId" {
   description                 = "(Required) The Azure AD object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies."
 }
 
+variable "common_tags" {
+  type = "map"
+}
+
 ////////////////////////////////////////////////
 //Addtional Vars ///////////////////////////////
 ////////////////////////////////////////////////
 variable "capacity" {
-  default = "2"
-}
-
-variable "common_tags" {
-  type = "map"
+  default = "1"
 }
 
 ////////////////////////////////////////////////
@@ -77,32 +81,3 @@ variable "em_redact_app_url" {
     default = "em-redact"
 }
 
-////////////////////////////////////////////////
-// Logging
-////////////////////////////////////////////////
-variable "root_appender" {
-  default = "JSON_CONSOLE"
-}
-
-variable "json_console_pretty_print" {
-  default = "false"
-}
-
-variable "log_output" {
-  default = "single"
-}
-
-////////////////////////////////////////////////
-// Toggle Features
-////////////////////////////////////////////////
-
-////////////////////////////////////////////////
-// Whitelists
-////////////////////////////////////////////////
-
-////////////////////////////////////////////////
-// Addtional
-////////////////////////////////////////////////
-variable "idam_service_name" {
-  default = "em_gw"
-}
