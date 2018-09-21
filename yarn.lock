@@ -130,6 +130,12 @@
   dependencies:
     tslib "^1.7.1"
 
+"@angular/forms@^6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-6.1.2.tgz#554459c415c010500640a08d7268bca304c5b491"
+  dependencies:
+    tslib "^1.9.0"
+
 "@angular/http@^5.0.0":
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/@angular/http/-/http-5.1.1.tgz#45aa61ee61f212a34f958c444c999e8c9352ec23"
@@ -7917,6 +7923,10 @@ tsickle@^0.25.5:
 tslib@^1.7.1, tslib@^1.8.0:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.8.1.tgz#6946af2d1d651a7b1863b531d6e5afa41aa44eac"
+
+tslib@^1.9.0:
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
 
 tslint@~5.7.0:
   version "5.7.0"
