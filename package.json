@@ -51,7 +51,7 @@
     "govuk-elements-sass": "^3.1.2",
     "govuk_template_jinja": "^0.23.0",
     "http": "^0.0.0",
-    "http-proxy-middleware": "^0.18.0",
+    "http-proxy-middleware": "^0.19.0",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.5",
     "ngx-cookie": "^2.0.1",
