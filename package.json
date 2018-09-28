@@ -44,7 +44,7 @@
     "config": "^1.30.0",
     "cookie-parser": "^1.4.3",
     "core-js": "^2.4.1",
-    "cross-env": "^5.0.5",
+    "cross-env": "^5.2.0",
     "em-viewer-web": "0.0.16",
     "express": "^4.16.2",
     "form-data": "^2.3.1",
