@@ -62,7 +62,7 @@
     "snyk": "^1.90.2",
     "superagent": "^3.8.2",
     "uuid": "^3.3.2",
-    "yarn": "1.2.1",
+    "yarn": "1.10.1",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
