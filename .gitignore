@@ -1,21 +1,28 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
+/dist
+/dist-server
 /tmp
 /out-tsc
+/documentation
+/reports
 
 # dependencies
-node_modules
+/node_modules
+api/node_modules
+api/.nyc_output
 
 # IDEs and editors
-.idea
+/.idea
+*.iml
 .project
 .classpath
 .c9/
 *.launch
 .settings/
 *.sublime-workspace
-*.iml
+
 # IDE - VSCode
 .vscode/*
 !.vscode/settings.json
@@ -23,18 +30,17 @@ node_modules
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# Package management
-yarn-error.log
-npm-debug.log
-package-lock.json
-
 # misc
 /.sass-cache
 /connect.lock
 /coverage
 /libpeerconnection.log
+npm-debug.log
+yarn-error.log
 testem.log
 /typings
+*.history
+*.wallaby.js
 
 # e2e
 /e2e/*.js
@@ -44,5 +50,25 @@ testem.log
 .DS_Store
 Thumbs.db
 version
-report
-dist
+/test/reports/
+reports/
+.tmp/
+!.sessions/
+.sessions/*
+
+
+
+reports_json/
+.nyc_output/
+cb_reports/
+report.json
+
+\.vscode/tasks\.json
+
+\.sessions/
+
+\.scannerwork/
+
+\.vscode/
+
+reports/tests/coverage/ng/

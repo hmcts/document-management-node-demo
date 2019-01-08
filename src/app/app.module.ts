@@ -1,64 +1,38 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {APP_INITIALIZER, NgModule} from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
-import {RouterModule, Routes} from '@angular/router';
-import {FormsModule} from '@angular/forms';
-import {CookieModule} from 'ngx-cookie';
+import {BrowserModule, BrowserTransferStateModule} from '@angular/platform-browser';
+import {APP_ID, Inject, NgModule, PLATFORM_ID} from '@angular/core';
 
-import {AppComponent} from './app.component';
-import {DmListViewComponent} from './dm-listview/dm-listview.component';
-import {DmListViewRouteComponent} from './dm-listview/dm-listview-route.component';
-import {DmUploadComponent} from './dm-upload/dm-upload.component';
-import {DmUploadRouteComponent } from './dm-upload/dm-upload-route.component';
-
-import {SessionService} from './auth/session.service';
-import {AppConfig} from './config/app.config';
-import {WindowService} from './utils/window.service';
-import {DocumentService} from './utils/document.service';
-import {DocumentStoreService} from './dm/document-store.service';
-import {EmViewerRouteComponent} from './em/em-viewer-route.component';
-import {EmAnnotationSummaryRouteComponent} from './em/em-annotation-summary-route.component';
-import { EmAnnotationSummaryComponent } from './em-annotation-summary/em-annotation-summary.component';
-
-const appRoutes: Routes = [
-  { path: '',  component: DmListViewRouteComponent },
-  { path: 'list',  component: DmListViewRouteComponent },
-  { path: 'upload',  component: DmUploadRouteComponent },
-  { path: 'viewer',  component: EmViewerRouteComponent },
-  { path: 'summary',  component: EmAnnotationSummaryRouteComponent }
-];
-
+import { HttpClientModule } from '@angular/common/http';
+import { AppComponent } from './app.component';
+import { RoutingModule } from './routing/routing.module';
+import { ConfigService } from './config.service';
+import {AuthModule} from './auth/auth.module';
+import {HmctsModule} from './hmcts/hmcts.module';
+import {GovukModule} from './govuk/govuk.module';
+import {RouterModule} from '@angular/router';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DmListViewComponent,
-    DmListViewRouteComponent,
-    DmUploadComponent,
-    DmUploadRouteComponent,
-    EmViewerRouteComponent,
-    EmAnnotationSummaryRouteComponent,
-    EmAnnotationSummaryComponent
-  ],
-  entryComponents: [],
-  imports: [
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
-    ),
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    CookieModule.forRoot()
-  ],
-  providers: [
-    WindowService,
-    DocumentService,
-    DocumentStoreService,
-    SessionService,
-    AppConfig,
-    { provide: APP_INITIALIZER, useFactory: (config: AppConfig) => () => config.load(), deps: [AppConfig], multi: true }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent
+    ],
+    imports: [
+        RouterModule,
+        BrowserModule.withServerTransition({appId: 'jui'}),
+        BrowserTransferStateModule,
+        RoutingModule,
+        HttpClientModule,
+        HmctsModule,
+        GovukModule,
+        AuthModule
+    ],
+    providers: [
+        ConfigService
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,
+              @Inject(APP_ID) private appId: string) {
+    }
+}

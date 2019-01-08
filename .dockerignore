@@ -1,11 +1,11 @@
 *
-!e2e
 !config
-!node
+!api
 !src
-!.angular-cli.json
-!app.js
-!package.json
+!angular.json
 !tsconfig.json
+!application.ts
+!server.ts
+!package.json
+!package-lock.json
 !yarn.lock
-!protractor.conf.js

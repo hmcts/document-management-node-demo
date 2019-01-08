@@ -20,8 +20,8 @@
                         "assets": [
                             {
                                 "glob": "**/*",
-                                "input": "src/assets",
-                                "output": "/assets"
+                                "input": "src/public",
+                                "output": "/public"
                             },
                             {
                                 "glob": "favicon.ico",
@@ -31,7 +31,7 @@
                             {
                                 "glob": "**/*",
                                 "input": "node_modules/@hmcts/frontend/assets",
-                                "output": "/assets"
+                                "output": "/public"
                             },
                             {
                                 "glob": "**/*",
@@ -41,7 +41,7 @@
                             {
                                 "glob": "**/*",
                                 "input": "node_modules/govuk-frontend/assets",
-                                "output": "/assets"
+                                "output": "/public"
                             },
                             {
                                 "glob": "**/*",
@@ -50,9 +50,13 @@
                             }
                         ],
                         "styles": [
+                            "src/public/sass/annotation-ui-theme.scss",
                             "src/styles.scss"
                         ],
                         "scripts": [
+                            "src/public/javascripts/pdf.js",
+                            "src/public/javascripts/pdf_viewer.js",
+                            "src/public/javascripts/pdf-annotate.js"
                         ]
                     },
                     "configurations": {
@@ -87,7 +91,7 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
                         "browserTarget": "jui:build",
-                        "port": 3608
+                        "port": 3000
                     },
                     "configurations": {
                         "production": {
@@ -127,7 +131,7 @@
                             "test/**",
                             "config/**",
                             "api/**/templates/**",
-                            "src/assets/**",
+                            "src/public/**",
                             "src/environments/**"
                         ],
                         "main": "src/test.ts",
@@ -137,8 +141,8 @@
                         "assets": [
                             {
                                 "glob": "**/*",
-                                "input": "src/assets",
-                                "output": "/assets"
+                                "input": "src/public",
+                                "output": "/public"
                             },
                             {
                                 "glob": "favicon.ico",
@@ -148,7 +152,7 @@
                             {
                                 "glob": "**/*",
                                 "input": "node_modules/@hmcts/frontend/assets",
-                                "output": "/assets"
+                                "output": "/public"
                             },
                             {
                                 "glob": "**/*",
@@ -158,7 +162,7 @@
                             {
                                 "glob": "**/*",
                                 "input": "node_modules/govuk-frontend/assets",
-                                "output": "/assets"
+                                "output": "/public"
                             },
                             {
                                 "glob": "**/*",
