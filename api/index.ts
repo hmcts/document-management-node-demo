@@ -4,18 +4,9 @@ import { auth } from './controllers/auth'
 
 const router = express.Router()
 
-import decisionRoutes from './controllers/decisions'
-
 const authInterceptor = require('./lib/middleware/auth')
 const serviceTokenMiddleware = require('./lib/middleware/service-token')
-const caseRoutes = require('./controllers/case')
-const caseListRoute = require('./controllers/case-list')
-
-const questionsRoutes = require('./controllers/questions')
-const eventsRoutes = require('./controllers/events')
 const documentsRoutes = require('./controllers/documents')
-
-const caseCreationRoute = require('./controllers/case-creation')
 
 const barApiRoutes = require('./services/bar-api/bar-api')
 const ccdDefApiRoutes = require('./services/ccd-def-api/ccd-def-api')
@@ -35,17 +26,9 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 router.use(serviceTokenMiddleware)
 auth(router)
 router.use(authInterceptor)
-caseListRoute(router)
-caseRoutes(router)
-eventsRoutes(router)
 documentsRoutes(router)
-questionsRoutes(router)
-decisionRoutes(router)
 
 if (config.configEnv !== 'prod') {
-    // Dev Tools
-    caseCreationRoute(router)
-
     // Uncomment to enable direct access to Microservices
     barApiRoutes(router)
     ccdDefApiRoutes(router)
