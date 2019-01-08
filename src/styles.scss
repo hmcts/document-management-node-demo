@@ -1,16 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+// Path to assets for use with the file-url function
+// in the govuk frontend toolkit"s url-helpers partial
+$path: "/assets/images/";
+$jui-assets-path : "/assets/images/";
 
-@import 'govuk-elements';
-@import '../node_modules/govuk_template_jinja/assets/stylesheets/govuk-template.css';
-@import '../node_modules/govuk_template_jinja/assets/stylesheets/fonts.css';
+$govuk-global-styles: true;
+@import "~govuk-frontend/all";
+@import "~@hmcts/frontend/all";
+@import "assets/sass/application";
 
-a {
-  cursor: pointer;
+
+div.govuk-prose-scope, p {
+    white-space: pre-wrap;
 }
 
-.button-disable{
-  @include button($grey-2);
+td.govuk-table__cell {
+    white-space: pre-wrap;
 }
-
-
-

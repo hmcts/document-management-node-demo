@@ -5,7 +5,6 @@ import {ActivatedRoute} from '@angular/router';
   selector: 'app-em-viewer-route',
   template: `
     <a data-hook="em-viewer__summary" class="button" href="/summary?url={{url}}">Summary</a>
-    <app-em-viewer *ngIf="url" [url]="url" [annotate]="annotate"></app-em-viewer>
   `
 })
 export class EmViewerRouteComponent implements OnInit {

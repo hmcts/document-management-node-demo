@@ -16,9 +16,9 @@ import {AppConfig} from './config/app.config';
 import {WindowService} from './utils/window.service';
 import {DocumentService} from './utils/document.service';
 import {DocumentStoreService} from './dm/document-store.service';
-import {EmAnnotationSummaryModule, EmViewerModule} from 'em-viewer-web';
 import {EmViewerRouteComponent} from './em/em-viewer-route.component';
 import {EmAnnotationSummaryRouteComponent} from './em/em-annotation-summary-route.component';
+import { EmAnnotationSummaryComponent } from './em-annotation-summary/em-annotation-summary.component';
 
 const appRoutes: Routes = [
   { path: '',  component: DmListViewRouteComponent },
@@ -37,7 +37,8 @@ const appRoutes: Routes = [
     DmUploadComponent,
     DmUploadRouteComponent,
     EmViewerRouteComponent,
-    EmAnnotationSummaryRouteComponent
+    EmAnnotationSummaryRouteComponent,
+    EmAnnotationSummaryComponent
   ],
   entryComponents: [],
   imports: [
@@ -48,8 +49,6 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    EmViewerModule,
-    EmAnnotationSummaryModule,
     CookieModule.forRoot()
   ],
   providers: [
