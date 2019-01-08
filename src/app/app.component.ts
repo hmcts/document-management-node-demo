@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
 
     private getTitle(key): string {
        const titleMapping: {[id: string]: string} = {
-           '/' : 'RPA Demo app'
+           '/' : 'RPA EM Demo app'
        };
 
        return titleMapping[key];

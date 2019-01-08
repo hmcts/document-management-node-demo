@@ -1,6 +1,6 @@
 module.exports = {
     context: __dirname,
-    angularProject: 'jui',
+    angularProject: 'rpa-em-demo',
     hmr: false,
     metafiles: [
         'angular.json',

@@ -1,7 +1,7 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
-        "outDir": "../dist/jui-backend",
+        "outDir": "../dist/rpa-em-demo-api",
         "target": "es5",
         "types": [
             "node",

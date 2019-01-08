@@ -26,7 +26,7 @@ exports.config = {
             // read the options part for more options
             automaticallyGenerateReport: true,
             removeExistingJsonReportFile: true,
-            reportName: "JUI Functional Tests"
+            reportName: "Functional Tests"
         }
     }]
 };

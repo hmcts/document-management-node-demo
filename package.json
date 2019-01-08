@@ -1,15 +1,14 @@
 {
-  "name": "jui",
+  "name": "rpa-em-demo",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "nuke": "rm -rf dist",
     "build": "npm run build:node && ng build --prod && ng run jui:server",
     "build:node": "cd api && npm run build",
-    "start": "node ./dist/jui-backend/server.js",
+    "start": "node ./dist/rpa-em-demo-api/server.js",
     "start-dev-proxy": "ng serve --proxy-config proxy.config.json",
-    "start-dev-node": "node ./dist/jui-backend/dev-server.js",
+    "start-dev-node": "node ./dist/rpa-em-demo-api/dev-server.js",
     "watch-dev-node": "cd api && npm run watch",
     "start-json-server": "export JUI_ENV=mock; node ./support/mock-server/mockserver.js",
     "lint": "npm run lint:node || npm run lint:ng || true",

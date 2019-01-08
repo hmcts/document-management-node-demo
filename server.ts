@@ -9,7 +9,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 const {
     AppServerModuleNgFactory,
     LAZY_MODULE_MAP
-} = require('../jui-frontend/server/main');
+} = require('../rpa-em-demo/server/main');
 
 const {
     provideModuleMap
@@ -29,11 +29,11 @@ app.set('view engine', 'html');
 app.set('views', __dirname);
 
 app.use(express.static(path.join(__dirname, '..', 'assets'), { index: false }));
-app.use(express.static(path.join(__dirname, '..', 'jui-frontend', 'main'), { index: false }));
+app.use(express.static(path.join(__dirname, '..', 'rpa-em-demo', 'main'), { index: false }));
 
 app.use('/*', (req, res) => {
     console.time(`GET: ${req.originalUrl}`);
-    res.render('../jui-frontend/main/index', {
+    res.render('../rpa-em-demo/main/index', {
         req,
         res,
         providers: [

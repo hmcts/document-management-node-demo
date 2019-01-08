@@ -116,7 +116,7 @@ const config = {
                 .then(session => {
                 });
         };
-        printSessionId('JUI CB Tests');
+        printSessionId('CB Tests');
     },
 
 
@@ -126,7 +126,7 @@ const config = {
             options: {
                 automaticallyGenerateReport: true,
                 removeExistingJsonReportFile: true,
-                reportName: 'JUI CrossBrowser Tests',
+                reportName: 'CrossBrowser Tests',
                 jsonDir: './functional-output/crossbrowser/reports',
                 reportPath: './functional-output/crossbrowser/reports'
 

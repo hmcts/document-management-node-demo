@@ -3,7 +3,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "jui": {
+        "rpa-em-demo": {
             "root": "",
             "projectType": "application",
             "cli": {},
@@ -12,7 +12,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/jui-frontend/main",
+                        "outputPath": "dist/rpa-em-demo/main",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "tsConfig": "src/tsconfig.app.json",
@@ -50,13 +50,9 @@
                             }
                         ],
                         "styles": [
-                            "src/public/sass/annotation-ui-theme.scss",
                             "src/styles.scss"
                         ],
                         "scripts": [
-                            "src/public/javascripts/pdf.js",
-                            "src/public/javascripts/pdf_viewer.js",
-                            "src/public/javascripts/pdf-annotate.js"
                         ]
                     },
                     "configurations": {
@@ -82,7 +78,7 @@
                 "server": {
                     "builder": "@angular-devkit/build-angular:server",
                     "options": {
-                        "outputPath": "dist/jui-frontend/server",
+                        "outputPath": "dist/rpa-em-demo/server",
                         "main": "src/server.main.ts",
                         "tsConfig": "src/tsconfig.server.json"
                     }
@@ -90,12 +86,12 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "jui:build",
+                        "browserTarget": "rpa-em-demo:build",
                         "port": 3000
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "jui:build:production"
+                            "browserTarget": "rpa-em-demo:build:production"
                         }
                     }
                 },
@@ -103,14 +99,14 @@
                     "builder": "udk:udk-builder",
                     "options": {
                         "main": "src/server.main.ts",
-                        "browserTarget": "jui:build",
-                        "serverTarget": "jui:server",
+                        "browserTarget": "rpa-em-demo:build",
+                        "serverTarget": "rpa-em-demo:server",
                         "deleteOutputPath": false
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "jui:build:production",
-                            "serverTarget": "jui:server:production",
+                            "browserTarget": "rpa-em-demo:build:production",
+                            "serverTarget": "rpa-em-demo:server:production",
                             "verbose": true
                         }
                     }
@@ -118,7 +114,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "jui:build"
+                        "browserTarget": "rpa-em-demo:build"
                     }
                 },
                 "test": {
