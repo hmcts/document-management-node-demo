@@ -36,18 +36,11 @@
     "test:fullfunctional": "echo 'not implemented'",
     "test:mutation": "echo 'not implemented'",
     "test:apiGateway": "echo 'not implemented'",
-    "sonar-scan": "node_modules/sonar-scanner/bin/sonar-scanner",
     "test:codacy-upload": "cat ./reports/tests/coverage/lcov.info | codacy-coverage",
     "test:codecov-upload": "codecov -f ./reports/tests/coverage/lcov.info",
     "snyk": "snyk test",
     "snyk-protect": "snyk protect",
     "doc:ng": "compodoc -p src/tsconfig.app.json -s"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint:ng",
-      "pre-push": "npm run lint:ng && npm run test && npm run test:nsp "
-    }
   },
   "private": true,
   "dependencies": {
@@ -180,7 +173,6 @@
     "sinon-chai": "^3.3.0",
     "sinon-express-mock": "^2.1.0",
     "socks-proxy-agent": "4.0.1",
-    "sonar-scanner": "3.1.0",
     "style-loader": "0.23.1",
     "stylus-loader": "3.0.1",
     "supertest": "3.1.0",
