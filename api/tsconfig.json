@@ -21,7 +21,7 @@
     },
     "include": [
         "**/*.ts",
-        "../*.ts"
+        "../*.ts", "../src/app/routing/pages/generic-page/annotation-webapp/annotation-webapp.component.ts"
     ],
     "exclude": [
         "**/*.spec.ts"

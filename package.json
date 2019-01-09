@@ -75,6 +75,7 @@
     "exception-formatter": "1.0.7",
     "express-session": "^1.15.6",
     "govuk-frontend": "2.4.1",
+    "hmcts-annotation-ui-lib": "file:../rpa-em-annotation-webapp/dist/hmcts-annotation-ui-lib/hmcts-annotation-ui-lib-0.0.8.tgz",
     "http-proxy-middleware": "0.18.0",
     "https-proxy-agent": "^2.2.1",
     "jsonpath": "1.0.0",

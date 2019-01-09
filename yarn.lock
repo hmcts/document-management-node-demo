@@ -4626,6 +4626,12 @@ hmac-drbg@^1.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
+"hmcts-annotation-ui-lib@file:../rpa-annotation-ui/dist/hmcts-annotation-ui-lib/hmcts-annotation-ui-lib-0.0.8.tgz":
+  version "0.0.8"
+  resolved "file:../rpa-annotation-ui/dist/hmcts-annotation-ui-lib/hmcts-annotation-ui-lib-0.0.8.tgz#48a2b95407364948ae1460bee3c037bbbf94d477"
+  dependencies:
+    tslib "^1.9.0"
+
 hoek@4.x.x:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-4.2.1.tgz#9634502aa12c445dd5a7c5734b572bb8738aacbb"

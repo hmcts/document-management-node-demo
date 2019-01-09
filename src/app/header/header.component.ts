@@ -20,6 +20,11 @@ export class HeaderComponent implements  OnInit {
             text: 'Demo',
             href: '/',
             active: true
+        },
+        {
+            text: 'Annotation Webapp',
+            href: '/annotation-webapp',
+            active: false
         }];
         this.serviceName = {
             name: 'RPA EM Demo Application',
