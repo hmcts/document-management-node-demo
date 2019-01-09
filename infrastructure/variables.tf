@@ -80,4 +80,3 @@ variable "em_anno_app_url" {
 variable "em_redact_app_url" {
     default = "em-redact"
 }
-
