@@ -596,10 +596,10 @@
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.8.3.tgz#f910edc67d69393d562d10f8f3d205ea3f3306bf"
   integrity sha512-BN0ho2/U55Td9k8RT2KqonDNmWZHTl1crIk8GIh+xNeCw8A60GMCIKN5a6u/Voz3pF3zzl3Ui+ldGrGxCSsYQw==
 
-"@types/jasminewd2@2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@types/jasminewd2/-/jasminewd2-2.0.2.tgz#5f68e1e697bf10bc6fd8cbf2e006a3d6712c5b64"
-  integrity sha1-X2jh5pe/ELxv2Mvy4Aaj1nEsW2Q=
+"@types/jasminewd2@2.0.6":
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/@types/jasminewd2/-/jasminewd2-2.0.6.tgz#2f57a8d9875a6c9ef328a14bd070ba14a055ac39"
+  integrity sha512-2ZOKrxb8bKRmP/po5ObYnRDgFE4i+lQiEB27bAMmtMWLgJSqlIDqlLx6S0IRorpOmOPRQ6O80NujTmQAtBkeNw==
   dependencies:
     "@types/jasmine" "*"
 
