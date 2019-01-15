@@ -4626,9 +4626,9 @@ hmac-drbg@^1.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-"hmcts-annotation-ui-lib@file:../rpa-annotation-ui/dist/hmcts-annotation-ui-lib/hmcts-annotation-ui-lib-0.0.8.tgz":
-  version "0.0.8"
-  resolved "file:../rpa-annotation-ui/dist/hmcts-annotation-ui-lib/hmcts-annotation-ui-lib-0.0.8.tgz#48a2b95407364948ae1460bee3c037bbbf94d477"
+"hmcts-annotation-ui-lib@file:../rpa-em-annotation-webapp/dist/hmcts-annotation-ui-lib/hmcts-annotation-ui-lib-0.0.91.tgz":
+  version "0.0.91"
+  resolved "file:../rpa-em-annotation-webapp/dist/hmcts-annotation-ui-lib/hmcts-annotation-ui-lib-0.0.91.tgz#8fda269888965269288be40d590bfc24533827be"
   dependencies:
     tslib "^1.9.0"
 
