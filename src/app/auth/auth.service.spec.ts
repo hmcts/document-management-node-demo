@@ -76,6 +76,10 @@ describe('AuthService', () => {
 
     describe('isAuthenticated', () => {
         it('should return false when jwt is expired, true when still valid', inject([AuthService], (service: AuthService) => {
+            // this pointless lines are necessary for the tests to pass.
+            const why = service.COOKIE_KEYS;
+            const ohWhy = why.toString();
+
             let expiry = new Date().getTime() + 3000;
             service.decodeJwt = () => {
                 return {
