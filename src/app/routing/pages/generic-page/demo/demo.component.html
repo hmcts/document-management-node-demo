@@ -1,2 +1,9 @@
 <h2 class="govuk-heading-m">DEMO PAD</h2>
 <p>This is a place to test out components</p>
+<app-document-viewer
+    [baseUrl]="''"
+    [annotate]="false"
+    [url]="'http://localhost:3000/public/lorem-case-data-1-page.pdf'"
+    [isDM]="false"
+    [contentType]="'pdf'">
+</app-document-viewer>

@@ -10,7 +10,7 @@ import { HmctsModule } from '../hmcts/hmcts.module';
 import { GenericPageComponent } from './pages/generic-page/generic-page.component';
 import { CookiesComponent } from './pages/generic-page/cookies/cookies.component';
 import { DemoComponent } from './pages/generic-page/demo/demo.component';
-import { DocViewerComponent } from './pages/generic-page/doc-viewer/doc-viewer.component';
+import { HmctsEmViewerUiModule } from '@hmcts/annotation-ui-lib';
 
 const routes: Routes = [
     {
@@ -20,17 +20,6 @@ const routes: Routes = [
             {
                 path: '',
                 component: DemoComponent,
-                canActivate: [AuthGuardService],
-            }
-        ]
-    },
-    {
-        path: 'doc-viewer',
-        component: GenericPageComponent,
-        children: [
-            {
-                path: '',
-                component: DocViewerComponent,
                 canActivate: [AuthGuardService],
             }
         ]
@@ -47,13 +36,13 @@ const routes: Routes = [
         HttpClientModule,
         ReactiveFormsModule,
         GovukModule,
-        HmctsModule
+        HmctsModule,
+        HmctsEmViewerUiModule
     ],
     declarations: [
         GenericPageComponent,
         DemoComponent,
-        CookiesComponent,
-        DocViewerComponent
+        CookiesComponent
     ],
     providers: [
         RedirectionService
