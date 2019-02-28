@@ -76,6 +76,9 @@ describe('AuthService', () => {
 
     describe('isAuthenticated', () => {
         it('should return false when jwt is expired, true when still valid', inject([AuthService], (service: AuthService) => {
+            cookieService.set(service.COOKIE_KEYS.TOKEN, 'value1');
+            cookieService.set(service.COOKIE_KEYS.USER, 'value2');
+
             let expiry = new Date().getTime() + 3000;
             service.decodeJwt = () => {
                 return {

@@ -4,7 +4,7 @@ properties([
   [
     $class       : 'GithubProjectProperty',
     displayName  : 'Evidence Management Show',
-    projectUrlStr: 'https://github.com/hmcts/em-show/'
+    projectUrlStr: 'https://github.com/hmcts/rpa-em-show/'
   ],
   pipelineTriggers([
     [$class: 'GitHubPushTrigger']
@@ -23,7 +23,7 @@ withPipeline(type, product, component) {
     enableSlackNotifications(channel)
 
     after('build') {
-      sh 'yarn setup'
+      sh 'yarn build'
     }
     before('buildinfra:prod') {
         error('Halting pipeline before prod stages')
