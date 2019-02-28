@@ -24,7 +24,7 @@ export class HeaderComponent implements  OnInit {
             },
             {
                 text: 'Document Viewer',
-                href: '/doc-viewer',
+                href: '/document-viewer',
                 active: false
             }
         ];
