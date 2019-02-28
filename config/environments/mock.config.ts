@@ -3,7 +3,7 @@ export default {
         ccd_data_api: 'http://localhost:3004',
         ccd_def_api:
             'https://ccd-definition-store-api-aat.service.core-compute-aat.internal',
-        idam_web: 'https://idam.preprod.ccidam.reform.hmcts.net',
+        idam_web: 'http://idam-test.dev.ccidam.reform.hmcts.net',
         idam_api: 'https://preprod-idamapi.reform.hmcts.net:3511',
         s2s:
             'https://rpe-service-auth-provider-aat.service.core-compute-aat.internal',
