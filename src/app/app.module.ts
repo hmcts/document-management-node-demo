@@ -10,6 +10,7 @@ import {HmctsModule} from './hmcts/hmcts.module';
 import {GovukModule} from './govuk/govuk.module';
 import {RouterModule} from '@angular/router';
 import { HeaderComponent } from './header/header.component';
+import { HmctsEmViewerUiModule } from '@hmcts/annotation-ui-lib';
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import { HeaderComponent } from './header/header.component';
         HttpClientModule,
         HmctsModule,
         GovukModule,
-        AuthModule
+        AuthModule,
+        HmctsEmViewerUiModule
     ],
     providers: [
         ConfigService

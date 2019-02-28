@@ -47,12 +47,21 @@
                                 "glob": "**/*",
                                 "input": "node_modules/govuk-frontend/assets",
                                 "output": "/assets"
+                            },
+                            {
+                                "glob": "**/*",
+                                "input": "node_modules/@hmcts/annotation-ui-lib/assets",
+                                "output": "/assets"
                             }
                         ],
                         "styles": [
-                            "src/styles.scss"
+                            "src/styles.scss",
+                            "node_modules/@hmcts/annotation-ui-lib/assets/aui-styles.scss"
                         ],
                         "scripts": [
+                            "node_modules/@hmcts/annotation-ui-lib/assets/js/pdf.combined.min.js",
+                            "node_modules/@hmcts/annotation-ui-lib/assets/js/pdf_viewer.min.js",
+                            "node_modules/@hmcts/annotation-ui-lib/assets/js/pdf-annotate.min.js"
                         ]
                     },
                     "configurations": {
