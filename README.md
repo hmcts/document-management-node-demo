@@ -17,4 +17,7 @@ yarn start-dev-proxy
 
 # console 3
 docker-compose -f docker-compose-dependencies.yml up
+
+# console 4
+curl -H "Content-type: application/json" -d '{"email":"a@b.com", "password":"password", "forename":"x","surname":"x",  "roles":[{"code":"caseworker","displayName":"caseworker"}]}' http://localhost:4501/testing-support/accounts
 ```
