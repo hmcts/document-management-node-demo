@@ -70,7 +70,7 @@ services:
     environment:
       IDAM_SUPERUSER_EMAIL: ccd@hmcts.net
       SPRING_DATASOURCE_URL: jdbc:postgresql://idam-database:5432/idam
-      SPRING_DATASOURCE_USERNAME: idam-user
+      SPRING_DATASOURCE_USERNAME: idam-username
       SPRING_DATASOURCE_PASSWORD: idam-password
       SPRING_MAIL_HOST: smtp-server
       IDAM_TESTING_SUPPORT_ENABLED: "true"
@@ -120,7 +120,7 @@ services:
   idam-database:
     image: postgres
     environment:
-      - POSTGRES_USER=idam-user
+      - POSTGRES_USER=idam-username
       - POSTGRES_PASSWORD=idam-password
       - POSTGRES_DB=idam
     ports:
