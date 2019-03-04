@@ -1,0 +1,128 @@
+---
+version: '2.1'
+
+services:
+  service-auth-provider-app:
+    image: hmcts.azurecr.io/hmcts/rpe-service-auth-provider:latest
+    environment:
+      - jwtKey=wThK0f0/lh3FlxFcL4xUWDMI5C1J9KyQBgXV4wseh1e5J1uYJIjvTvArHxQDrYoHJ23xFxjHkOnvNbR5dXRoxA==
+      #      - Add key for any microservice that will be used: template-management
+      - microserviceKeys_em_gw=AAAAAAAAAAAAAAAA
+      - microserviceKeys_dg_docassembly_api=AAAAAAAAAAAAAAAA
+      - microserviceKeys_dg_template_management_api=AAAAAAAAAAAAAAAA
+      #      logging env vars
+      - JSON_CONSOLE_PRETTY_PRINT=false
+      - REFORM_SERVICE_TYPE=java
+      - REFORM_SERVICE_NAME=service-auth-provider-app
+      - REFORM_TEAM=rpe
+      - REFORM_ENVIRONMENT=docker
+      #      healthcheck env vars
+      - PACKAGES_ENVIRONMENT=docker
+      - PACKAGES_PROJECT=rpe
+      - PACKAGES_NAME=service-auth-provider-app
+      - PACKAGES_VERSION=unkown
+      - TESTING_SUPPORT_ENABLED=true
+    ports:
+      - 4502:8489
+
+  em-annotation-app:
+    image: hmcts.azurecr.io/hmcts/em-anno:latest
+    environment:
+      - SERVER_PORT=8080
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://annotation-app-db:5432/em-annotation-app
+      - SPRING_DATASOURCE_USERNAME=em-annotation-app
+      - SPRING_DATASOURCE_PASSWORD=em-annotation-app
+      - IDAM_USER_BASE_URI=http://idam-api:8080
+      - IDAM_S2S_BASE_URI=http://service-auth-provider-api:8080
+      - APPINSIGHTS_INSTRUMENTATIONKEY=test_app
+      # these environment variables are used by java-logging library
+      - ROOT_APPENDER=JSON_CONSOLE
+      - JSON_CONSOLE_PRETTY_PRINT=false
+      - ROOT_LOGGING_LEVEL
+      - REFORM_SERVICE_TYPE=java
+      - REFORM_SERVICE_NAME=em-annotation-app
+      - REFORM_TEAM=em-annotation
+      - REFORM_ENVIRONMENT=docker
+    links:
+      - annotation-app-db
+      - idam-api
+    depends_on:
+      - annotation-app-db
+      - idam-api
+    ports:
+      - 4503:8080
+
+  annotation-app-db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=em-annotation-app
+      - POSTGRES_PASSWORD=em-annotation-app
+      - POSTGRES_DB=em-annotation-app
+    ports:
+      - 5433:5432
+
+  idam-api:
+    image: hmcts.azurecr.io/hmcts/tidam-api:latest
+    healthcheck:
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    environment:
+      IDAM_SUPERUSER_EMAIL: ccd@hmcts.net
+      SPRING_DATASOURCE_URL: jdbc:postgresql://idam-database:5432/idam
+      SPRING_DATASOURCE_USERNAME: idam-user
+      SPRING_DATASOURCE_PASSWORD: idam-password
+      SPRING_MAIL_HOST: smtp-server
+      IDAM_TESTING_SUPPORT_ENABLED: "true"
+      NOTIFY_API_KEY: AAAAAAAAAAAAAAAA
+      NOTIFY_CMC_ACTIVATE_USER_TEMPLATE: 76aa8695-64e8-4afd-ae13-bc8385302b1f
+      IDAM_SECRET: idam_test_secret
+      IDAM_WEBSHOW_URL: http://localhost:3000/
+      IDAM_API_OAUTH2_CLIENT_CLIENT_SECRETS_CCD_GATEWAY: "${OAUTH2_CLIENT_CCD_GATEWAY}"
+      IDAM_API_OAUTH2_CLIENT_CLIENT_SECRETS_CCD_ADMIN: "${OAUTH2_CLIENT_CCD_ADMIN}"
+      IDAM_API_OAUTH2_CLIENT_CLIENT_SECRETS_SSCS: QM5RQQ53LZFOSIXJ
+      IDAM_API_OAUTH2_CLIENT_CLIENT_SECRETS_CCD_DATA: QM5RQQ53LZFOSIXJ
+      IDAM_CCD_WHITELIST: http://localhost:3451/oauth2redirect
+      IDAM_CCD_ADMIN_WHITELIST: https://localhost:3100/oauth2redirect
+      IDAM_WEBSHOW_WHITELIST: https://localhost:3000/oauth2redirect
+      NOTIFY: "false"
+      NOTIFY_CMC_WELCOME_USER_TEMPLATE: fake
+      NOTIFY_DIVORCE_WELCOME_USER_TEMPLATE: fake
+      NOTIFY_SSCS_WELCOME_USER_TEMPLATE: fake
+      NOTIFY_WEBSHOW_WELCOME_USER_TEMPLATE: fake
+      NOTIFY_RESET_PASSWORD_TEMPLATE: fake
+      NOTIFY_PROBATE_ACTIVATE_USER_TEMPLATE: fake
+      NOTIFY_DIVORCE_ACTIVATE_USER_TEMPLATE: fake
+      NOTIFY_SSCS_ACTIVATE_USER_TEMPLATE: fake
+      NOTIFY_CCD_ACTIVATE_USER_TEMPLATE: fake
+      NOTIFY_WEBSHOW_ACTIVATE_USER_TEMPLATE: fake
+      REFORM_SERVICE_NAME: idam-api
+      REFORM_TEAM: idam
+      REFORM_ENVIRONMENT: local
+      http_proxy:
+      https_proxy:
+      no_proxy:
+    ports:
+      - 4501:8080
+    links:
+      - smtp-server
+      - idam-database
+    depends_on:
+      - idam-database
+      - smtp-server
+
+  smtp-server:
+    image: mailhog/mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025
+
+  idam-database:
+    image: postgres
+    environment:
+      - POSTGRES_USER=idam-user
+      - POSTGRES_PASSWORD=idam-password
+      - POSTGRES_DB=idam
+    ports:
+      - 5434:5432
+
