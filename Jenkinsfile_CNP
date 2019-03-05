@@ -27,6 +27,9 @@ def secrets = [
         secret('fr-password', 'FR_PASSWORD'),
         secret('sscs-email', 'SSCS_EMAIL'),
         secret('sscs-password', 'SSCS_PASSWORD'),
+        secret('em-s2s-token', 'S2S_SECRET'),
+        secret('decrypt-key', 'DECRYPT_KEY'),
+        secret('show-oauth2-token', 'IDAM_SECRET'),
     ]
 ]
 
