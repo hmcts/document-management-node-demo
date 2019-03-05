@@ -4,10 +4,10 @@ export default {
             'https://ccd-data-store-api-aat.service.core-compute-aat.internal',
         ccd_def_api:
             'https://ccd-definition-store-api-aat.service.core-compute-aat.internal',
-        idam_web: 'https://idam.preprod.ccidam.reform.hmcts.net',
-        idam_api: 'https://preprod-idamapi.reform.hmcts.net:3511',
+        idam_web: 'https://localhost:3501',
+        idam_api: 'http://localhost:4501',
         s2s:
-            'https://rpe-service-auth-provider-aat.service.core-compute-aat.internal',
+            'http://localhost:4502',
         draft_store_api:
             'https://draft-store-service-aat.service.core-compute-aat.internal',
         dm_store_api: 'https://dm-store-aat.service.core-compute-aat.internal',
@@ -15,10 +15,7 @@ export default {
         em_npa_api: 'https://em-npa-aat.service.core-compute-aat.internal',
         coh_cor_api: 'https://coh-cor-aat.service.core-compute-aat.internal'
     },
-    proxy: {
-        host: '172.16.0.7',
-        port: 8080,
-    },
+    useProxy: false,
     protocol: 'http',
     secureCookie: false,
     sessionSecret: 'secretSauce',
