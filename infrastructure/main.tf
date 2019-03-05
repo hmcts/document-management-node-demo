@@ -61,6 +61,7 @@ module "app" {
     IDAM_SERVICE_KEY = "${data.azurerm_key_vault_secret.s2s_secret.value}"
     IDAM_SERVICE_NAME = "em_gw"
     IDAM_API_OAUTH2_CLIENT_CLIENT_SECRETS_WEBSHOW = "${data.azurerm_key_vault_secret.oauth2_secret.value}"
+    IDAM_SECRET = "${data.azurerm_key_vault_secret.oauth2_secret.value}"
   }
 }
 
