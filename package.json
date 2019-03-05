@@ -38,6 +38,7 @@
     "test:apiGateway": "echo 'not implemented'",
     "test:codacy-upload": "cat ./reports/tests/coverage/lcov.info | codacy-coverage",
     "test:codecov-upload": "codecov -f ./reports/tests/coverage/lcov.info",
+    "sonar-scan": "sonar-scanner",
     "snyk": "snyk test",
     "snyk-protect": "snyk protect",
     "doc:ng": "compodoc -p src/tsconfig.app.json -s"
@@ -95,6 +96,7 @@
     "rxjs": "~6.4.0",
     "rxjs-compat": "~6.4.0",
     "session-file-store": "~1.2.0",
+    "sonar-scanner": "^3.1.0",
     "stable": "~0.1.8",
     "ts-loader": "~5.3.3",
     "udk": "~1.0.2",
