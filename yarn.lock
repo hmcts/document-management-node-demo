@@ -325,10 +325,25 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
+"@hmcts/annotation-ui-lib@^1.0.19":
+  version "1.0.21"
+  resolved "https://registry.yarnpkg.com/@hmcts/annotation-ui-lib/-/annotation-ui-lib-1.0.21.tgz#cf4d7bbfe1d065e43f9df0fe57d94ac8f0891482"
+  integrity sha512-LLGiB5JLAnuze3v9tTb32CwYCt1Zj9EwlX6EfaE/OTDRgKKBmZwWFrPabUS5EhRXpjPhIP1CDiLNZXTeJO4JYA==
+  dependencies:
+    "@hmcts/frontend" "0.0.14-alpha"
+    "@hmcts/pdf-annotate" "^1.1.15"
+    govuk-frontend "2.5.0"
+    tslib "^1.9.0"
+
 "@hmcts/eslint-config@~1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@hmcts/eslint-config/-/eslint-config-1.4.0.tgz#e713457cee3758a43394c2974913885aaae8a41b"
   integrity sha1-5xNFfO43WKQzlMKXSROIWqropBs=
+
+"@hmcts/frontend@0.0.14-alpha":
+  version "0.0.14-alpha"
+  resolved "https://registry.yarnpkg.com/@hmcts/frontend/-/frontend-0.0.14-alpha.tgz#ebd5a8e85bf11a0473f02398ecece3321cf82953"
+  integrity sha512-gRaSJgF41A7SyL87nwf9dU/nFrB4OPT/xz4CwtJkkaxX0cLjUiAiNGr3ti6wLEaHviCh5Jjw8i5kMHWm9bGBFw==
 
 "@hmcts/frontend@~0.0.29-alpha":
   version "0.0.29-alpha"
@@ -364,6 +379,14 @@
     moment "^2.19.3"
     on-finished "^2.3.0"
     winston "^2.4.1"
+
+"@hmcts/pdf-annotate@^1.1.15":
+  version "1.1.16"
+  resolved "https://registry.yarnpkg.com/@hmcts/pdf-annotate/-/pdf-annotate-1.1.16.tgz#b29bd1207333bf44449aa3d1bd925cd597d43e78"
+  integrity sha512-+tDFPOPW9sknJO/hUo4vfQ2fkMINCzuH/Mr2F9SJjLOXxdL6jjHy6zfGJ4jxQauGN8TNLskvP00dAIb2yJ9zdg==
+  dependencies:
+    create-stylesheet "^0.3.0"
+    object-assign "^4.0.1"
 
 "@ng-toolkit/_utils@1.1.51", "@ng-toolkit/_utils@^1.1.51":
   version "1.1.51"
@@ -426,6 +449,13 @@
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/@nguniversal/module-map-ngfactory-loader/-/module-map-ngfactory-loader-7.1.0.tgz#70ea905c1b32c2edc484cb77aa7a3f3208069966"
   integrity sha512-GYfb24OLJKBY58CgUsIsGgci5ceZAt4+GrVKh7RZRIHtZ/bjdGsvpIbfE9udqsnSowxIxHA5KzYHbC1x6AAB0A==
+
+"@ngx-formly/core@^4.8.2":
+  version "4.8.2"
+  resolved "https://registry.yarnpkg.com/@ngx-formly/core/-/core-4.8.2.tgz#9bf7af44aadff7a0b15b3ee14287f76d0de3971e"
+  integrity sha512-KWgV0qjOdJe9UNRPnSMAiWkNXbKGYkXxi9aWdqcroNAls4OrbX9B8PdUeEVEPXekuDttNEOx+IaJXoJTOOkKww==
+  dependencies:
+    tslib "^1.7.1"
 
 "@schematics/angular@7.3.3", "@schematics/angular@^7.0.0":
   version "7.3.3"
@@ -1445,6 +1475,11 @@ boom@5.x.x:
   integrity sha512-Z5BTk6ZRe4tXXQlkqftmsAUANpXmuwlsF5Oov8ThoMbQRzdGTA1ngYRW160GexgOgjsFOKJz0LYhoNi+2AMBUw==
   dependencies:
     hoek "4.x.x"
+
+bootstrap@4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.2.1.tgz#8f8bdca024dbf0e8644da32e918c8a03a90a5757"
+  integrity sha512-tt/7vIv3Gm2mnd/WeDx36nfGGHleil0Wg8IeB7eMrVkY0fZ5iTaBisSh8oNANc2IBsCc6vCgCNTIM/IEN0+50Q==
 
 boxen@^1.2.1:
   version "1.3.0"
@@ -2498,6 +2533,11 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     ripemd160 "^2.0.0"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
+
+create-stylesheet@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/create-stylesheet/-/create-stylesheet-0.3.0.tgz#37479d83c75131b0677d00510d0419fcccc9bc96"
+  integrity sha1-N0edg8dRMbBnfQBRDQQZ/MzJvJY=
 
 cross-spawn@^3.0.0:
   version "3.0.1"
@@ -4483,6 +4523,23 @@ got@^6.7.1:
     timed-out "^4.0.0"
     unzip-response "^2.0.1"
     url-parse-lax "^1.0.0"
+
+govuk-formly-templates@^0.1.7:
+  version "0.1.12"
+  resolved "https://registry.yarnpkg.com/govuk-formly-templates/-/govuk-formly-templates-0.1.12.tgz#933d3804a89ad7c49cb0b72350877d323b1c11bf"
+  integrity sha512-bKZjEM73YTVOAuLybVU9D596t229xE2dSv2YKVanKMvecGbFfVdD4QpzQBagrFOjylpwQrL8SmDsD3TUJiCmAQ==
+  dependencies:
+    tslib "^1.9.0"
+
+govuk-frontend@2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/govuk-frontend/-/govuk-frontend-2.5.0.tgz#7fa7a1f6522ffbc500613598aaae32ecbf390a9a"
+  integrity sha512-NjrI7G7oFXvuFhj30a3bAuouUWZwfkpewEUmmz5Sfm/BgM9ElTyhV/bvQaGcCefLhYTwXI8DSnZ86861GMZUug==
+
+govuk-frontend@^2.5.1:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/govuk-frontend/-/govuk-frontend-2.8.0.tgz#e4cecf7365ca38d65ed514867d11ff3a35b1c361"
+  integrity sha512-yGjvE9HlIRUb5IxpF19h+IMIX8ATlCsyXLIY/KTvCRnHMMOd0RNlTtHyhD7YMP3k1yP+mqlyoQYcNH9XC8Qwqw==
 
 govuk-frontend@~2.7.0:
   version "2.7.0"
@@ -6843,6 +6900,11 @@ next-tick@1:
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
   integrity sha1-yobR/ogoFpsBICCOPchCS524NCw=
 
+ngx-bootstrap@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-3.2.0.tgz#ece7c48af0bc260462c3f77de14f22d4b3dde149"
+  integrity sha512-oLSLIWZgRiIfcuxyXLMZUOhX3wZtg6lpuMbdo/0UzMDg2bSOe1XPskcKZ/iuOa3FOlU9rjuYMzswHYYV5f/QCA==
+
 ngx-cookie@~4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/ngx-cookie/-/ngx-cookie-4.1.2.tgz#ab2fafc6ee7f23b7ad92f8427dc714894e60aa31"
@@ -8665,11 +8727,17 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
-rpa-dg-docassembly-webcomponent@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/rpa-dg-docassembly-webcomponent/-/rpa-dg-docassembly-webcomponent-0.1.1.tgz#dd414f9a412d2932d52741573b768610b8265f68"
-  integrity sha512-F5s3Yc1UehLIyoZ0XDvPJx9sdhtl39o6dQyc4Lkxi9z05E2V6Bj2Tbd78B7aVfYqe4Rz1XcG36XFQFap6uZJDA==
+rpa-dg-docassembly-webcomponent@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/rpa-dg-docassembly-webcomponent/-/rpa-dg-docassembly-webcomponent-0.1.3.tgz#993c3e6be331bb5703575368e46e73c46cfb116d"
+  integrity sha512-amBqIwtjfbgFbPyybjetcFmCQO2zZu2U/7sy6aZjFid7OKFvxj0wVg5O8/p6+3mqgsAdPHyK5xlXZBUdbqO46Q==
   dependencies:
+    "@hmcts/annotation-ui-lib" "^1.0.19"
+    "@ngx-formly/core" "^4.8.2"
+    bootstrap "4.2.1"
+    govuk-formly-templates "^0.1.7"
+    govuk-frontend "^2.5.1"
+    ngx-bootstrap "^3.2.0"
     tslib "^1.9.0"
 
 run-async@^2.2.0:

@@ -10,6 +10,7 @@ import { HmctsModule } from '../hmcts/hmcts.module';
 import { GenericPageComponent } from './pages/generic-page/generic-page.component';
 import { CookiesComponent } from './pages/generic-page/cookies/cookies.component';
 import { DemoComponent } from './pages/generic-page/demo/demo.component';
+import { AssemblyModule } from 'rpa-dg-docassembly-webcomponent';
 
 const routes: Routes = [
     {
@@ -34,6 +35,7 @@ const routes: Routes = [
         }),
         HttpClientModule,
         ReactiveFormsModule,
+        AssemblyModule,
         GovukModule,
         HmctsModule
     ],
