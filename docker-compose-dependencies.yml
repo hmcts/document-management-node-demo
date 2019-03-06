@@ -145,7 +145,8 @@ services:
     image: hmcts.azurecr.io/hmcts/dg-docassembly-api:latest
     environment:
       - S2S_BASE_URI=http://service-auth-provider-app:8489
-      - IDAM_USER_BASE_URI=http://idam-api:8080
+      - IDAM_API_URL=http://idam-api:8080
+      - IDAM_API_BASE_URI=http://idam-api:8080
       - APPINSIGHTS_INSTRUMENTATIONKEY=test-key
       - DG_TEMPLATE_MANAGEMENT_API=http://rpa-dg-template-management-api:8080
       - DM_STORE_APP_URL=http://dm-store:8080
@@ -163,7 +164,8 @@ services:
     image: hmcts.azurecr.io/hmcts/dg-tmpl-mgmt:latest
     environment:
       - S2S_BASE_URI=http://service-auth-provider-app:8489
-      - IDAM_USER_BASE_URI=http://idam-api:8080
+      - IDAM_API_URL=http://idam-api:8080
+      - IDAM_API_BASE_URI=http://idam-api:8080
       - APPINSIGHTS_INSTRUMENTATIONKEY=test-key
       - DOCMOSIS_ACCESS_KEY
     links:
