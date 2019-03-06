@@ -29,7 +29,7 @@ const configs = {
     protocol: 'https'
 };
 
-export const configEnv = process ? process.env.JUI_ENV || 'local' : 'local';
+export const configEnv = process ? process.env.NODE_ENV || 'local' : 'local';
 export const config = { ...configs[configEnv].default, ...application };
 
 if (configEnv === 'local') {

@@ -1,5 +1,5 @@
 const app = require('./application');
-// require( 'zone.js/dist/zone-node');
+require( 'zone.js/dist/zone-node');
 import * as express from 'express';
 import * as path from 'path';
 

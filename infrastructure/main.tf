@@ -1,3 +1,7 @@
+provider "azurerm" {
+  version = "1.21"
+}
+
 locals {
   app_full_name = "${var.product}-${var.component}"
   ase_name = "${data.terraform_remote_state.core_apps_compute.ase_name[0]}"
@@ -28,9 +32,9 @@ module "app" {
     # REDIS_PORT = "${module.redis-cache.redis_port}"
     # REDIS_PASSWORD = "${module.redis-cache.access_key}"
     # RECIPE_BACKEND_URL = "http://rhubarb-recipe-backend-${var.env}.service.${data.terraform_remote_state.core_apps_compute.ase_name[0]}.internal"
-    WEBSITE_NODE_DEFAULT_VERSION = "8.8.0"
+    WEBSITE_NODE_DEFAULT_VERSION = "8.11.1"
 
-    # NODE_ENV = "${var.env}"
+    NODE_ENV = "${var.env}"
     # PORT = "8080"
 
     # logging vars & healthcheck
@@ -57,6 +61,7 @@ module "app" {
     IDAM_SERVICE_KEY = "${data.azurerm_key_vault_secret.s2s_secret.value}"
     IDAM_SERVICE_NAME = "em_gw"
     IDAM_API_OAUTH2_CLIENT_CLIENT_SECRETS_WEBSHOW = "${data.azurerm_key_vault_secret.oauth2_secret.value}"
+    IDAM_SECRET = "${data.azurerm_key_vault_secret.oauth2_secret.value}"
   }
 }
 
@@ -74,7 +79,6 @@ data "azurerm_key_vault_secret" "oauth2_secret" {
     name = "show-oauth2-token"
     vault_uri = "${data.azurerm_key_vault.key_vault.vault_uri}"
 }
-
 
 provider "vault" {
   address = "https://vault.reform.hmcts.net:6200"

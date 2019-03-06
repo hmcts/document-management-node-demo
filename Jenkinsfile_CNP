@@ -19,8 +19,32 @@ def component = "show"
 
 def channel = '#rpa-pipeline'
 
+def secrets = [
+    'rpa-${env}': [
+        secret('test-email', 'TEST_EMAIL'),
+        secret('test-password', 'TEST_PASSWORD'),
+        secret('fr-email', 'FR_EMAIL'),
+        secret('fr-password', 'FR_PASSWORD'),
+        secret('sscs-email', 'SSCS_EMAIL'),
+        secret('sscs-password', 'SSCS_PASSWORD'),
+        secret('em-s2s-token', 'S2S_SECRET'),
+        secret('decrypt-key', 'DECRYPT_KEY'),
+        secret('show-oauth2-token', 'IDAM_SECRET'),
+    ]
+]
+
+static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
+    [ $class: 'AzureKeyVaultSecret',
+      secretType: 'Secret',
+      name: secretName,
+      version: '',
+      envVariable: envVar
+    ]
+}
+
 withPipeline(type, product, component) {
     enableSlackNotifications(channel)
+    loadVaultSecrets(secrets)
 
     after('build') {
       sh 'yarn build'
