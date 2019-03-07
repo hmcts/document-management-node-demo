@@ -11,6 +11,7 @@ import { GenericPageComponent } from './pages/generic-page/generic-page.componen
 import { CookiesComponent } from './pages/generic-page/cookies/cookies.component';
 import { DemoComponent } from './pages/generic-page/demo/demo.component';
 import { AssemblyModule } from 'rpa-dg-docassembly-webcomponent';
+import { AssemblyComponent } from './pages/generic-page/assembly/assembly.component';
 
 const routes: Routes = [
     {
@@ -20,6 +21,17 @@ const routes: Routes = [
             {
                 path: '',
                 component: DemoComponent,
+                canActivate: [AuthGuardService],
+            }
+        ]
+    },
+    {
+        path: 'assembly',
+        component: GenericPageComponent,
+        children: [
+            {
+                path: '',
+                component: AssemblyComponent,
                 canActivate: [AuthGuardService],
             }
         ]
@@ -42,6 +54,7 @@ const routes: Routes = [
     declarations: [
         GenericPageComponent,
         DemoComponent,
+        AssemblyComponent,
         CookiesComponent
     ],
     providers: [
