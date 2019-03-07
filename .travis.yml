@@ -24,14 +24,14 @@ apt:
 #  - sh -e /etc/init.d/xvfb start
 #
 script:
-  - yarn --version
-  - yarn check --integrity
-  - yarn install
-  - yarn build
-  - yarn lint
-  - yarn test
-  - yarn test:coverage
-  - yarn test:a11y
+  - npm --version
+  - npm check --integrity
+  - npm install
+  - npm build
+  - npm lint
+  - npm test
+  - npm test:coverage
+  - npm test:a11y
 after_success:
-  - yarn test:codacy-upload
-  - yarn test:codecov-upload
+  - npm test:codacy-upload
+  - npm test:codecov-upload
