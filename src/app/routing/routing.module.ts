@@ -10,6 +10,8 @@ import { HmctsModule } from '../hmcts/hmcts.module';
 import { GenericPageComponent } from './pages/generic-page/generic-page.component';
 import { CookiesComponent } from './pages/generic-page/cookies/cookies.component';
 import { DemoComponent } from './pages/generic-page/demo/demo.component';
+import { AssemblyModule } from 'rpa-dg-docassembly-webcomponent';
+import { AssemblyComponent } from './pages/generic-page/assembly/assembly.component';
 
 const routes: Routes = [
     {
@@ -19,6 +21,17 @@ const routes: Routes = [
             {
                 path: '',
                 component: DemoComponent,
+                canActivate: [AuthGuardService],
+            }
+        ]
+    },
+    {
+        path: 'assembly',
+        component: GenericPageComponent,
+        children: [
+            {
+                path: '',
+                component: AssemblyComponent,
                 canActivate: [AuthGuardService],
             }
         ]
@@ -34,12 +47,14 @@ const routes: Routes = [
         }),
         HttpClientModule,
         ReactiveFormsModule,
+        AssemblyModule,
         GovukModule,
         HmctsModule
     ],
     declarations: [
         GenericPageComponent,
         DemoComponent,
+        AssemblyComponent,
         CookiesComponent
     ],
     providers: [

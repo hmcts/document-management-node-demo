@@ -45,10 +45,6 @@
             }
         ],
         "quotemark": false,
-        "semicolon": [
-            true,
-            "never"
-        ],
         "trailing-comma": [
             true,
             {
