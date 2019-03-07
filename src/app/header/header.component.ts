@@ -20,6 +20,10 @@ export class HeaderComponent implements  OnInit {
             text: 'Demo',
             href: '/',
             active: true
+        },{
+            text: 'Document Assembly',
+            href: '/assembly',
+            active: true
         }];
         this.serviceName = {
             name: 'RPA EM Demo Application',
