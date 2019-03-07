@@ -30,9 +30,5 @@ const configs = {
 };
 
 export const configEnv = process ? process.env.NODE_ENV || 'local' : 'local';
-export const config = { ...configs[configEnv].default, ...application };
-
-if (configEnv === 'local') {
-    config.protocol = 'http';
-}
+export const config = { ...application, ...configs[configEnv].default };
 

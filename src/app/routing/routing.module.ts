@@ -10,6 +10,8 @@ import { HmctsModule } from '../hmcts/hmcts.module';
 import { GenericPageComponent } from './pages/generic-page/generic-page.component';
 import { CookiesComponent } from './pages/generic-page/cookies/cookies.component';
 import { DemoComponent } from './pages/generic-page/demo/demo.component';
+import { DocViewerComponent } from './pages/generic-page/doc-viewer/doc-viewer.component';
+import { HmctsEmViewerUiModule } from '@hmcts/annotation-ui-lib';
 import { AssemblyModule } from 'rpa-dg-docassembly-webcomponent';
 import { AssemblyComponent } from './pages/generic-page/assembly/assembly.component';
 
@@ -21,6 +23,17 @@ const routes: Routes = [
             {
                 path: '',
                 component: DemoComponent,
+                canActivate: [AuthGuardService],
+            }
+        ]
+    },
+    {
+        path: 'document-viewer',
+        component: GenericPageComponent,
+        children: [
+            {
+                path: '',
+                component: DocViewerComponent,
                 canActivate: [AuthGuardService],
             }
         ]
@@ -49,11 +62,13 @@ const routes: Routes = [
         ReactiveFormsModule,
         AssemblyModule,
         GovukModule,
-        HmctsModule
+        HmctsModule,
+        HmctsEmViewerUiModule
     ],
     declarations: [
         GenericPageComponent,
         DemoComponent,
+        DocViewerComponent,
         AssemblyComponent,
         CookiesComponent
     ],

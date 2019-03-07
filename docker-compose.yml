@@ -1,7 +1,26 @@
----
-version: '2.1'
+version: '3.4'
 
 services:
+  webshow:
+    build:
+        context: .
+        target: development
+        dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+      - ./:/app 
+    ports:
+      - 3000:3000
+  webshow-proxy:
+    build:
+        context: .
+        dockerfile: api/Dockerfile
+    volumes:
+      - /app/node_modules
+      - ./:/app
+    ports:
+      - 3001:3001
+
   service-auth-provider-app:
     image: hmcts.azurecr.io/hmcts/rpe-service-auth-provider:latest
     environment:
