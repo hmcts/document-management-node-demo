@@ -2,9 +2,9 @@ export default {
     services: {
         ccd_data_api: 'http://localhost:4452',
         ccd_def_api: 'http://localhost:4452',
-        idam_web: 'https://localhost:3501',
-        idam_api: 'http://localhost:4501',
-        s2s: 'http://localhost:4502',
+        idam_web: 'http://idam-authentication-web:8000',
+        idam_api: 'http://idam-api:8080',
+        s2s: 'http://service-auth-provider-app:8489',
         draft_store_api: 'http://localhost:8080',
         dm_store_api: 'http://localhost:4603',
         em_anno_api: 'http://localhost:3621',
@@ -14,5 +14,6 @@ export default {
     useProxy: false,
     protocol: 'http',
     secureCookie: false,
-    sessionSecret: 'secretSauce'
+    sessionSecret: 'secretSauce',
+    logging: 'debug'
 };
