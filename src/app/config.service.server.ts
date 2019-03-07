@@ -1,10 +1,8 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
-declare function require(name: string);
 import { config } from '../../config';
 
 import { REQUEST, RESPONSE } from '@nguniversal/express-engine/tokens';
-import { isPlatformBrowser } from '@angular/common';
 import { Response, Request } from 'express';
 
 @Injectable({
@@ -29,8 +27,8 @@ export class ServerConfigService {
         }
     }
 
-    getBaseUrl(config) {
-        const protocol = config.protocol;
+    getBaseUrl(conf) {
+        const protocol = conf.protocol;
         const host = this.request.get('host');
         return `${protocol}://${host}`;
     }

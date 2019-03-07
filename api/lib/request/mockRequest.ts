@@ -1,5 +1,4 @@
 const request = require('request-promise')
-const extend = require('util')._extend
 
 module.exports = (method, url, params) => {
     const options: any = {

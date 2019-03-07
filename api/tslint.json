@@ -32,12 +32,6 @@
                 "import": false
             }
         ],
-        "no-unused-variable": [
-            true,
-            {
-                "check-parameters": false
-            }
-        ],
         "prefer-const": [
             true,
             {

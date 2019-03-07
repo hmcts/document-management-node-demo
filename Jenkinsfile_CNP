@@ -47,7 +47,7 @@ withPipeline(type, product, component) {
     loadVaultSecrets(secrets)
 
     after('build') {
-      sh 'yarn build'
+      sh 'npm run build'
     }
     before('buildinfra:prod') {
         error('Halting pipeline before prod stages')

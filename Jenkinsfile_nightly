@@ -23,7 +23,7 @@ withNightlyPipeline(type, product, component) {
     enableSlackNotifications(channel)
 
     after('build') {
-      sh 'yarn build'
+      sh 'npm run build'
     }
     before('buildinfra:prod') {
         error('Halting pipeline before prod stages')
