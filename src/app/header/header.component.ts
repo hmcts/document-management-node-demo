@@ -26,8 +26,14 @@ export class HeaderComponent implements  OnInit {
                 text: 'Document Viewer',
                 href: '/document-viewer',
                 active: false
+            },
+            {
+                text: 'Document Assembly',
+                href: '/assembly',
+                active: true
             }
         ];
+
         this.serviceName = {
             name: 'RPA EM Demo Application',
             url: '/'
