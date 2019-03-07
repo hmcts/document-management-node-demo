@@ -25,8 +25,8 @@ apt:
 #
 script:
   - npm --version
-  - npm run check --integrity
-  - npm run install
+  - npm check --integrity
+  - npm install
   - npm run build
   - npm run lint
   - npm test
