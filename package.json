@@ -12,11 +12,8 @@
     "watch-dev-node": "cd api && npm run watch",
     "start-json-server": "export JUI_ENV=mock; node ./support/mock-server/mockserver.js",
     "lint": "npm run lint:node || npm run lint:ng || true",
-    "lint:node": "echo 'not implemented'",
+    "lint:node": "tslint -c ./api/tslint.json ./api/**/*.ts",
     "lint:ng": "ng lint rpa-em-demo",
-    "lint:fix": "npm run lint:fix:node || npm run lint:fix:ng || true",
-    "lint:fix:node": "eslint . --fix",
-    "lint:fix:ng": "ng lint rpa-em-demo --fix",
     "test": "cd api && npm run coverage && cd .. && npm run test:ng",
     "test:node": "cd api && npm run test",
     "test:node:watch": "cd api && npm run test:watch",
@@ -112,13 +109,6 @@
     "cucumber-html-reporter": "~4.0.5",
     "cucumber-pretty": "~1.5.0",
     "cucumberjs-allure-reporter": "~1.0.3",
-    "eslint": "~5.15.1",
-    "eslint-config-standard": "~12.0.0",
-    "eslint-plugin-import": "~2.16.0",
-    "eslint-plugin-node": "~8.0.1",
-    "eslint-plugin-promise": "~4.0.1",
-    "eslint-plugin-standard": "~4.0.0",
-    "eslint-html-reporter": "~0.7.1",
     "formidable": "~1.2.1",
     "html-webpack-plugin": "~3.2.0",
     "istanbul-instrumenter-loader": "~3.0.1",
@@ -163,30 +153,5 @@
     "url-loader": "~1.1.2",
     "webpack": "^4.29.6"
   },
-  "snyk": true,
-  "eslintConfig": {
-    "extends": "@hmcts",
-    "env": {
-      "es6": true,
-      "node": true,
-      "jasmine": true
-    },
-    "parserOptions": {
-      "sourceType": "module"
-    },
-    "rules": {
-      "indent": [
-        "error",
-        4
-      ],
-      "max-len": [
-        2,
-        120
-      ]
-    }
-  },
-  "eslintIgnore": [
-    "**/node_modules/**",
-    "src/public/**"
-  ]
+  "snyk": true
 }
