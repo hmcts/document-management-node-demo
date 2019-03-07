@@ -16,15 +16,24 @@ export class HeaderComponent implements  OnInit {
     }
 
     ngOnInit(): void {
-        this.navItems = [{
-            text: 'Demo',
-            href: '/',
-            active: true
-        },{
-            text: 'Document Assembly',
-            href: '/assembly',
-            active: true
-        }];
+        this.navItems = [
+            {
+                text: 'Home',
+                href: '/',
+                active: true
+            },
+            {
+                text: 'Document Viewer',
+                href: '/document-viewer',
+                active: false
+            },
+            {
+                text: 'Document Assembly',
+                href: '/assembly',
+                active: true
+            }
+        ];
+
         this.serviceName = {
             name: 'RPA EM Demo Application',
             url: '/'
