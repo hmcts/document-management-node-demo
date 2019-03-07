@@ -27,7 +27,7 @@ function generateToken() {
                 resolve()
             })
             .catch(e => {
-                reject()
+                reject(e)
             })
     })
 }
@@ -42,7 +42,7 @@ function serviceTokenGenerator() {
                     resolve(getToken())
                 })
                 .catch(e => {
-                    reject()
+                    reject(e)
                 })
         }
     })
@@ -53,6 +53,7 @@ module.exports = async (req, res, next) => {
         const token: any = await serviceTokenGenerator()
         req.headers.ServiceAuthorization = token.token
     } catch (e) {
+        console.log(e)
     }
 
     next()

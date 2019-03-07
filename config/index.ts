@@ -1,34 +1,29 @@
-import {application} from './application.config';
 
-import * as local from './environments/local.config';
-import * as docker from './environments/docker.config';
-import * as spreview from './environments/spreview.config';
-import * as saat from './environments/saat.config';
-import * as sprod from './environments/sprod.config';
-import * as preview from './environments/preview.config';
-import * as demo from './environments/demo.config';
-import * as aat from './environments/aat.config';
-import * as prod from './environments/prod.config';
-import * as mock from './environments/mock.config';
-import * as process from 'process';
+function getEnvOr(property: string, defaultValue: string) {
+    return (typeof process !== 'undefined' && process.env[property]) || defaultValue;
+}
 
-const configs = {
-    local,
-    docker,
-    spreview,
-    saat,
-    sprod,
-    preview,
-    demo,
-    aat,
-    prod,
-    mock,
-    microservice: 'jui_webapp',
-    idam_client: 'juiwebapp',
-    oauth_callback_url: 'oauth2/callback',
-    protocol: 'https'
+export const config = {
+    services: {
+        idam_web: getEnvOr('IDAM_LOGIN_URL', 'https://localhost:3501'),
+        idam_api: getEnvOr('IDAM_USER_BASE_URI', 'http://idam-api:8080'),
+        s2s: getEnvOr('IDAM_S2S_BASE_URI', 'http://service-auth-provider-app:8489'),
+        dm_store_api: getEnvOr('DM_STORE_APP_URI', 'http://localhost:4603'),
+        em_anno_api: getEnvOr('EM_ANNO_APP_URI', 'http://localhost:3621'),
+        em_npa_api: getEnvOr('EM_NPA_APP_URI', 'http://localhost:3622'),
+        dg_docassembly_api: getEnvOr('DG_DOCASSEMBLY_API_URL', 'http://rpa-dg-docassembly-api:8080')
+    },
+    cookies: {
+        token: '__auth__',
+        userId: '__userid__'
+    },
+    microservice: 'em_gw',
+    idamClient: 'webshow',
+    idamSecret: getEnvOr('IDAM_SECRET', 'AAAAAAAAAAAAAAAA'),
+    oauthCallback: 'oauth2/callback',
+    protocol: getEnvOr('HTTP_PROTOCOL', 'http'),
+    s2sSecret: getEnvOr('S2S_SECRET', 'AAAAAAAAAAAAAAAA'),
+    secureCookie: getEnvOr('HTTP_PROTOCOL', 'http') === 'https',
+    sessionSecret: 'secretSauce',
+    logging: getEnvOr('LOG_LEVEL', 'debug')
 };
-
-export const configEnv = process ? process.env.NODE_ENV || 'local' : 'local';
-export const config = { ...application, ...configs[configEnv].default };
-

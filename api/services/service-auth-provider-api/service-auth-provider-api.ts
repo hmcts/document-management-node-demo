@@ -1,52 +1,26 @@
-import * as express from 'express'
-const otp = require('otp')
-import { config } from '../../../config'
-const generateRequest = require('../../lib/request/request')
-const headerUtilities = require('../../lib/utilities/headerUtilities')
+import * as express from 'express';
+import { config } from '../../../config';
+import { generateRequest } from '../../lib/request/request';
+import * as otp from 'otp';
 
-const url = config.services.s2s
-const microservice = config.microservice
-const s2sSecret = process.env.S2S_SECRET || 'AAAAAAAAAAAAAAAA'
+const url = config.services.s2s;
+const microservice = config.microservice;
+const s2sSecret = config.s2sSecret;
 
-function postS2SLease() {
-    const oneTimePassword = otp({ secret: s2sSecret }).totp()
+export function postS2SLease() {
+    const oneTimePassword = otp({ secret: s2sSecret }).totp();
     const options = {
         headers: {},
         body: {
             microservice,
             oneTimePassword
         }
-    }
-    return generateRequest('POST', `${url}/lease`, options)
+    };
+
+    return generateRequest('POST', `${url}/lease`, options);
 }
 
-function getHealth(options) {
-    return generateRequest('GET', `${url}/health`, options)
+export function serviceAuthRoutes(app) {
+    const router = express.Router({ mergeParams: true });
+    app.use('/s2s', router);
 }
-
-function getInfo(options) {
-    return generateRequest('GET', `${url}/info`, options)
-}
-
-function getOptions(req) {
-    return headerUtilities.getAuthHeadersWithS2SBearer(req)
-}
-
-module.exports = app => {
-    const router = express.Router({ mergeParams: true })
-    app.use('/s2s', router)
-
-    router.get('/health', (req, res, next) => {
-        getHealth(getOptions(req)).pipe(res)
-    })
-
-    router.get('/info', (req, res, next) => {
-        getInfo(getOptions(req)).pipe(res)
-    })
-}
-
-module.exports.getInfo = getInfo
-
-module.exports.getHealth = getHealth
-
-module.exports.postS2SLease = postS2SLease

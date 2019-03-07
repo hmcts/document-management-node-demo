@@ -77,6 +77,11 @@ variable "dm_store_app_url" {
 variable "em_anno_app_url" {
     default = "em-anno"
 }
-variable "em_redact_app_url" {
-    default = "em-redact"
+
+variable "em_rpa_app_url" {
+    default = "em-rpa"
+}
+
+variable "dg_docassembly_api_url" {
+    default = "dg-docassembly-api"
 }

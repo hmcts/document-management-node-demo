@@ -25,3 +25,11 @@ output "dm_store_app_url" {
 output "em_anno_app_url" {
   value = "http://${var.em_anno_app_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
 }
+
+output "em_npa_app_url" {
+  value = "http://${var.em_npa_app_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
+}
+
+output "dg_docassembly_api_url" {
+  value = "http://${var.dg_docassembly_api_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
+}

@@ -100,6 +100,8 @@
     "@types/jasmine": "~3.3.9",
     "@types/jasminewd2": "~2.0.6",
     "@types/mocha": "~5.2.6",
+    "@types/node": "^11.10.5",
+    "@types/request-promise": "^4.1.42",
     "chai": "~4.2.0",
     "chai-as-promised": "~7.1.1",
     "codecov": "~3.2.0",

@@ -8,9 +8,10 @@ services:
         dockerfile: Dockerfile
     volumes:
       - /app/node_modules
-      - ./:/app 
+      - ./:/app
     ports:
       - 3000:3000
+
   webshow-proxy:
     build:
         context: .

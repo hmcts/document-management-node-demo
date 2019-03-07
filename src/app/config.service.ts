@@ -13,12 +13,10 @@ export class ConfigService {
     CONFIG_KEY = makeStateKey('config');
 
     constructor(private state: TransferState, @Inject(DOCUMENT) private document: any) {
-        this.config = this.state.get(this.CONFIG_KEY, null as any);
-        if (!this.config) {
-            config.api_base_url = this.getBaseUrl(config);
-            this.state.set(this.CONFIG_KEY, config);
-            this.config = config;
-        }
+        this.config = this.state.get(this.CONFIG_KEY, {
+            api_base_url: this.getBaseUrl(config),
+            ...config
+        });
     }
 
     getBaseUrl(configData) {
