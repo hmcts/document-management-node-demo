@@ -23,6 +23,6 @@ withPipeline(type, product, component) {
     enableSlackNotifications(channel)
 
     after('build') {
-      sh 'yarn build'
+      sh 'npm run build'
     }
 }
