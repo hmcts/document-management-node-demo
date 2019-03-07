@@ -24,7 +24,6 @@ apt:
 #  - sh -e /etc/init.d/xvfb start
 #
 script:
-  - npm --version
   - npm install
   - npm run build
   - npm run lint
