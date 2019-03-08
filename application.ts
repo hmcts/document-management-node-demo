@@ -1,21 +1,16 @@
-const healthcheck = require("@hmcts/nodejs-healthcheck");
-const { InfoContributor, infoRequestHandler } = require("@hmcts/info-provider");
-import * as express from "express";
-const apiRoute = require("./api");
-import { config } from "./config";
+import * as healthcheck from '@hmcts/nodejs-healthcheck';
+import * as express from 'express';
+import * as bodyParser from 'body-parser';
+import * as cookieParser from 'cookie-parser';
+import * as appInsights from 'applicationinsights';
+import * as session from 'express-session';
+import * as sessionFileStore from 'session-file-store';
+import { getRouter } from './api';
+import { config } from './config';
+import { InfoContributor, infoRequestHandler } from '@hmcts/info-provider';
 
 const app = express();
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const appInsights = require("applicationinsights");
-
-const session = require("express-session");
-const sessionFileStore = require("session-file-store");
-
 const FileStore = sessionFileStore(session);
-
-const appInsightsInstrumentationKey =
-    process.env.APPINSIGHTS_INSTRUMENTATIONKEY || "AAAAAAAAAAAAAAAA";
 
 app.use(
     session({
@@ -24,20 +19,20 @@ app.use(
             maxAge: 31536000,
             secure: config.secureCookie !== false
         },
-        name: "jui-webapp",
+        name: 'jui-webapp',
         resave: true,
         saveUninitialized: true,
         secret: config.sessionSecret,
         store: new FileStore({
-            path: process.env.NOW ? "/tmp/sessions" : ".sessions"
+            path: process.env.NOW ? '/tmp/sessions' : '.sessions'
         })
     })
 );
 
 // local logging improves on appInsights
-if (config.configEnv !== "local") {
+if (process.env.APPINSIGHTS_INSTRUMENTATIONKEY) {
     appInsights
-        .setup(appInsightsInstrumentationKey)
+        .setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY)
         .setAutoDependencyCorrelation(true)
         .setAutoCollectRequests(true)
         .setAutoCollectPerformance(true)
@@ -48,7 +43,7 @@ if (config.configEnv !== "local") {
         .start();
 
     const client = appInsights.defaultClient;
-    client.trackTrace({ message: "Test Message App Insight Activated" });
+    client.trackTrace({ message: 'Test Message App Insight Activated' });
 
     app.use((req, res, next) => {
         client.trackNodeHttpRequest({ request: req, response: res });
@@ -67,19 +62,15 @@ function healthcheckConfig(msUrl) {
 }
 
 app.get(
-    "/health",
+    '/health',
     healthcheck.configure({
         checks: {
-            ccd_data_api: healthcheckConfig(config.services.ccd_data_api),
-            ccd_def_api: healthcheckConfig(config.services.ccd_def_api),
-            // idam_web: healthcheckConfig(config.services.idam_web),
             idam_api: healthcheckConfig(config.services.idam_api),
             s2s: healthcheckConfig(config.services.s2s),
-            draft_store_api: healthcheckConfig(config.services.draft_store_api),
             dm_store_api: healthcheckConfig(config.services.dm_store_api),
             em_anno_api: healthcheckConfig(config.services.em_anno_api),
             em_npa_api: healthcheckConfig(config.services.em_npa_api),
-            coh_cor_api: healthcheckConfig(config.services.coh_cor_api)
+            dg_docassembly_api: healthcheckConfig(config.services.dg_docassembly_api)
         },
         buildInfo: {}
     })
@@ -90,19 +81,16 @@ function infocheckConfig(msUrl) {
 }
 
 app.get(
-    "/info",
+    '/info',
     infoRequestHandler({
         info: {
-            ccd_data_api: infocheckConfig(config.services.dm_store_api),
-            ccd_def_api: infocheckConfig(config.services.ccd_def_api),
             idam_web: infocheckConfig(config.services.idam_web),
             idam_api: infocheckConfig(config.services.idam_api),
             s2s: infocheckConfig(config.services.s2s),
-            draft_store_api: infocheckConfig(config.services.draft_store_api),
             dm_store_api: infocheckConfig(config.services.dm_store_api),
             em_anno_api: infocheckConfig(config.services.em_anno_api),
             em_npa_api: infocheckConfig(config.services.em_npa_api),
-            coh_cor_api: infocheckConfig(config.services.coh_cor_api)
+            dg_docassembly_api: infocheckConfig(config.services.dg_docassembly_api)
         },
         extraBuildInfo: {
             empty: {}
@@ -112,8 +100,10 @@ app.get(
     })
 );
 
-app.get("/oauth2/callback", apiRoute);
-app.get("/logout", apiRoute);
-app.use("/api", apiRoute);
+const apiRouter = getRouter();
+
+app.get('/oauth2/callback', apiRouter);
+app.get('/logout', apiRouter);
+app.use('/api', apiRouter);
 
 module.exports = app;

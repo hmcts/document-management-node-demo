@@ -14,9 +14,9 @@ const config = {
         services: {
             idam_web: 'http://idam_url.com'
         },
-        oauth_callback_url: 'callback_url',
+        oauthCallback: 'callback_url',
         api_base_url: 'api_base',
-        idam_client: 'client_name'
+        idamClient: 'client_name'
     }
 };
 

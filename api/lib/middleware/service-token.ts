@@ -1,59 +1,46 @@
-const { postS2SLease } = require('../../services/service-auth-provider-api/service-auth-provider-api')
-const jwtDecode = require('jwt-decode')
-import { config } from '../../../config'
+import { postS2SLease } from '../../services/service-auth-provider-api/service-auth-provider-api';
+import * as jwtDecode from 'jwt-decode';
+import { config } from '../../../config';
 
-const _cache = {}
-const microservice = config.microservice
+const cache = {};
+const microservice = config.microservice;
 
 function validateCache() {
-    const currentTime = Math.floor(Date.now() / 1000)
-    if (!_cache[microservice]) return false
-    return currentTime < _cache[microservice].expiresAt
+    const currentTime = Math.floor(Date.now() / 1000);
+    if (!cache[microservice]) return false;
+    return currentTime < cache[microservice].expiresAt;
 }
 
 function getToken() {
-    return _cache[microservice]
+    return cache[microservice];
 }
 
-function generateToken() {
-    return new Promise((resolve, reject) => {
-        postS2SLease()
-            .then(body => {
-                const tokenData = jwtDecode(body)
-                _cache[microservice] = {
-                    expiresAt: tokenData.exp,
-                    token: body
-                }
-                resolve()
-            })
-            .catch(e => {
-                reject()
-            })
-    })
+async function generateToken() {
+    const body = await postS2SLease();
+    const tokenData = jwtDecode(body);
+
+    cache[microservice] = {
+        expiresAt: tokenData.exp,
+        token: body
+    };
 }
 
-function serviceTokenGenerator() {
-    return new Promise((resolve, reject) => {
-        if (validateCache()) {
-            resolve(getToken())
-        } else {
-            generateToken()
-                .then(() => {
-                    resolve(getToken())
-                })
-                .catch(e => {
-                    reject()
-                })
-        }
-    })
-}
-
-module.exports = async (req, res, next) => {
-    try {
-        const token: any = await serviceTokenGenerator()
-        req.headers.ServiceAuthorization = token.token
-    } catch (e) {
+async function serviceTokenGenerator() {
+    if (!validateCache()) {
+        await generateToken();
     }
 
-    next()
+    return getToken();
+}
+
+export async function serviceTokenMiddleware(req, res, next) {
+    try {
+        const token = await serviceTokenGenerator();
+
+        req.headers.ServiceAuthorization = token.token;
+    } catch (e) {
+        console.log(e);
+    }
+
+    next();
 }

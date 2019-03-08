@@ -1,4 +1,4 @@
-import * as proxy from "http-proxy-middleware";
+import * as proxy from 'http-proxy-middleware';
 import {config} from '../../../config';
 
 function injectHeaders(proxyRequest, request) {
@@ -14,8 +14,7 @@ export function docAssemblyRoutes(app) {
 
     const urls = [
       '/api/form-definitions',
-      '/api/template-renditions',
-      '/health',
+      '/api/template-renditions'
     ];
 
     app.use(proxy(urls, proxyConfig));

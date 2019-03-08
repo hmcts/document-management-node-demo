@@ -3,20 +3,18 @@ import * as chai from 'chai'
 import * as sinon from 'sinon'
 import * as sinonChai from 'sinon-chai'
 import * as express from 'express'
-import * as pq from 'proxyquire'
 import * as supertest from 'supertest'
 
 chai.use(sinonChai)
 const expect = chai.expect
 const assert = chai.assert
-const proxyquire = pq.noPreserveCache()
 
 import {config} from '../../../config'
+import { idamRoutes, postOauthToken } from './idam-api';
 
 const url = config.services.idam_api
 
 describe('idam-api spec', () => {
-    let route
     let request
     let app
     let httpRequest
@@ -31,72 +29,12 @@ describe('idam-api spec', () => {
 
         app = express()
 
-        route = proxyquire('./idam-api.ts', {
-            '../../lib/request/request': httpRequest
-        })
-
-        route(app)
+        idamRoutes(app)
 
         request = supertest(app)
     })
 
-    describe('getHealth', () => {
-        let getHealth
-
-        beforeEach(() => {
-            getHealth = route.getHealth
-        })
-
-        it('should expose function', () => {
-            expect(getHealth).to.be.ok
-        })
-
-        it('should make a request', () => {
-            getHealth({})
-            expect(httpRequest).to.have.been.calledWith('GET', `${url}/health`, {})
-        })
-    })
-
-    describe('getInfo', () => {
-        let getInfo
-
-        beforeEach(() => {
-            getInfo = route.getInfo
-        })
-
-        it('should expose function', () => {
-            expect(getInfo).to.be.ok
-        })
-
-        it('should make a request', () => {
-            getInfo({})
-            expect(httpRequest).to.have.been.calledWith('GET', `${url}/info`, {})
-        })
-    })
-
-    describe('getDetails', () => {
-        let getDetails
-
-        beforeEach(() => {
-            getDetails = route.getDetails
-        })
-
-        it('should expose function', () => {
-            expect(getDetails).to.be.ok
-        })
-
-        it('should make a request', () => {
-            getDetails({})
-            expect(httpRequest).to.have.been.calledWith('GET', `${url}/details`, {})
-        })
-    })
-
     describe('postOauthToken', () => {
-        let postOauthToken
-
-        beforeEach(() => {
-            postOauthToken = route.postOauthToken
-        })
 
         it('should expose function', () => {
             expect(postOauthToken).to.be.ok

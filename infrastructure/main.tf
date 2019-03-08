@@ -49,7 +49,8 @@ module "app" {
 
     DM_STORE_APP_URI= "http://${var.dm_store_app_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
     EM_ANNO_APP_URI="http://${var.em_anno_app_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
-    EM_REDACT_APP_URI="http://${var.em_redact_app_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
+    EM_NPA_APP_URI="http://${var.em_redact_app_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
+    DG_DOCASSEMBLY_API_URI="http://${var.dg_docassembly_api_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
 
     DM_UPLOAD_URL="/demproxy/dm/documents"
     DM_OWNED_URL="/demproxy/dm/documents/owned"
@@ -62,6 +63,8 @@ module "app" {
     IDAM_SERVICE_NAME = "em_gw"
     IDAM_API_OAUTH2_CLIENT_CLIENT_SECRETS_WEBSHOW = "${data.azurerm_key_vault_secret.oauth2_secret.value}"
     IDAM_SECRET = "${data.azurerm_key_vault_secret.oauth2_secret.value}"
+
+    HTTP_PROTOCOL = "https"
   }
 }
 
