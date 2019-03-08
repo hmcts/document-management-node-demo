@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./doc-viewer.component.scss']
 })
 export class DocViewerComponent implements OnInit {
+  url: string;
 
   constructor() { }
 
