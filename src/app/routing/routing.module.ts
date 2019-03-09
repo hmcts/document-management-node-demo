@@ -12,7 +12,7 @@ import { CookiesComponent } from './pages/generic-page/cookies/cookies.component
 import { DemoComponent } from './pages/generic-page/demo/demo.component';
 import { DocViewerComponent } from './pages/generic-page/doc-viewer/doc-viewer.component';
 import { HmctsEmViewerUiModule } from '@hmcts/annotation-ui-lib';
-import { AssemblyModule } from 'rpa-dg-docassembly-webcomponent';
+import { AssemblyModule } from '@hmcts/dg-docassembly-webcomponent';
 import { AssemblyComponent } from './pages/generic-page/assembly/assembly.component';
 
 const routes: Routes = [
