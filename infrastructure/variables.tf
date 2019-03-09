@@ -78,8 +78,8 @@ variable "em_anno_app_url" {
     default = "em-anno"
 }
 
-variable "em_rpa_app_url" {
-    default = "em-rpa"
+variable "em_npa_app_url" {
+    default = "em-npa"
 }
 
 variable "dg_docassembly_api_url" {

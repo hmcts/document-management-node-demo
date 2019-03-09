@@ -49,7 +49,7 @@ module "app" {
 
     DM_STORE_APP_URI= "http://${var.dm_store_app_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
     EM_ANNO_APP_URI="http://${var.em_anno_app_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
-    EM_NPA_APP_URI="http://${var.em_redact_app_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
+    EM_NPA_APP_URI="http://${var.em_npa_app_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
     DG_DOCASSEMBLY_API_URI="http://${var.dg_docassembly_api_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
 
     DM_UPLOAD_URL="/demproxy/dm/documents"
