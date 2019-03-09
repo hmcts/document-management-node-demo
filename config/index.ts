@@ -11,7 +11,7 @@ export const config = {
         dm_store_api: getEnvOr('DM_STORE_APP_URI', 'http://localhost:4603'),
         em_anno_api: getEnvOr('EM_ANNO_APP_URI', 'http://localhost:3621'),
         em_npa_api: getEnvOr('EM_NPA_APP_URI', 'http://localhost:3622'),
-        dg_docassembly_api: getEnvOr('DG_DOCASSEMBLY_API_URL', 'http://rpa-dg-docassembly-api:8080')
+        dg_docassembly_api: getEnvOr('DG_DOCASSEMBLY_API_URI', 'http://rpa-dg-docassembly-api:8080')
     },
     cookies: {
         token: '__auth__',
