@@ -22,7 +22,7 @@ export const config = {
     idamSecret: getEnvOr('IDAM_SECRET', 'AAAAAAAAAAAAAAAA'),
     oauthCallback: 'oauth2/callback',
     protocol: getEnvOr('HTTP_PROTOCOL', 'http'),
-    s2sSecret: getEnvOr('S2S_SECRET', 'AAAAAAAAAAAAAAAA'),
+    s2sSecret: getEnvOr('IDAM_SERVICE_KEY', 'AAAAAAAAAAAAAAAA'),
     secureCookie: getEnvOr('HTTP_PROTOCOL', 'http') === 'https',
     sessionSecret: 'secretSauce',
     logging: getEnvOr('LOG_LEVEL', 'debug')
