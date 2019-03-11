@@ -56,7 +56,7 @@
     "@angular/router": "~7.2.7",
     "@angular/service-worker": "~7.2.8",
     "@hmcts/document-viewer-webcomponent": "^1.1.2",
-    "@hmcts/dg-docassembly-webcomponent": "^0.1.6",
+    "@hmcts/dg-docassembly-webcomponent": "^0.1.7",
     "@hmcts/frontend": "~0.0.30-alpha",
     "@hmcts/info-provider": "~1.0.0",
     "@hmcts/nodejs-healthcheck": "~1.4.6",
