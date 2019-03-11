@@ -87,7 +87,7 @@
     "rxjs": "~6.4.0",
     "rxjs-compat": "~6.4.0",
     "session-file-store": "~1.2.0",
-    "udk": "~1.0.2",
+    "udk": "~1.0.3",
     "zone.js": "~0.8.29"
   },
   "devDependencies": {
