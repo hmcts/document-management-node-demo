@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
-declare function require(name: string);
 import { config } from '../../config';
 import { DOCUMENT } from '@angular/common';
 
@@ -17,6 +16,8 @@ export class ConfigService {
             api_base_url: this.getBaseUrl(config),
             ...config
         });
+
+        console.log(this.config);
     }
 
     getBaseUrl(configData) {
