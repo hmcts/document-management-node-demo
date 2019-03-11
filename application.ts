@@ -12,6 +12,7 @@ import { InfoContributor, infoRequestHandler } from '@hmcts/info-provider';
 const app = express();
 const FileStore = sessionFileStore(session);
 
+app.set('trust proxy', 1);
 app.use(
     session({
         cookie: {
