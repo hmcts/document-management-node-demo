@@ -66,6 +66,10 @@ variable "idam_login_url" {
   default = "https://idam-test.dev.ccidam.reform.hmcts.net/login"
 }
 
+variable "idam_web_url" {
+  default = "https://idam-test.dev.ccidam.reform.hmcts.net"
+}
+
 variable "s2s_url" {
   default = "rpe-service-auth-provider"
 }

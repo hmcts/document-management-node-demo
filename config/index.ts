@@ -5,7 +5,7 @@ function getEnvOr(property: string, defaultValue: string) {
 
 export const config = {
     services: {
-        idam_web: getEnvOr('IDAM_LOGIN_URL', 'https://localhost:3501'),
+        idam_web: getEnvOr('IDAM_WEB_URL', 'https://localhost:3501'),
         idam_api: getEnvOr('IDAM_USER_BASE_URI', 'http://idam-api:8080'),
         s2s: getEnvOr('IDAM_S2S_BASE_URI', 'http://service-auth-provider-app:8489'),
         dm_store_api: getEnvOr('DM_STORE_APP_URI', 'http://localhost:4603'),

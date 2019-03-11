@@ -56,7 +56,7 @@ module "app" {
     DM_OWNED_URL="/demproxy/dm/documents/owned"
     DM_SEARCH_URL="/demproxy/dm/documents/filter"
 
-    IDAM_LOGIN_URL = "${var.idam_login_url}"
+    IDAM_WEB_URL = "${var.idam_web_url}"
     IDAM_USER_BASE_URI = "${var.idam_api_url}"
     IDAM_S2S_BASE_URI = "http://${var.s2s_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
     IDAM_SERVICE_KEY = "${data.azurerm_key_vault_secret.s2s_secret.value}"
