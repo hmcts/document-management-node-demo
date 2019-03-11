@@ -11,7 +11,7 @@ import { GenericPageComponent } from './pages/generic-page/generic-page.componen
 import { CookiesComponent } from './pages/generic-page/cookies/cookies.component';
 import { DemoComponent } from './pages/generic-page/demo/demo.component';
 import { DocViewerComponent } from './pages/generic-page/doc-viewer/doc-viewer.component';
-import { HmctsEmViewerUiModule } from '@hmcts/annotation-ui-lib';
+import { DocumentViewerModule } from '@hmcts/document-viewer-webcomponent';
 import { AssemblyModule } from '@hmcts/dg-docassembly-webcomponent';
 import { AssemblyComponent } from './pages/generic-page/assembly/assembly.component';
 
@@ -63,7 +63,7 @@ const routes: Routes = [
         AssemblyModule,
         GovukModule,
         HmctsModule,
-        HmctsEmViewerUiModule
+        DocumentViewerModule
     ],
     declarations: [
         GenericPageComponent,

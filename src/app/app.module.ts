@@ -5,12 +5,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { RoutingModule } from './routing/routing.module';
 import { ConfigService } from './config.service';
-import {AuthModule} from './auth/auth.module';
-import {HmctsModule} from './hmcts/hmcts.module';
-import {GovukModule} from './govuk/govuk.module';
-import {RouterModule} from '@angular/router';
+import { AuthModule } from './auth/auth.module';
+import { HmctsModule } from './hmcts/hmcts.module';
+import { GovukModule } from './govuk/govuk.module';
+import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
-import { HmctsEmViewerUiModule } from '@hmcts/annotation-ui-lib';
+import { DocumentViewerModule } from '@hmcts/document-viewer-webcomponent';
 
 @NgModule({
     declarations: [
@@ -26,7 +26,7 @@ import { HmctsEmViewerUiModule } from '@hmcts/annotation-ui-lib';
         HmctsModule,
         GovukModule,
         AuthModule,
-        HmctsEmViewerUiModule
+        DocumentViewerModule
     ],
     providers: [
         ConfigService
