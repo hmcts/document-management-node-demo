@@ -11,6 +11,7 @@ export class AuthGuardService {
 
     canActivate(): boolean {
         if (!this.auth.isAuthenticated()) {
+            console.log('Not authenticated, redirecting');
             this.auth.loginRedirect();
             return false;
         }

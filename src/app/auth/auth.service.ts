@@ -60,8 +60,10 @@ export class AuthService {
             return false;
         }
         const jwtData = this.decodeJwt(jwt);
+        console.log(jwtData);
         const expired = jwtData.exp > new Date().getTime();
         // do stuff!!
+        console.log('EXPIRED', expired);
         return !expired;
     }
 }
