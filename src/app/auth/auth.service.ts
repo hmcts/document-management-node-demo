@@ -44,7 +44,7 @@ export class AuthService {
     }
 
     loginRedirect() {
-        this.redirectionService.redirect(this.generateLoginUrl());
+        // this.redirectionService.redirect(this.generateLoginUrl());
     }
 
     decodeJwt(jwt) {
@@ -53,6 +53,9 @@ export class AuthService {
 
     isAuthenticated(): boolean {
         const jwt = this.cookieService.get(this.COOKIE_KEYS.TOKEN);
+        console.log(jwt);
+        console.log(this.COOKIE_KEYS);
+
         if (!jwt) {
             return false;
         }
