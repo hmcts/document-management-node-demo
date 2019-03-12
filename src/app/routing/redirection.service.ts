@@ -12,6 +12,6 @@ export class RedirectionService {
 
     redirect(url) {
         console.log('Redirecting', url);
-        //this.document.location.href = url;
+        this.document.location.href = url;
     }
 }
