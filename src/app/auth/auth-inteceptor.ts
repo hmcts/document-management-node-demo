@@ -25,6 +25,8 @@ export class AuthInteceptor implements HttpInterceptor  {
         }, (err: any) => {
             if (err instanceof HttpErrorResponse) {
                 if (err.status === 401) {
+                    console.log('Request 401, redirecting');
+                    console.log(request);
                     this.authService.loginRedirect();
                 }
             }

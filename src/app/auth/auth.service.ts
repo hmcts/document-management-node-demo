@@ -44,6 +44,7 @@ export class AuthService {
     }
 
     loginRedirect() {
+        console.log('login url', this.generateLoginUrl());
         // this.redirectionService.redirect(this.generateLoginUrl());
     }
 
