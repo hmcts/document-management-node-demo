@@ -22,7 +22,8 @@ export class AuthService {
     }
 
     generateLoginUrl() {
-        const base = this.configService.config.services.idam_web;
+        // const base = this.configService.config.services.idam_web;
+        const base = 'https://idam.preprod.ccidam.reform.hmcts.net';
         const clientId = this.configService.config.idamClient;
         const callback = `${this.configService.config.api_base_url}/${
             this.configService.config.oauthCallback
