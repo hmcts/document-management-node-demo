@@ -12,9 +12,9 @@ export class ServerRedirectionService {
                 @Inject(PLATFORM_ID) private platformId: string) { }
 
     redirect(url) {
-        try {
-            this.response.redirect(301, url);
-            this.response.end();
-        } catch (e) {}
+        // try {
+        //     this.response.redirect(301, url);
+        //     this.response.end();
+        // } catch (e) {}
     }
 }
