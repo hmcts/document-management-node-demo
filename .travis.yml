@@ -1,35 +1,15 @@
 language: node_js
-
 node_js:
-  - "lts/*"
-
-cache:
-  yarn: true
-  directories:
-    - node_modules
-
-sudo: required
-addons:
-  chrome: stable
-apt:
-  sources:
-    - google-chrome
-  packages:
-    - google-chrome-stable
-    - google-chrome-beta
-
-#before_install:
-#  - export CHROME_BIN=chromium-browser
-#  - export DISPLAY=:99.0
-#  - sh -e /etc/init.d/xvfb start
-#
+  - "8.4"
+cache: yarn
 script:
-  - npm install
-  - npm run build
-  - npm run lint
-  - npm test
-  - npm run test:coverage
-  - npm run test:a11y
-after_success:
-  - npm run test:codacy-upload
-  - npm run test:codecov-upload
+  - yarn --version
+  - yarn sass
+  - yarn check
+  - yarn lint
+  - yarn test
+  - yarn test:routes
+  - yarn test:a11y
+# needed for newer yarn for a little bit: https://github.com/travis-ci/travis-ci/issues/7566#issuecomment-324138144
+group: edge
+sudo: required

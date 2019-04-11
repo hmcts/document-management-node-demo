@@ -1,74 +1,22 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
+node_modules/
+.nyc_output
+.sass-cache
+*.css
 
-# compiled output
-/dist
-/dist-server
-/tmp
-/out-tsc
-/documentation
-/reports
-
-# dependencies
-/node_modules
-api/node_modules
-api/.nyc_output
-
-# IDEs and editors
-/.idea
+.idea/
 *.iml
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
 
-# IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-
-# misc
-/.sass-cache
-/connect.lock
-/coverage
-/libpeerconnection.log
-npm-debug.log
-yarn-error.log
-testem.log
-/typings
-*.history
-*.wallaby.js
-
-# e2e
-/e2e/*.js
-/e2e/*.map
-
-# System Files
+*swp
+*log
 .DS_Store
-Thumbs.db
-version
-/test/reports/
-reports/
-.tmp/
-!.sessions/
-.sessions/*
 
+src/main/public/img/lib/*
+src/main/public/js/lib/**/*.js
+src/main/public/stylesheets/lib/*
 
+node-rpm-packaging/
+mochawesome-report/
+npm-debug.log.*
 
-reports_json/
-.nyc_output/
-cb_reports/
-report.json
-
-\.vscode/tasks\.json
-
-.sessions/
-
-\.scannerwork/
-
-\.vscode/
-
-reports/tests/coverage/ng/
+.project
+.settings/
