@@ -15,7 +15,9 @@
     "test:nsp": "nsp check",
     "build": "npm run sass",
     "test:coverage": "echo 'not implemented'",
-    "sonar-scan": "echo 'not implemented'"
+    "sonar-scan": "echo 'not implemented'",
+    "sonar-scanner": "node_modules/sonar-scanner/bin/sonar-scanner",
+    "sonar-scan": "cross-env NODE_PATH=. sonar-scanner -Dsonar.projectKey='em-show' -Dsonar.sources=src/main -Dsonar.tests=src/test -Dsonar.exclusions=src/test/**,node_modules/**,src/main/** "
   },
   "dependencies": {
     "@hmcts/info-provider": "^1.0.0",
