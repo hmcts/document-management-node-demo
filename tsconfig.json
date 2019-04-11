@@ -1,19 +1,26 @@
 {
-    "compileOnSave": false,
-    "compilerOptions": {
-        "outDir": "./dist/rpa-em-demo-api",
-        "sourceMap": true,
-        "declaration": false,
-        "moduleResolution": "node",
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "target": "es5",
-        "typeRoots": ["node_modules/@types"],
-        "baseUrl": ".",
-        "paths": {
-            "@angular/*": ["../node_modules/@angular/*"]
-        },
-        "lib": ["es2017", "dom"]
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "lib": [
+      "es6",
+      "es2017.object",
+      "dom"
+    ],
+    "target": "es5",
+    "baseUrl": "src/main",
+    "paths": {
+      "router/*": [
+        "router/*"
+      ],
+      "routes/*": [
+        "routes/*"
+      ]
     },
-    "exclude": ["support/**/*.spec.ts"]
+    "typeRoots": [
+      "./node_modules/@types"
+    ]
+  }
 }

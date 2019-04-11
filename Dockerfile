@@ -1,15 +1,17 @@
-FROM node:alpine as development
+FROM node:8.1.4
 
-WORKDIR /app
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-COPY package.json .
-RUN  npm install
+COPY package.json yarn.lock /usr/src/app/
+RUN yarn install
 
-COPY . .
-RUN npm install -g @angular/cli@7.3.3 && ng build
+COPY src/main /usr/src/app/src/main
+COPY config /usr/src/app/config
 
-EXPOSE 3000
-CMD ["npm", "run", "start-dev-proxy", "--", "--proxy-config", "proxy.docker.config.json"]
+COPY gulpfile.js tsconfig.json /usr/src/app/
+RUN yarn sass
 
-FROM nginx as production
-COPY --from=development /app/dist/rpa-em-demo/main /usr/share/nginx/html
+# TODO: expose the right port for your application
+EXPOSE 3100
+CMD [ "yarn", "start" ]
