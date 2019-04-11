@@ -61,7 +61,7 @@
     "sass-lint": "^1.11.1",
     "sinon": "^3.3.0",
     "sinon-chai": "^2.13.0",
-    "supertest": "^3.0.0",
+    "supertest": "^4.0.2",
     "tslint": "^5.7.0",
     "cross-env": "^5.2.0",
     "sonar-scanner": "^3.1.0"
