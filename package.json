@@ -14,7 +14,8 @@
     "test:a11y": "NODE_ENV=mocha LOG_LEVEL=ERROR mocha --compilers ts:ts-node/register -r tsconfig-paths/register src/test/a11y --timeout 60000 --reporter mochawesome --reporter-options reportFilename=a11y,inlineAssets=true,reportTitle=expressjs-template-a11y",
     "test:nsp": "nsp check",
     "build": "npm run sass",
-    "test:coverage": "echo 'not implemented'"
+    "test:coverage": "echo 'not implemented'",
+    "sonar-scan": "echo 'not implemented'"
   },
   "dependencies": {
     "@hmcts/info-provider": "^1.0.0",
