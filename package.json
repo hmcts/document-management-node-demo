@@ -31,7 +31,7 @@
     "express": "^4.15.4",
     "express-nunjucks": "^2.2.3",
     "govuk-elements-sass": "^3.1.1",
-    "govuk_template_jinja": "^0.23.0",
+    "govuk_template_jinja": "^0.25.0",
     "helmet": "^3.8.1",
     "jquery": "^3.2.1",
     "nunjucks": "^3.0.1",
